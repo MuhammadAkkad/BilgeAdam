@@ -1,4 +1,6 @@
-﻿-- En az 4 tane tabloyu joinleyerek sorguyu getir.
+﻿use AdventureWorks2016
+
+-- En az 4 tane tabloyu joinleyerek sorguyu getir.
 select * from Production.Product as product
 inner join Production.ProductModel as modal on product.ProductModelID = modal.ProductModelID
 inner join Production.ProductCostHistory as pHistory on product.ProductID = pHistory.ProductID
@@ -55,7 +57,6 @@ where s.CustomerID is null
 
 
 -- full from inner
-
 select *
 from Sales.Customer c full join Sales.SalesOrderHeader h 
 on c.CustomerID = h.CustomerID
@@ -66,14 +67,30 @@ inner join Sales.SalesOrderHeader h on c.CustomerID = h.CustomerID
 )
 
 
-En az 4 tane tabloyu joinleyerek sorguyu getir.
-Fiyatı en pahalı olan ilk 3 fiyatlı ürünler??
-Left, Right, Full, Cross joinlerin herbiriyle birer örnek yap.
+--En az 4 tane tabloyu joinleyerek sorguyu getir.
+--Fiyatı en pahalı olan ilk 3 fiyatlı ürünler??
+--Left, Right, Full, Cross joinlerin herbiriyle birer örnek yap.
 
-Self join nedir araştır! Mantığını araştır.
+--Self join nedir araştır! Mantığını araştır.
 
 
 
-hiç sipariş vermemiş müşteriler kimler en az 3 farklı yöntemle yaz
+--hiç sipariş vermemiş müşteriler kimler en az 3 farklı yöntemle yaz
 
-fiyatı en pahalı olan ürünün rengindeki bütün ürünler MAX ile
+--fiyatı en pahalı olan ürünün rengindeki bütün ürünler MAX ile
+
+select distinct Color,ListPrice from Production.Product 
+where ListPrice in( 
+select  max(ListPrice) from Production.Product group by Color
+)
+order by ListPrice desc
+
+insert into AdventureWorks2016.Production.Product (Color,ListPrice) Values ('ahmar','123456789')
+
+INSERT INTO Production.Product (Color)VALUES('PURPLE')
+
+INSERT INTO Production.Product
+              (Color, ListPrice)
+  VALUES      ('poprble', 09999999)
+
+   
