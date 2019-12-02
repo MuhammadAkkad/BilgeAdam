@@ -21,9 +21,9 @@ namespace XmlGenerator
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Student std1 = new Student { TCKN = 123456789, LastName = "Hamza1", Name = "Hamza1", Miktar = 100 };
-            Student std2 = new Student { TCKN = 321321332, LastName = "Hamza2", Name = "Hamza2", Miktar = 300 };
-            Student std3 = new Student { TCKN = 421421332, LastName = "Hamza3", Name = "Hamza3", Miktar = 400 };
+            Student std1 = new Student { TCKN = 123456789, LastName = "Muhammad", Name = "Akkad", Miktar = 100 };
+            Student std2 = new Student { TCKN = 321321332, LastName = "Samir", Name = "Sari", Miktar = 300 };
+            Student std3 = new Student { TCKN = 421421332, LastName = "LAtife", Name = "SHAdy", Miktar = 400 };
 
             List<object> students = new List<object>();
             students.Add(std1);

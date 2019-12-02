@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace XmlGenerator
 {
-    [XmlRoot("Student")]
+    [XmlRoot("NewStudent")]
     class Student
     {
-        [XmlAttribute("Number")]
+
+        [XmlAttribute(DataType = "int", AttributeName = "TC number")]
         public int TCKN { get; set; }
 
-        [XmlElement("First Name")]
+        [XmlElement(DataType = "string", ElementName ="Name Attr")]
         public string Name { get; set; }
 
-        [XmlElement("Second Name")] 
+        [XmlElement(DataType = "string", ElementName = "Last name Attr")]
         public string LastName { get; set; }
 
-        [XmlElement("Total")]
+        [XmlElement(DataType = "int", ElementName = "Total")]
         public int Miktar { get; set; }
     }
 }
