@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+
+namespace XmlGenerator
+{    
+        public class XmlGenerator
+    {
+        XElement header;
+        XElement element;
+
+        //public XmlGenerator(Type type, List<object> list)
+        //{
+        //    header = new XElement(type.Name);
+
+        //    foreach (var classes in list)
+        //    {
+        //        element = new XElement(type.Name);
+        //        foreach (PropertyInfo property in type.GetProperties())
+        //        {
+        //            if (property.GetCustomAttributes(typeof(XmlAttributeAttribute), true).Length > 0) { 
+                    
+        //            }
+        //                element.Add(new XElement(property.Name, type.GetProperty(property.Name).GetValue(classes)));
+        //        }
+        //        header.Add(element);
+        //    }
+        //}
+
+
+
+        public XmlGenerator(Type type, List<object> list)
+        {
+            element = new XElement(type.Name);
+            foreach (var classes in list)
+            {
+
+                // get class root attribute 
+                    if (type.GetCustomAttributes(typeof(XmlRootAttribute), true).Length > 0)
+                    {
+                        element.Add(new XmlRootAttribute(classes.GetType().Name));;
+                    }
+
+
+
+                element = new XElement(type.Name);
+                foreach (PropertyInfo property in type.GetProperties())
+                {
+                    XName xName = property.Name;
+
+
+                    
+
+
+
+                    //
+                    if (property.GetCustomAttributes(typeof(XmlAttributeAttribute), true).Length > 0)
+                    {
+
+                       // element.Add(new XAttribute(property.Name, property), property.GetCustomAttribute(property.Name).GetValue(classes));
+                        //element.Add(new XElement(property.GetCustomAttribute(typeof(XmlElementAttribute), true).GetType().GetProperty("ElementName").GetValue(property.GetCustomAttribute(typeof(XmlElementAttribute), true)).ToString(), type.GetProperty(property.Name).GetValue(classes)));
+
+                    }
+                    else
+                        element.Add(new XElement(property.Name, type.GetProperty(property.Name).GetValue(classes)));
+                }
+                element.Add(element);
+            }
+        }
+
+
+
+
+
+
+        //public XmlGenerator(Type type, object obj)
+        //{
+        //    element = new XElement(type.Name);
+        //    foreach (PropertyInfo property in type.GetProperties())
+        //    {
+        //        element.Add(new XElement(property.Name, type.GetProperty(property.Name).GetValue(obj)));
+        //    }
+        //    element.Add(element);
+        //}
+    }
+}
+
+
