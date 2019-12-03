@@ -1,0 +1,34 @@
+string getBetween(string strSource, string strStart, string strEnd)
+            {
+                int Start, End;
+                if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+                {
+                    Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                    End = strSource.IndexOf(strEnd, Start);
+                    return strSource.Substring(Start, End - Start);
+                }
+                else
+                {
+                    return "";
+                }
+            }
+
+
+
+int getCount(string source1, string word)
+            {
+
+                string word1 = word;
+                string source = source1;
+
+                int wordSize = word1.Length;
+                int sourceSize = source.Length;
+
+                string sourceNewSize = source.Replace(word1, "");
+                int newSizeSource = sourceNewSize.Length;
+
+                return (sourceSize - newSizeSource) / wordSize;
+
+            }
+
+
