@@ -105,9 +105,7 @@ select dbo.fnSum(5,6)
   -- girilen musterinin girilen adet kadar son siparislerini gitiern fonksyon
 
  create function fMusteri(@MusteriID int, @Adet int)
-
  returns table
-
  as 
 	 return
 		 select top (@Adet) CustomerID, OrderDate, SubTotal
@@ -117,3 +115,16 @@ select dbo.fnSum(5,6)
 
 
 
+
+select * from fMusteri(11019,5)
+
+
+
+
+select *
+from Sales.Customer as c
+cross apply dbo.fMusteri(c.CustomerID, 3)
+
+--~`'" HOME WORK
+
+--normalization rules english turkish

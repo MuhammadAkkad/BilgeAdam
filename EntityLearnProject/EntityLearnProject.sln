@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLearnProject", "EntityLearnProject\EntityLearnProject.csproj", "{7076BBC0-368F-481A-953F-47D27BB7FBDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7076BBC0-368F-481A-953F-47D27BB7FBDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7076BBC0-368F-481A-953F-47D27BB7FBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7076BBC0-368F-481A-953F-47D27BB7FBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7076BBC0-368F-481A-953F-47D27BB7FBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6752C32A-BA3B-4168-BD52-7AF0BCBB9042}
+	EndGlobalSection
+EndGlobal
