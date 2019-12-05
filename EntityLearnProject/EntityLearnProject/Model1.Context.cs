@@ -15,10 +15,10 @@ namespace EntityLearnProject
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ProgrammingEFDB1Entities : DbContext
+    public partial class PEF : DbContext
     {
-        public ProgrammingEFDB1Entities()
-            : base("name=ProgrammingEFDB1Entities")
+        public PEF()
+            : base("name=PEF")
         {
         }
     

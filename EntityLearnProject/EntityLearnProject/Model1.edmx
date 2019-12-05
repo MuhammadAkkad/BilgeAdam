@@ -231,7 +231,7 @@ warning 6002: The table/view 'ProgrammingEFDB1.dbo.vOfficeAddresses' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProgrammingEFDB1Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PEF" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -312,7 +312,7 @@ warning 6002: The table/view 'ProgrammingEFDB1.dbo.vOfficeAddresses' does not ha
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProgrammingEFDB1ModelStoreContainer" CdmEntityContainer="ProgrammingEFDB1Entities">
+        <EntityContainerMapping StorageEntityContainer="ProgrammingEFDB1ModelStoreContainer" CdmEntityContainer="PEF">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="ProgrammingEFDB1Model.Address">
               <MappingFragment StoreEntitySet="Address">
