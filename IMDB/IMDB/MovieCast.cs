@@ -15,7 +15,7 @@ namespace IMDB
         public Movie MovieID { get; set; }
 
         [Key]
-        public virtual MovieCast MovieCastID { get; set; }
+        public Movie Movie
     }
 }
 

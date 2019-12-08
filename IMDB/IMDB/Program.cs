@@ -25,13 +25,14 @@ namespace IMDB
 
 
 
-            //using (var ctx = new IMDBContext())
-            //{
-            //    foreach (Movie mvi in movies) {
-            //        ctx.movies.Add(mvi);
-            //    }                
-            //    ctx.SaveChanges();
-            //}
+            using (var ctx = new IMDBContext())
+            {
+                foreach (Movie mvi in movies)
+                {
+                    ctx.movies.Add(mvi);
+                }
+                ctx.SaveChanges();
+            }
         }
     }
 }
