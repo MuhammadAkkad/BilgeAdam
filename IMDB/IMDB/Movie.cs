@@ -11,6 +11,7 @@ namespace IMDB
     class Movie
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ID")]
         public int MovieID { get; set; }
 
@@ -25,7 +26,7 @@ namespace IMDB
         public decimal Rank { get; set; }
 
 
-        public ICollection<MovieCast> MovieCasts { get; set; }
+        public virtual ICollection<MovieCast> MovieCasts { get; set; }
 
     }
 }

@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IMDB
 {
     class MovieCast
     {
-     // [Key]
+        [Key]
         public Cast CastID { get; set; }
-     //   [Key]
+
+        [Key]
         public Movie MovieID { get; set; }
-        [for]
-        public MovieCast MovieCastID { get; set; }
+
+        [Key]
+        public virtual MovieCast MovieCastID { get; set; }
     }
 }
 

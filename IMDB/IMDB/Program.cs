@@ -7,6 +7,8 @@ namespace IMDB
     {
         static void Main(string[] args)
         {
+
+
             List<Movie> movies = new List<Movie>();
             movies.Add(new Movie() { MovieName = "Frans", Link = "joomla.org", Rank = 5 });
             movies.Add(new Movie() { MovieName = "Gatling", Link = "independent.co.uk", Rank = 6 });
@@ -21,13 +23,15 @@ namespace IMDB
             movies.Add(new Movie() { MovieName = "Anna", Link = "Yewdell.org", Rank = 5 });
 
 
-            using (var ctx = new IMDBContext())
-            {
-                foreach (Movie mvi in movies) {
-                    ctx.movies.Add(mvi);
-                }                
-                ctx.SaveChanges();
-            }
+
+
+            //using (var ctx = new IMDBContext())
+            //{
+            //    foreach (Movie mvi in movies) {
+            //        ctx.movies.Add(mvi);
+            //    }                
+            //    ctx.SaveChanges();
+            //}
         }
     }
 }

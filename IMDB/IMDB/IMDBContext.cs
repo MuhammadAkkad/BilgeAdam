@@ -7,9 +7,9 @@ namespace IMDB
 {
     class IMDBContext : DbContext
     {
-        public IMDBContext() : base()
+        public IMDBContext() : base("name=IMDBConnectionString")
         {
-            
+            Database.SetInitializer<IMDBContext>(new CreateDatabaseIfNotExists<IMDBContext>());
         }
 
         public DbSet<Movie> movies { get; set; }
