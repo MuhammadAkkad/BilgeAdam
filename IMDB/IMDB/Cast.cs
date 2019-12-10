@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
-namespace IMDB
+namespace imdb
 {
-    class Cast
+    public class Cast
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CastID { get; set; }
-        public string CastName { get; set; }
-
-        public virtual ICollection<MovieCast> MovieCasts { get; set; }
+        public int CastId { get; set; }
+        public string Name { get; set; }
+        public ICollection<MovieCast> movieCasts { get; set; }
     }
 }

@@ -1,32 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
 using System.Text;
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
-namespace IMDB
+namespace imdb
 {
-    [Table("Movie")]
-    class Movie
+    public class Movie
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ID")]
-        public int MovieID { get; set; }
-
-        [Column("Name")]
-        public string MovieName { get; set; }
-
+        public int MovieId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime Year { get; set; }
         public string Link { get; set; }
-
-
-        [Range(0,10)]
-        [Index("Rank")]
+        public byte[] Photo { get; set; }
         public decimal Rank { get; set; }
-
-
-        public virtual ICollection<MovieCast> MovieCasts { get; set; }
+        public ICollection<MovieCast> movieCasts { get; set; }
 
     }
 }

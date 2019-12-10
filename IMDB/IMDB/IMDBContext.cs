@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace IMDB
+namespace imdb
 {
-    class IMDBContext : DbContext
+    public class imdbContext : DbContext
     {
-        public IMDBContext() : base("name=IMDBConnectionString")
-        {
-            Database.SetInitializer<IMDBContext>(new CreateDatabaseIfNotExists<IMDBContext>());
-        }
-
-        public DbSet<Movie> movies { get; set; }
-        public DbSet<Cast> casts { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Cast> Casts { get; set; }
         public DbSet<CastRole> castRoles { get; set; }
         public DbSet<MovieCast> MovieCasts { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new MovieConfiguration());
+        }
     }
 }
