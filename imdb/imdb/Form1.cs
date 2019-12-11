@@ -21,12 +21,10 @@ namespace imdb
         private void Form1_Load(object sender, EventArgs e)
         {
 
-
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
             lbListResult.Items.Clear();
             string search = txtLink.Text;
             WebClient wc = new WebClient();
@@ -77,9 +75,6 @@ namespace imdb
             {
                 lbListResult.Items.Add(item.Name);
             }
-            
-
-
         }
 
         private void txtLink_TextChanged(object sender, EventArgs e)
@@ -91,75 +86,6 @@ namespace imdb
         {
             
         }
-        /*
-private string Title { get; set; }
-private int Rank { get; set; }
-private DateTime Year { get; set; }
-private string Directors { get; set; }
-private string Writers { get; set; }
-private string Stars { get; set; }
-private string Description { get; set; }
-private string Url { get; set; }
-
-private string siteUrl = "https://www.imdb.com/title/tt0133093/?ref_=nv_sr_srsg_0";
-public string[] QueryTerms { get; } = { "Ocean", "Nature", "Pollution" };
-
-internal async void ScrapeWebsite()
-{
-CancellationTokenSource cancellationToken = new CancellationTokenSource();
-HttpClient httpClient = new HttpClient();
-HttpResponseMessage request = await httpClient.GetAsync(siteUrl);
-cancellationToken.Token.ThrowIfCancellationRequested();
-
-Stream response = await request.Content.ReadAsStreamAsync();
-cancellationToken.Token.ThrowIfCancellationRequested();
-
-HtmlParser parser = new HtmlParser();
-IHtmlDocument document = parser.ParseDocument(response);
-}
-
-
-private void GetScrapeResults(IHtmlDocument document)
-{
-IEnumerable<IElement> articleLink = Ieleme;
-
-foreach (var term in QueryTerms)
-{
-articleLink = document.All.Where(x => x.ClassName == "views-field views-field-nothing" && (x.ParentElement.InnerHtml.Contains(term) || x.ParentElement.InnerHtml.Contains(term.ToLower())));
-}
-
-if (articleLink.Any())
-{
-// Print Results: See Next Step
-}
-}
-
-public void PrintResults(string term, IEnumerable<IElement> articleLink)
-{
-// Clean Up Results: See Next Step
-
-lbListResult.Text = $"{Title} - {Url}{Environment.NewLine}";
-}
-
-private void CleanUpResults(IElement result)
-{
-string htmlResult = result.InnerHtml.ReplaceFirst("        <span class=\"field-content\"><div><a href=\"", "https://www.oceannetworks.ca");
-htmlResult = htmlResult.ReplaceFirst("\">", "*");
-htmlResult = htmlResult.ReplaceFirst("</a></div>\n<div class=\"article-title-top\">", "-");
-htmlResult = htmlResult.ReplaceFirst("</div>\n<hr></span>  ", "");
-
-// Split Results: See Next Step
-}
-
-private void SplitResults(string htmlResult)
-{
-string[] splitResults = htmlResult.Split('*');
-Url = splitResults[0];
-Title = splitResults[1];
-}
-
-*/
-
         private void lbListResult_Click(object sender, EventArgs e)
         {
             int movieIndex = lbListResult.SelectedIndex;
@@ -172,8 +98,26 @@ Title = splitResults[1];
         {
 
         }
-    }
 
+        //<img alt = "(.*)" class="
+        //<a href = "/title/(.*)" > < img alt
+
+        Movie movie100 = new Movie();
+        string getBetween(string strSource, string strStart, string strEnd)
+        {
+            int Start, End;
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                return strSource.Substring(Start, End - Start);
+            }
+            else
+            {
+                return "Not Found!!";
+            }
+        }
+    }
 }
 
 

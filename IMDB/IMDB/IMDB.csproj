@@ -74,6 +74,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="imdbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieCast.cs" />
     <Compile Include="MovieConfiguration.cs" />
@@ -114,8 +115,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Content Include="Images\Batman.jpg" />
+    <Content Include="Images\Inception.jpg" />
+    <Content Include="Images\The Matrix %281999%29 .jpg" />
+    <Content Include="Images\The Matrix.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

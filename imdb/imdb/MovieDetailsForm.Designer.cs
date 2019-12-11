@@ -148,6 +148,7 @@
             this.btnSave2Db.TabIndex = 10;
             this.btnSave2Db.Text = "Save";
             this.btnSave2Db.UseVisualStyleBackColor = true;
+            this.btnSave2Db.Click += new System.EventHandler(this.btnSave2Db_Click);
             // 
             // MovieDetailsForm
             // 
