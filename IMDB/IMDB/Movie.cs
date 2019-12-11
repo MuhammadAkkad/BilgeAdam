@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -14,8 +16,10 @@ namespace imdb
         public string Description { get; set; }
         public DateTime Year { get; set; }
         public string Link { get; set; }
-        public byte[] Photo { get; set; }
-        public decimal Rank { get; set; }
+        [Column(TypeName ="image")]
+        public Image Photo { get; set; }
+        [Column(TypeName = "numeric")]
+        public string Rank { get; set; }
         public ICollection<MovieCast> movieCasts { get; set; }
 
     }

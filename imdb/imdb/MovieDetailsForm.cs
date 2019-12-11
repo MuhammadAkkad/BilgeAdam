@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace imdb
@@ -30,12 +26,19 @@ namespace imdb
 
         private void MovieDetailsForm_Load(object sender, EventArgs e)
         {
-            // add movies title to the lable
-            lblMovieLable.Text = movie.Name;
+            lblMovieLable.Text = movie.Name + " (" + getYear().Year.ToString() + ") ";
+            txtDescription.Text = getDescription();
+            lblRank.Text = getRank();
+            getPoster(imgMovie);
+
+            movie.Description = txtDescription.Text;
+            movie.Name = lblMovieLable.Text;
+            movie.Photo = imgMovie.Image;
+            movie.Rank = lblRank.Text;
+            movie.Year = getYear();
 
             List<string> directors = new List<string>();
             directors = getDirectors();
-
             foreach (var item in directors)
             {
                 lbDirectors.Items.Add(item);
@@ -43,7 +46,6 @@ namespace imdb
 
             List<string> writers = new List<string>();
             writers = getWriters();
-
             foreach (var item in writers)
             {
                 lbWriters.Items.Add(item);
@@ -55,36 +57,6 @@ namespace imdb
             {
                 lbStars.Items.Add(item);
             }
-
-            //string des = getDescription();
-            //txtDescription.Text = movie.Description;
-
-
-            txtDescription.Text = getDescription();
-            //lbDirectors.Items.Add(directors);
-
-            //List<string> writers = new List<string>();
-            //writers = getWriters();
-
-            //List<string> stars = new List<string>();
-            //stars = getStars();
-
-
-
-            //string htmlCode;
-
-            //using (WebClient client = new WebClient())
-            //{
-            //    htmlCode = client.DownloadString(link);
-            //}
-            //foreach (Match m in Regex.Matches(htmlCode, "\"name\":\\s\"(.*)\""))
-            //{
-            //    // MessageBox.Show(m.Groups[1].Value);
-            //}
-
-
-
-
         }
 
         private void txtDescription_TextChanged(object sender, EventArgs e)
@@ -94,16 +66,17 @@ namespace imdb
 
         private void lblMovieLable_Click(object sender, EventArgs e)
         {
-           
+
         }
 
-        public List<string> getDirectors() {
+        public List<string> getDirectors()
+        {
             string htmlCode;
             List<string> directors = new List<string>();
 
             using (WebClient client = new WebClient())
             {
-                htmlCode = client.DownloadString("https://www.imdb.com"+link);
+                htmlCode = client.DownloadString("https://www.imdb.com" + link);
             }
             htmlCode = getBetween(htmlCode, "director", "creator");
             foreach (Match m in Regex.Matches(htmlCode, "\"name\":\\s\"(.*)\""))
@@ -112,8 +85,6 @@ namespace imdb
             }
             return directors;
         }
-
-
         public List<string> getWriters()
         {
             string htmlCode;
@@ -125,14 +96,12 @@ namespace imdb
             }
             htmlCode = getBetween(htmlCode, "Writers", "summary");
             // TODO: fix 
-            foreach (Match m in Regex.Matches(htmlCode, "\n\" >(.*)</a> "))
+            foreach (Match m in Regex.Matches(htmlCode, ">(.*)</a>"))
             {
                 writers.Add(m.Groups[1].Value);
             }
             return writers;
         }
-
-
         public List<string> getStars()
         {
             string htmlCode;
@@ -149,7 +118,6 @@ namespace imdb
             }
             return stars;
         }
-
         public string getDescription()
         {
             string htmlCode;
@@ -161,10 +129,40 @@ namespace imdb
             }
             return htmlCode = getBetween(htmlCode, "<meta name=\"description\" content=\"", "\" />");
         }
+        public string getRank()
+        {
+            string htmlCode;
+            using (WebClient client = new WebClient())
+            {
+                htmlCode = client.DownloadString("https://www.imdb.com" + link);
+            }
+            htmlCode = getBetween(htmlCode, "ratingValue\": \"", "\"");
 
+            return htmlCode;
+        }
+        public PictureBox getPoster(PictureBox pictureBox) {
 
-
-        // count word
+            string htmlCode;
+            using (WebClient client = new WebClient())
+            {
+            htmlCode = client.DownloadString("https://www.imdb.com" + link);                
+            htmlCode = getBetween(htmlCode, "<link rel='image_src' href=\"", "/>");                
+                client.DownloadFile(htmlCode, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
+                pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
+            }
+            return pictureBox;
+        }
+        public DateTime getYear() {
+            string date;
+            string htmlCode;
+            using (WebClient client = new WebClient())
+            {
+                htmlCode = client.DownloadString("https://www.imdb.com" + link);
+            }
+            date = getBetween(htmlCode, "datePublished\": \"", "\",");
+            DateTime oDate = Convert.ToDateTime(date);
+            return oDate;
+        }
         int getCount(string source1, string word)
         {
 
@@ -180,7 +178,7 @@ namespace imdb
             return (sourceSize - newSizeSource) / wordSize;
 
         }
-        // get substring 
+
         string getBetween(string strSource, string strStart, string strEnd)
         {
             int Start, End;
@@ -195,7 +193,7 @@ namespace imdb
                 return "Not Found!!";
             }
         }
-        // delete
+
         string delete(string strSource, string deleteWord)
         {
             int start;
@@ -204,8 +202,11 @@ namespace imdb
             return strSource = strSource.Substring(start);
 
         }
-
         private void lbDirectors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void lblRank_Click(object sender, EventArgs e)
         {
 
         }

@@ -37,6 +37,8 @@
             this.Directors = new System.Windows.Forms.Label();
             this.Stars = new System.Windows.Forms.Label();
             this.Writers = new System.Windows.Forms.Label();
+            this.lblRank = new System.Windows.Forms.Label();
+            this.btnSave2Db = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgMovie)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,6 +47,7 @@
             this.imgMovie.Location = new System.Drawing.Point(570, 12);
             this.imgMovie.Name = "imgMovie";
             this.imgMovie.Size = new System.Drawing.Size(203, 188);
+            this.imgMovie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgMovie.TabIndex = 0;
             this.imgMovie.TabStop = false;
             // 
@@ -61,8 +64,9 @@
             // 
             // lbDirectors
             // 
+            this.lbDirectors.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lbDirectors.FormattingEnabled = true;
-            this.lbDirectors.Location = new System.Drawing.Point(26, 281);
+            this.lbDirectors.Location = new System.Drawing.Point(22, 238);
             this.lbDirectors.Name = "lbDirectors";
             this.lbDirectors.Size = new System.Drawing.Size(199, 147);
             this.lbDirectors.TabIndex = 2;
@@ -70,27 +74,29 @@
             // 
             // lbStars
             // 
+            this.lbStars.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lbStars.FormattingEnabled = true;
-            this.lbStars.Location = new System.Drawing.Point(308, 281);
+            this.lbStars.Location = new System.Drawing.Point(304, 238);
             this.lbStars.Name = "lbStars";
             this.lbStars.Size = new System.Drawing.Size(199, 147);
             this.lbStars.TabIndex = 3;
             // 
             // lbWriters
             // 
+            this.lbWriters.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lbWriters.FormattingEnabled = true;
-            this.lbWriters.Location = new System.Drawing.Point(574, 281);
+            this.lbWriters.Location = new System.Drawing.Point(570, 238);
             this.lbWriters.Name = "lbWriters";
             this.lbWriters.Size = new System.Drawing.Size(199, 147);
             this.lbWriters.TabIndex = 4;
             // 
             // txtDescription
             // 
-            this.txtDescription.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtDescription.BackColor = System.Drawing.SystemColors.MenuBar;
             this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDescription.Location = new System.Drawing.Point(26, 74);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(481, 143);
+            this.txtDescription.Size = new System.Drawing.Size(481, 126);
             this.txtDescription.TabIndex = 5;
             this.txtDescription.Text = "";
             this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
@@ -98,7 +104,7 @@
             // Directors
             // 
             this.Directors.AutoSize = true;
-            this.Directors.Location = new System.Drawing.Point(23, 265);
+            this.Directors.Location = new System.Drawing.Point(19, 222);
             this.Directors.Name = "Directors";
             this.Directors.Size = new System.Drawing.Size(49, 13);
             this.Directors.TabIndex = 6;
@@ -107,7 +113,7 @@
             // Stars
             // 
             this.Stars.AutoSize = true;
-            this.Stars.Location = new System.Drawing.Point(305, 265);
+            this.Stars.Location = new System.Drawing.Point(301, 222);
             this.Stars.Name = "Stars";
             this.Stars.Size = new System.Drawing.Size(31, 13);
             this.Stars.TabIndex = 7;
@@ -116,17 +122,40 @@
             // Writers
             // 
             this.Writers.AutoSize = true;
-            this.Writers.Location = new System.Drawing.Point(571, 265);
+            this.Writers.Location = new System.Drawing.Point(567, 222);
             this.Writers.Name = "Writers";
             this.Writers.Size = new System.Drawing.Size(40, 13);
             this.Writers.TabIndex = 8;
             this.Writers.Text = "Writers";
+            // 
+            // lblRank
+            // 
+            this.lblRank.AutoSize = true;
+            this.lblRank.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRank.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.lblRank.Location = new System.Drawing.Point(198, 37);
+            this.lblRank.Name = "lblRank";
+            this.lblRank.Size = new System.Drawing.Size(72, 24);
+            this.lblRank.TabIndex = 9;
+            this.lblRank.Text = "lblRank";
+            this.lblRank.Click += new System.EventHandler(this.lblRank_Click);
+            // 
+            // btnSave2Db
+            // 
+            this.btnSave2Db.Location = new System.Drawing.Point(661, 415);
+            this.btnSave2Db.Name = "btnSave2Db";
+            this.btnSave2Db.Size = new System.Drawing.Size(127, 23);
+            this.btnSave2Db.TabIndex = 10;
+            this.btnSave2Db.Text = "Save";
+            this.btnSave2Db.UseVisualStyleBackColor = true;
             // 
             // MovieDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 450);
+            this.Controls.Add(this.btnSave2Db);
+            this.Controls.Add(this.lblRank);
             this.Controls.Add(this.Writers);
             this.Controls.Add(this.Stars);
             this.Controls.Add(this.Directors);
@@ -156,5 +185,7 @@
         private System.Windows.Forms.Label Directors;
         private System.Windows.Forms.Label Stars;
         private System.Windows.Forms.Label Writers;
+        private System.Windows.Forms.Label lblRank;
+        private System.Windows.Forms.Button btnSave2Db;
     }
 }

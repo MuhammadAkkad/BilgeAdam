@@ -14,7 +14,6 @@ namespace imdb
             InitializeComponent();
             Database.SetInitializer(
                 new DropCreateDatabaseIfModelChanges<imdbContext>());
-
         }
         Movie movie = new Movie();
         List<Movie> movieList = new List<Movie>();
@@ -51,9 +50,6 @@ namespace imdb
                     count++;
                 }
             }
-
-
-
             for (int i = 1; i <= count; i++)
             {
 
