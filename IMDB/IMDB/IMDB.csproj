@@ -74,6 +74,17 @@
       <DependentUpon>imdb.cs</DependentUpon>
     </Compile>
     <Compile Include="imdbContext.cs" />
+    <Compile Include="imdbContextDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imdbContextDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ListDBMovies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListDBMovies.Designer.cs">
+      <DependentUpon>ListDBMovies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieCast.cs" />
@@ -89,6 +100,9 @@
     <EmbeddedResource Include="imdb.resx">
       <DependentUpon>imdb.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListDBMovies.resx">
+      <DependentUpon>ListDBMovies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MovieDetailsForm.resx">
       <DependentUpon>MovieDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +115,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="imdbContextDataSet.xsc">
+      <DependentUpon>imdbContextDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="imdbContextDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>imdbContextDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="imdbContextDataSet.xss">
+      <DependentUpon>imdbContextDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

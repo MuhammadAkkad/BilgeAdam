@@ -67,7 +67,6 @@ namespace imdb
 
                 int yearIndex = result.IndexOf(")");
                 string year = result.Substring(0, yearIndex);
-                //movie.year = year;
                 movieList.Add(movie);
 
             }
@@ -99,10 +98,6 @@ namespace imdb
 
         }
 
-        //<img alt = "(.*)" class="
-        //<a href = "/title/(.*)" > < img alt
-
-        Movie movie100 = new Movie();
         string getBetween(string strSource, string strStart, string strEnd)
         {
             int Start, End;
@@ -120,8 +115,8 @@ namespace imdb
 
         private void btnSavedMovies_Click(object sender, EventArgs e)
         {
-           // Datas datas = new Datas();
-           // datas.Show();
+            ListDBMovies db = new ListDBMovies();
+            db.Show();
         }
     }
 }
