@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace imdb
 {
+
     public partial class MovieDetailsForm : Form
     {
         string link;
@@ -29,30 +30,31 @@ namespace imdb
 
         private void MovieDetailsForm_Load(object sender, EventArgs e)
         {
-            lblMovieLable.Text = movie.Name + " (" + getYear().Year.ToString() + ") ";
-            txtDescription.Text = getDescription();
-            lblRank.Text = getRank();
-            getPoster(imgMovie);
+            string htmlCode = client.DownloadString("https://www.imdb.com" + link);
+            lblMovieLable.Text = movie.Name + " (" + getYear(htmlCode).Year.ToString() + ") ";
+            txtDescription.Text = getDescription(htmlCode);
+            lblRank.Text = getRank(htmlCode);
+            getPoster(imgMovie, htmlCode);
 
             movie.Description = txtDescription.Text;
             movie.Name = lblMovieLable.Text;
             movie.Photo = @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg";
             movie.Rank = lblRank.Text;
-            movie.Year = getYear();
+            movie.Year = getYear(htmlCode);
 
-            directorInsert = getDirectors();
+            directorInsert = getDirectors(htmlCode);
             foreach (var item in directorInsert)
             {
                 lbDirectors.Items.Add(item);
             }
 
-            writerInsert = getWriters();
+            writerInsert = getWriters(htmlCode);
             foreach (var item in writerInsert)
             {
                 lbWriters.Items.Add(item);
             }
 
-            starInsert = getStars();
+            starInsert = getStars(htmlCode);
             foreach (var item in starInsert)
             {
                 lbStars.Items.Add(item);
@@ -66,97 +68,71 @@ namespace imdb
         {
 
         }
-        public List<string> getDirectors()
-        {
-            string htmlCode;
-            List<string> directors = new List<string>();
 
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            }
-            htmlCode = getBetween(htmlCode, "director", "creator");
-            foreach (Match m in Regex.Matches(htmlCode, "\"name\":\\s\"(.*)\""))
+
+
+
+            
+public List<string> getDirectors(string htmlCode)
+        {
+            string html = htmlCode;
+            List<string> directors = new List<string>();
+            html = getBetween(html, "director", "creator");
+            foreach (Match m in Regex.Matches(html, "\"name\":\\s\"(.*)\""))
             {
                 directors.Add(m.Groups[1].Value);
             }
             return directors;
         }
-        public List<string> getWriters()
+        public List<string> getWriters(string htmlCode)
         {
-            string htmlCode;
+            string html= htmlCode;
             List<string> writers = new List<string>();
-
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            }
-            htmlCode = getBetween(htmlCode, "Writers", "summary");
-            // TODO: fix 
-            foreach (Match m in Regex.Matches(htmlCode, ">(.*)</a>"))
+            html = getBetween(html, "Writers", "summary");
+            foreach (Match m in Regex.Matches(html, ">(.*)</a>"))
             {
                 writers.Add(m.Groups[1].Value);
             }
             return writers;
         }
-        public List<string> getStars()
+        public List<string> getStars(string htmlCode)
         {
-            string htmlCode;
+            string html = htmlCode;
             List<string> stars = new List<string>();
-
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            }
-            htmlCode = getBetween(htmlCode, "actor", "director");
-            foreach (Match m in Regex.Matches(htmlCode, "\"name\":\\s\"(.*)\""))
+            html = getBetween(html, "actor", "director");
+            foreach (Match m in Regex.Matches(html, "\"name\":\\s\"(.*)\""))
             {
                 stars.Add(m.Groups[1].Value);
             }
             return stars;
         }
-        public string getDescription()
+        public string getDescription(string htmlCode)
         {
-            string htmlCode;
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            }
-            return htmlCode = getBetween(htmlCode, "<meta name=\"description\" content=\"", "\" />");
+            string html= htmlCode;
+            return html = getBetween(html, "<meta name=\"description\" content=\"", "\" />");
         }
-        public string getRank()
+        public string getRank(string htmlCode)
         {
-            string htmlCode;
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            }
-            htmlCode = getBetween(htmlCode, "ratingValue\": \"", "\"");
+            string html = htmlCode;
+            html = getBetween(html, "ratingValue\": \"", "\"");
 
-            return htmlCode;
+            return html;
         }
-        public PictureBox getPoster(PictureBox pictureBox)
+        public PictureBox getPoster(PictureBox pictureBox, string htmlCode)
         {
 
-            string htmlCode;
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-                htmlCode = getBetween(htmlCode, "<link rel='image_src' href=\"", "/>");
-                client.DownloadFile(htmlCode, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
+            string html = htmlCode;
+                html = client.DownloadString("https://www.imdb.com" + link);
+                html = getBetween(html, "<link rel='image_src' href=\"", "/>");
+                client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
                 pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
-            }
             return pictureBox;
         }
-        public DateTime getYear()
+        public DateTime getYear(string htmlCode)
         {
             string date;
-            string htmlCode;
-            using (WebClient client = new WebClient())
-            {
-                htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            }
-            date = getBetween(htmlCode, "datePublished\": \"", "\"");
+            string html = htmlCode;
+            date = getBetween(html, "datePublished\": \"", "\"");
             DateTime oDate = Convert.ToDateTime(date);
             return oDate;
         }
@@ -262,5 +238,7 @@ namespace imdb
             ctx.MovieCasts.Add(map);
             ctx.SaveChanges();
         }
+        WebClient client = new WebClient();
+
     }
 }

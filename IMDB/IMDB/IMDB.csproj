@@ -67,11 +67,11 @@
   <ItemGroup>
     <Compile Include="Cast.cs" />
     <Compile Include="CastRole.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="imdb.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="imdb.Designer.cs">
+      <DependentUpon>imdb.cs</DependentUpon>
     </Compile>
     <Compile Include="imdbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -86,8 +86,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="imdb.resx">
+      <DependentUpon>imdb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MovieDetailsForm.resx">
       <DependentUpon>MovieDetailsForm.cs</DependentUpon>
