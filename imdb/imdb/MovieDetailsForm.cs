@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -48,7 +46,6 @@ namespace imdb
                 lbDirectors.Items.Add(item);
             }
 
-
             writerInsert = getWriters();
             foreach (var item in writerInsert)
             {
@@ -61,17 +58,14 @@ namespace imdb
                 lbStars.Items.Add(item);
             }
         }
-
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void lblMovieLable_Click(object sender, EventArgs e)
         {
 
         }
-
         public List<string> getDirectors()
         {
             string htmlCode;
@@ -141,19 +135,21 @@ namespace imdb
 
             return htmlCode;
         }
-        public PictureBox getPoster(PictureBox pictureBox) {
+        public PictureBox getPoster(PictureBox pictureBox)
+        {
 
             string htmlCode;
             using (WebClient client = new WebClient())
             {
-            htmlCode = client.DownloadString("https://www.imdb.com" + link);                
-            htmlCode = getBetween(htmlCode, "<link rel='image_src' href=\"", "/>");                
+                htmlCode = client.DownloadString("https://www.imdb.com" + link);
+                htmlCode = getBetween(htmlCode, "<link rel='image_src' href=\"", "/>");
                 client.DownloadFile(htmlCode, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
                 pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
             }
             return pictureBox;
         }
-        public DateTime getYear() {
+        public DateTime getYear()
+        {
             string date;
             string htmlCode;
             using (WebClient client = new WebClient())
@@ -179,7 +175,6 @@ namespace imdb
             return (sourceSize - newSizeSource) / wordSize;
 
         }
-
         string getBetween(string strSource, string strStart, string strEnd)
         {
             int Start, End;
@@ -194,7 +189,6 @@ namespace imdb
                 return "Not Found!!";
             }
         }
-
         string delete(string strSource, string deleteWord)
         {
             int start;
@@ -211,129 +205,62 @@ namespace imdb
         {
 
         }
-
         private void btnSave2Db_Click(object sender, EventArgs e)
         {
-
             imdbContext ctx = new imdbContext();
-            var movieExist = ctx.Movies.FirstOrDefault(m => m.Link == movie.Link);
 
-            if (movieExist == null)
-            {
-                ctx.Movies.Add(movie);
-                ctx.SaveChanges();
-                foreach (var item in directorInsert)
-                {
-                    CastRole castRole = new CastRole();
-                    castRole.Role = "Director";
-                    var castRoleExist = ctx.castRoles.FirstOrDefault(c => c.Role == castRole.Role);
-                    if (castRoleExist == null)
-                    {
-                        ctx.castRoles.Add(castRole);
-                        ctx.SaveChanges();
-                    }
-
-                    Cast cast = new Cast();
-                    cast.Name = item;
-
-                    var castExist = ctx.Casts.FirstOrDefault(c =>c.Name  == cast.Name);
-                    if (castExist == null)
-                    {
-                        ctx.Casts.Add(cast);
-                        ctx.SaveChanges();
-                    }
-
-
-                    MovieCast map = new MovieCast();
-
-                    var castQ = ctx.Casts.ToList();
-                    map.CastId = castQ.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
-
-                    var castRQ = ctx.castRoles.ToList();
-                    map.CastRoleId=castRQ.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();
-                    map.MovieId = movie.MovieId;
-                    
-                    ctx.MovieCasts.Add(map);
-                    ctx.SaveChanges();
-                }
-
-                foreach (var item in writerInsert)
-                {
-                    CastRole castRole = new CastRole();
-                    castRole.Role = "Writer";
-                    var castRoleExist = ctx.castRoles.FirstOrDefault(c => c.Role == castRole.Role);
-                    if (castRoleExist == null)
-                    {
-                        ctx.castRoles.Add(castRole);
-                        ctx.SaveChanges();
-                    }
-                   
-
-                    Cast cast = new Cast();
-                    cast.Name = item;
-
-                    var castExist = ctx.Casts.FirstOrDefault(c => c.Name == cast.Name);
-                    if (castExist == null)
-                    {
-                        ctx.Casts.Add(cast);
-                        ctx.SaveChanges();
-                    }
-
-                    MovieCast map = new MovieCast();
-
-                    var castQ = ctx.Casts.ToList();
-                    map.CastId = castQ.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
-
-                    var castRQ = ctx.castRoles.ToList();
-                    map.CastRoleId = castRQ.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();
-
-                    map.MovieId = movie.MovieId;
-                    ctx.MovieCasts.Add(map);
-                    ctx.SaveChanges();
-                }
-
-                foreach (var item in starInsert)
-                {
-                    CastRole castRole = new CastRole();
-                    castRole.Role = "Star";
-                    var castRoleExist = ctx.castRoles.FirstOrDefault(c => c.Role == castRole.Role);
-                    if (castRoleExist == null)
-                    {
-                        ctx.castRoles.Add(castRole);
-                        ctx.SaveChanges();
-                    }
-
-                    Cast cast = new Cast();
-                    cast.Name = item;
-
-                    var castExist = ctx.Casts.FirstOrDefault(c => c.Name == cast.Name);
-                    if (castExist == null)
-                    {
-                        ctx.Casts.Add(cast);
-                        ctx.SaveChanges();
-                    }
-                    MovieCast map = new MovieCast();
-                    var castQ = ctx.Casts.ToList();
-                    map.CastId = castQ.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
-
-                    var castRQ = ctx.castRoles.ToList();
-                    map.CastRoleId = castRQ.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();
-
-                    map.MovieId = movie.MovieId;
-                    ctx.MovieCasts.Add(map);
-                    ctx.SaveChanges();
-                }
-
-            }
-            else
+            if (ctx.Movies.Any(m => m.Link == movie.Link))
             {
                 MessageBox.Show("Movie already exists");
             }
+            else
+            {
+                ctx.Movies.Add(movie);
+                ctx.SaveChanges();
+                foreach (var director in directorInsert)
+                {
+                    AddCast("Director", director, movie.Name);
+                }
 
+                foreach (var writer in writerInsert)
+                {
+                    AddCast("Writer", writer, movie.Name);
+                }
 
+                foreach (var star in starInsert)
+                {
+                    AddCast("Star", star, movie.Name);
+                }
+                MessageBox.Show("Movie added successfully");
+            }
+            this.Close();
+        }
+        void AddCast(string role, string castName , string movieName) {
+            imdbContext ctx = new imdbContext();
+            CastRole castRole = new CastRole();
+            MovieCast map = new MovieCast();
+            Cast cast = new Cast();
 
-            MessageBox.Show("Film is added successfully");
-            this.Close();            
+            castRole.Role = role;
+            if (!ctx.castRoles.Any(c => c.Role == castRole.Role))
+            {
+                ctx.castRoles.Add(castRole);
+                ctx.SaveChanges();
+            }
+
+            cast.Name = castName;
+
+            if (!ctx.Casts.Any(c => c.Name == cast.Name))
+            {
+                ctx.Casts.Add(cast);
+                ctx.SaveChanges();
+            }
+
+            map.CastId = ctx.Casts.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
+            map.CastRoleId = ctx.castRoles.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();
+            map.MovieId = ctx.Movies.Where(m => m.Name == movieName).Select(m => m.MovieId).FirstOrDefault();
+            ctx.MovieCasts.Add(map);
+            ctx.SaveChanges();
         }
     }
 }
