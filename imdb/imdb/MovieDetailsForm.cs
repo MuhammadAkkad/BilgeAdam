@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -8,30 +9,28 @@ using System.Windows.Forms;
 
 namespace imdb
 {
-
     public partial class MovieDetailsForm : Form
     {
         string link;
+        Movie movie;
+        WebClient client = new WebClient();
+        List<string> directorInsert = new List<string>();
+        List<string> writerInsert = new List<string>();
+        List<string> starInsert = new List<string>();
         public MovieDetailsForm()
         {
             InitializeComponent();
         }
-        Movie movie;
         public MovieDetailsForm(Movie movie)
         {
             InitializeComponent();
             this.movie = movie;
             link = movie.Link;
         }
-
-        List<string> directorInsert = new List<string>();
-        List<string> writerInsert = new List<string>();
-        List<string> starInsert = new List<string>();
-
         private void MovieDetailsForm_Load(object sender, EventArgs e)
         {
             string htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            lblMovieLable.Text = movie.Name + " (" + getYear(htmlCode).Year.ToString() + ") ";
+            lblMovieLable.Text = movie.Name;
             txtDescription.Text = getDescription(htmlCode);
             lblRank.Text = getRank(htmlCode);
             getPoster(imgMovie, htmlCode);
@@ -67,13 +66,8 @@ namespace imdb
         private void lblMovieLable_Click(object sender, EventArgs e)
         {
 
-        }
-
-
-
-
-            
-public List<string> getDirectors(string htmlCode)
+        }            
+        public List<string> getDirectors(string htmlCode)
         {
             string html = htmlCode;
             List<string> directors = new List<string>();
@@ -124,8 +118,12 @@ public List<string> getDirectors(string htmlCode)
             string html = htmlCode;
                 html = client.DownloadString("https://www.imdb.com" + link);
                 html = getBetween(html, "<link rel='image_src' href=\"", "/>");
+
+            if (File.Exists(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg")){
                 client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
                 pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
+                return pictureBox;
+            }                
             return pictureBox;
         }
         public DateTime getYear(string htmlCode)
@@ -238,7 +236,6 @@ public List<string> getDirectors(string htmlCode)
             ctx.MovieCasts.Add(map);
             ctx.SaveChanges();
         }
-        WebClient client = new WebClient();
 
     }
 }

@@ -7,8 +7,7 @@ namespace imdb
     {
 
         public MovieConfiguration() {
-
-            Property(m => m.Name).IsRequired();
+            Property(m => m.Name).IsRequired();            
         }
 
     }

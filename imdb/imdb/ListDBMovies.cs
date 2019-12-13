@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
+using System.Data.Entity;
 
 namespace imdb
 {
@@ -27,26 +22,49 @@ namespace imdb
 
         private void gvMovieDBList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (gvMovieDBList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            Movie movie = new Movie();
+            DialogResult dr = MessageBox.Show("Please choose an option: \n Yes View \n No Delete \n" +
+                "\n Cancel Does nothing :)", "Action", MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Information);
+
+
+            if (dr == DialogResult.Yes)
             {
-                Movie movie = new Movie();
-                string name = gvMovieDBList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string desc = gvMovieDBList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string year = gvMovieDBList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                DateTime Date = Convert.ToDateTime(year);
-                string link = gvMovieDBList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string rank = gvMovieDBList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                if (gvMovieDBList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
 
-                movie.Name = name;
-                movie.Description = desc;
-                movie.Year = Date;
-                movie.Link = link;
-                movie.Rank = rank;
-                MovieDetailsForm mdf = new MovieDetailsForm(movie);
-                mdf.Show();
+                    string name = gvMovieDBList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    string desc = gvMovieDBList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    string year = gvMovieDBList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    DateTime Date = Convert.ToDateTime(year);
+                    string link = gvMovieDBList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    string rank = gvMovieDBList.Rows[e.RowIndex].Cells[4].Value.ToString();
 
-                //ctx.Movies.Where(m => m.Link == movie.Link).ToList();
+                    movie.Name = name;
+                    movie.Description = desc;
+                    movie.Year = Date;
+                    movie.Link = link;
+                    movie.Rank = rank;
+                    MovieDetailsForm mdf = new MovieDetailsForm(movie);
+                    mdf.Show();
+                }
             }
+            else if (dr == DialogResult.No)
+            {
+                if (gvMovieDBList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    string link = gvMovieDBList.Rows[e.RowIndex].Cells[3].Value.ToString();                    
+                    var movieObject = ctx.Movies.FirstOrDefault(m => m.Link == link);
+                    ctx.Movies.Remove(movieObject);
+                    ctx.SaveChanges();
+                }
+                MessageBox.Show("deleted");
+            }
+            else
+            {
+                MessageBox.Show("else!");
+            }
+            this.moviesTableAdapter.Fill(this.imdbContextDataSet.Movies);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace imdb
 {
     public partial class Main : Form
     {
+        WebClient wc = new WebClient();
         public Main()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace imdb
         {
             lbListResult.Items.Clear();
             string search = txtLink.Text;
-            WebClient wc = new WebClient();
+
             string result = wc.DownloadString("https://www.imdb.com/find?ref_=nv_sr_fn&q=" + search + "&s=all");
 
             int firstIndex, lastIndex;
@@ -117,6 +118,18 @@ namespace imdb
         {
             ListDBMovies db = new ListDBMovies();
             db.Show();
+        }
+
+        private void btnList100_Click(object sender, EventArgs e)
+        {
+            string htmlCode = wc.DownloadString("https://www.imdb.com/list/ls055592025/");
+            htmlCode = getBetween(htmlCode, "lister-list", "footer filmosearch");
+            List<string> list = new List<string>();
+            foreach (Match m in Regex.Matches(htmlCode, "alt=\"(.*)\"\\sclass"))
+            {
+                list.Add(m.Groups[1].Value);                
+            }
+            lbListResult.Items.Add(list);
         }
     }
 }
