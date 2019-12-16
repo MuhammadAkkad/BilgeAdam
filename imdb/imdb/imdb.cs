@@ -29,17 +29,13 @@ namespace imdb
             lbListResult.Items.Clear();
             string search = txtLink.Text;
             string result = wc.DownloadString("https://www.imdb.com/find?ref_=nv_sr_fn&q=" + search + "&s=all");
-
             int firstIndex, lastIndex;
-
             firstIndex = result.IndexOf("\"findList\"");
             string slimmedString = result.Substring(firstIndex);
             firstIndex = slimmedString.IndexOf("\"findList\"") + "\"findList\"".Length;
             lastIndex = slimmedString.IndexOf("</table>");
             result = slimmedString.Substring(firstIndex, lastIndex);
-
             string[] result_text = result.Split('"', '"');
-
             int count = 0;
             foreach (var item in result_text)
             {
@@ -50,7 +46,6 @@ namespace imdb
             }
             for (int i = 1; i <= count; i++)
             {
-
                 Movie movie = new Movie();
                 int resultIndex = result.IndexOf("<td class=\"result_text\"> <a href=\"") + "<td class=\"result_text\"> <a href=\"".Length;
                 string newResult = result.Substring(resultIndex);
@@ -58,29 +53,23 @@ namespace imdb
                 string link = newResult.Substring(0, hrefStart);
                 movie.Link = link;
                 result = newResult.Remove(0, link.Length + 3);
-
                 int startIndex = result.IndexOf("</a>");
                 string title = result.Substring(0, startIndex);
                 movie.Name = title;
-
                 result = result.Remove(0, title.Length + 6);
-
                 int yearIndex = result.IndexOf(")");
                 string year = result.Substring(0, yearIndex);
                 movieList.Add(movie);
-
             }
             foreach (var item in movieList)
             {
                 lbListResult.Items.Add(item.Name);
             }
         }
-
         private void txtLink_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void lbListResult_SelectedIndexChanged(object sender, EventArgs e)
         {
             
@@ -92,12 +81,10 @@ namespace imdb
             MovieDetailsForm mdf = new MovieDetailsForm(movie);            
             mdf.Show();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
-
         string getBetween(string strSource, string strStart, string strEnd)
         {
             int Start, End;
@@ -112,13 +99,11 @@ namespace imdb
                 return "Not Found!!";
             }
         }
-
         private void btnSavedMovies_Click(object sender, EventArgs e)
         {
             ListDBMovies db = new ListDBMovies();
             db.Show();
         }
-
         private void btnList100_Click(object sender, EventArgs e)
         {
             string htmlCode = wc.DownloadString("https://www.imdb.com/list/ls055592025/");
