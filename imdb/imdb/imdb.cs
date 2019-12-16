@@ -28,7 +28,6 @@ namespace imdb
         {
             lbListResult.Items.Clear();
             string search = txtLink.Text;
-
             string result = wc.DownloadString("https://www.imdb.com/find?ref_=nv_sr_fn&q=" + search + "&s=all");
 
             int firstIndex, lastIndex;

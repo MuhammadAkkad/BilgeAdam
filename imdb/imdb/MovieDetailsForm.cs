@@ -114,16 +114,11 @@ namespace imdb
         }
         public PictureBox getPoster(PictureBox pictureBox, string htmlCode)
         {
-
             string html = htmlCode;
-                html = client.DownloadString("https://www.imdb.com" + link);
-                html = getBetween(html, "<link rel='image_src' href=\"", "/>");
-
-            if (File.Exists(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg")){
-                client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
-                pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
-                return pictureBox;
-            }                
+            html = client.DownloadString("https://www.imdb.com" + link);
+            html = getBetween(html, "<link rel='image_src' href=\"", "/>");   
+            client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
+            pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
             return pictureBox;
         }
         public DateTime getYear(string htmlCode)
