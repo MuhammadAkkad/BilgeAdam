@@ -65,8 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cast.cs" />
-    <Compile Include="CastRole.cs" />
     <Compile Include="imdb.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,9 +84,6 @@
       <DependentUpon>ListDBMovies.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Movie.cs" />
-    <Compile Include="MovieCast.cs" />
-    <Compile Include="MovieConfiguration.cs" />
     <Compile Include="MovieDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,7 +135,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{3a3d7873-2735-43b0-86d1-0900f93854da}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Batman.jpg" />
     <Content Include="Images\Inception.jpg" />

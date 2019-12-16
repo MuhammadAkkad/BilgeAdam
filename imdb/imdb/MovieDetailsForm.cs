@@ -231,6 +231,5 @@ namespace imdb
             ctx.MovieCasts.Add(map);
             ctx.SaveChanges();
         }
-
     }
 }

@@ -72,13 +72,13 @@ namespace imdb
         }
         private void lbListResult_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
         private void lbListResult_Click(object sender, EventArgs e)
         {
             int movieIndex = lbListResult.SelectedIndex;
             movie = movieList[movieIndex];
-            MovieDetailsForm mdf = new MovieDetailsForm(movie);            
+            MovieDetailsForm mdf = new MovieDetailsForm(movie);
             mdf.Show();
         }
         private void button1_Click(object sender, EventArgs e)
@@ -114,11 +114,7 @@ namespace imdb
                 list.Add(m.Groups[1].Value);
                 lbListResult.Items.Add(m.Groups[1].Value);
             }
-            
+
         }
     }
 }
-
-
-
-

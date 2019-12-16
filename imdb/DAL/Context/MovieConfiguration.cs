@@ -2,7 +2,7 @@
 
 namespace imdb
 {
-    class MovieConfiguration :
+    public class MovieConfiguration :
        EntityTypeConfiguration<Movie>
     {
 
