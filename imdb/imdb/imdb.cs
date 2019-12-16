@@ -127,9 +127,10 @@ namespace imdb
             List<string> list = new List<string>();
             foreach (Match m in Regex.Matches(htmlCode, "alt=\"(.*)\"\\sclass"))
             {
-                list.Add(m.Groups[1].Value);                
+                list.Add(m.Groups[1].Value);
+                lbListResult.Items.Add(m.Groups[1].Value);
             }
-            lbListResult.Items.Add(list);
+            
         }
     }
 }
