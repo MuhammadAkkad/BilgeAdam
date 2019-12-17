@@ -60,9 +60,7 @@ namespace imdb
             }
         }
         private void txtDescription_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
         private void lblMovieLable_Click(object sender, EventArgs e)
         {
 

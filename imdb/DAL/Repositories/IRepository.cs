@@ -9,9 +9,10 @@ namespace DAL
     interface IRepository<TEntity>
     {
         List<TEntity> GetAll();
-        //IQueryable<TEntity> Query { get; }
-        void Add(TEntity entity);
+        TEntity GetByID(object id);
+        void Insert(TEntity entity);
         void Delete(TEntity entity);
+        void Update(TEntity entityToUpdate);
         void Save();
     }
 }

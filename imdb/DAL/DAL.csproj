@@ -51,19 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cast.cs" />
-    <Compile Include="CastRole.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="imdbContext.cs" />
-    <Compile Include="Movie.cs" />
-    <Compile Include="MovieCast.cs" />
-    <Compile Include="MovieConfiguration.cs" />
+    <Compile Include="Entities\Cast.cs" />
+    <Compile Include="Entities\CastRole.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Context\imdbContext.cs" />
+    <Compile Include="Entities\Movie.cs" />
+    <Compile Include="Entities\MovieCast.cs" />
+    <Compile Include="Context\MovieConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

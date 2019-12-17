@@ -1,6 +1,7 @@
 ﻿using imdb;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 
@@ -31,9 +32,25 @@ namespace DAL
             return db.Set<TEntity>().ToList();
         }
 
+        public TEntity GetByID(object id)
+        {
+            return db.Set<TEntity>().Find(id);
+        }
+
+        public void Insert(TEntity entity)
+        {
+            db.Set<TEntity>().Add(entity);
+        }
+
         public void Save()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
+        }
+
+        public void Update(TEntity entityToUpdate)
+        {
+            db.Set<TEntity>().Attach(entityToUpdate);
+            db.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
         #region IRepository<T> Members
