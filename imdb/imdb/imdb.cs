@@ -10,15 +10,16 @@ namespace imdb
 {
     public partial class Main : Form
     {
-        WebClient wc = new WebClient();
+
+        imdbServices s = new imdbServices();
+        List<Movie> mList = new List<Movie>();
+        List<string> sList = new List<string>();
+        Movie movie = new Movie();
         public Main()
         {
             InitializeComponent();
-            Database.SetInitializer(
-                new DropCreateDatabaseIfModelChanges<imdbContext>());
+
         }
-        Movie movie = new Movie();
-        List<Movie> movieList = new List<Movie>();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -28,41 +29,8 @@ namespace imdb
         private void btnSearch_Click(object sender, EventArgs e)
         {
             lbListResult.Items.Clear();
-            string search = txtLink.Text;
-            string result = wc.DownloadString("https://www.imdb.com/find?ref_=nv_sr_fn&q=" + search + "&s=all");
-            int firstIndex, lastIndex;
-            firstIndex = result.IndexOf("\"findList\"");
-            string slimmedString = result.Substring(firstIndex);
-            firstIndex = slimmedString.IndexOf("\"findList\"") + "\"findList\"".Length;
-            lastIndex = slimmedString.IndexOf("</table>");
-            result = slimmedString.Substring(firstIndex, lastIndex);
-            string[] result_text = result.Split('"', '"');
-            int count = 0;
-            foreach (var item in result_text)
-            {
-                if (item == "result_text")
-                {
-                    count++;
-                }
-            }
-            for (int i = 1; i <= count; i++)
-            {
-                Movie movie = new Movie();
-                int resultIndex = result.IndexOf("<td class=\"result_text\"> <a href=\"") + "<td class=\"result_text\"> <a href=\"".Length;
-                string newResult = result.Substring(resultIndex);
-                int hrefStart = newResult.IndexOf("\"");
-                string link = newResult.Substring(0, hrefStart);
-                movie.Link = link;
-                result = newResult.Remove(0, link.Length + 3);
-                int startIndex = result.IndexOf("</a>");
-                string title = result.Substring(0, startIndex);
-                movie.Name = title;
-                result = result.Remove(0, title.Length + 6);
-                int yearIndex = result.IndexOf(")");
-                string year = result.Substring(0, yearIndex);
-                movieList.Add(movie);
-            }
-            foreach (var item in movieList)
+            mList = s.Search(txtLink.Text);
+            foreach (var item in mList)
             {
                 lbListResult.Items.Add(item.Name);
             }
@@ -78,27 +46,13 @@ namespace imdb
         private void lbListResult_Click(object sender, EventArgs e)
         {
             int movieIndex = lbListResult.SelectedIndex;
-            movie = movieList[movieIndex];
+            movie = mList[movieIndex];
             MovieDetailsForm mdf = new MovieDetailsForm(movie);
             mdf.Show();
         }
         private void button1_Click(object sender, EventArgs e)
         {
 
-        }
-        string getBetween(string strSource, string strStart, string strEnd)
-        {
-            int Start, End;
-            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
-            {
-                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
-                End = strSource.IndexOf(strEnd, Start);
-                return strSource.Substring(Start, End - Start);
-            }
-            else
-            {
-                return "Not Found!!";
-            }
         }
         private void btnSavedMovies_Click(object sender, EventArgs e)
         {
@@ -107,15 +61,11 @@ namespace imdb
         }
         private void btnList100_Click(object sender, EventArgs e)
         {
-            string htmlCode = wc.DownloadString("https://www.imdb.com/list/ls055592025/");
-            htmlCode = getBetween(htmlCode, "lister-list", "footer filmosearch");
-            List<string> list = new List<string>();
-            foreach (Match m in Regex.Matches(htmlCode, "alt=\"(.*)\"\\sclass"))
-            {
-                list.Add(m.Groups[1].Value);
-                lbListResult.Items.Add(m.Groups[1].Value);
+           sList = s.Top100();
+            foreach (var item in sList)
+            {                
+                lbListResult.Items.Add(item); //lbListResult.Items.Add(m.Groups[1].Value);
             }
-
         }
     }
 }

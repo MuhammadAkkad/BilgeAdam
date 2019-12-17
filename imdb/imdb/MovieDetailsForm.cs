@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -14,6 +15,7 @@ namespace imdb
         string link;
         Movie movie;
         WebClient client = new WebClient();
+        imdbServices s = new imdbServices();
         List<string> directorInsert = new List<string>();
         List<string> writerInsert = new List<string>();
         List<string> starInsert = new List<string>();
@@ -69,7 +71,7 @@ namespace imdb
         {
             string html = htmlCode;
             List<string> directors = new List<string>();
-            html = getBetween(html, "director", "creator");
+            html = s.getBetween(html, "director", "creator");
             foreach (Match m in Regex.Matches(html, "\"name\":\\s\"(.*)\""))
             {
                 directors.Add(m.Groups[1].Value);
@@ -80,7 +82,7 @@ namespace imdb
         {
             string html= htmlCode;
             List<string> writers = new List<string>();
-            html = getBetween(html, "Writers", "summary");
+            html = s.getBetween(html, "Writers", "summary");
             foreach (Match m in Regex.Matches(html, ">(.*)</a>"))
             {
                 writers.Add(m.Groups[1].Value);
@@ -91,7 +93,7 @@ namespace imdb
         {
             string html = htmlCode;
             List<string> stars = new List<string>();
-            html = getBetween(html, "actor", "director");
+            html = s.getBetween(html, "actor", "director");
             foreach (Match m in Regex.Matches(html, "\"name\":\\s\"(.*)\""))
             {
                 stars.Add(m.Groups[1].Value);
@@ -101,12 +103,12 @@ namespace imdb
         public string getDescription(string htmlCode)
         {
             string html= htmlCode;
-            return html = getBetween(html, "<meta name=\"description\" content=\"", "\" />");
+            return html = s.getBetween(html, "<meta name=\"description\" content=\"", "\" />");
         }
         public string getRank(string htmlCode)
         {
             string html = htmlCode;
-            html = getBetween(html, "ratingValue\": \"", "\"");
+            html = s.getBetween(html, "ratingValue\": \"", "\"");
 
             return html;
         }
@@ -114,7 +116,7 @@ namespace imdb
         {
             string html = htmlCode;
             html = client.DownloadString("https://www.imdb.com" + link);
-            html = getBetween(html, "<link rel='image_src' href=\"", "/>");   
+            html = s.getBetween(html, "<link rel='image_src' href=\"", "/>");   
             client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
             pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
             return pictureBox;
@@ -123,7 +125,7 @@ namespace imdb
         {
             string date;
             string html = htmlCode;
-            date = getBetween(html, "datePublished\": \"", "\"");
+            date = s.getBetween(html, "datePublished\": \"", "\"");
             DateTime oDate = Convert.ToDateTime(date);
             return oDate;
         }
@@ -141,20 +143,6 @@ namespace imdb
 
             return (sourceSize - newSizeSource) / wordSize;
 
-        }
-        string getBetween(string strSource, string strStart, string strEnd)
-        {
-            int Start, End;
-            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
-            {
-                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
-                End = strSource.IndexOf(strEnd, Start);
-                return strSource.Substring(Start, End - Start);
-            }
-            else
-            {
-                return "Not Found!!";
-            }
         }
         string delete(string strSource, string deleteWord)
         {

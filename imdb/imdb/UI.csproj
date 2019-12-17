@@ -140,6 +140,10 @@
     <Content Include="Images\The Matrix.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{D8298A0C-B95C-481E-A5DE-A5C26366F1AA}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{e8fc1d52-bd5a-469d-b07c-adb2fb98efad}</Project>
       <Name>Services</Name>
