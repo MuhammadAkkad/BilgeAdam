@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -104,7 +105,6 @@ namespace Services
             string result = client.DownloadString("https://www.imdb.com" + link);
             return result;
         }
-
         public List<string> getDirectors(string htmlCode)
         {
             string html = htmlCode;
