@@ -53,7 +53,9 @@
   <ItemGroup>
     <Compile Include="Entities\Cast.cs" />
     <Compile Include="Entities\CastRole.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Context\imdbContext.cs" />
     <Compile Include="Entities\Movie.cs" />

@@ -15,10 +15,10 @@ namespace imdb
         string link;
         Movie movie;
         WebClient client = new WebClient();
-        imdbServices s = new imdbServices();
-        List<string> directorInsert = new List<string>();
-        List<string> writerInsert = new List<string>();
-        List<string> starInsert = new List<string>();
+        imdbServices service = new imdbServices();
+        List<string> directorList = new List<string>();
+        List<string> writerList = new List<string>();
+        List<string> starList = new List<string>();
         public MovieDetailsForm()
         {
             InitializeComponent();
@@ -33,30 +33,30 @@ namespace imdb
         {
             string htmlCode = client.DownloadString("https://www.imdb.com" + link);
             lblMovieLable.Text = movie.Name;
-            txtDescription.Text = getDescription(htmlCode);
-            lblRank.Text = getRank(htmlCode);
-            getPoster(imgMovie, htmlCode);
+            txtDescription.Text = service.getDescription(htmlCode);
+            lblRank.Text = service.getRank(htmlCode);
+            service.getPoster(imgMovie, htmlCode, link);
 
             movie.Description = txtDescription.Text;
             movie.Name = lblMovieLable.Text;
             movie.Photo = @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg";
             movie.Rank = lblRank.Text;
-            movie.Year = getYear(htmlCode);
+            movie.Year = service.getYear(htmlCode);
 
-            directorInsert = getDirectors(htmlCode);
-            foreach (var item in directorInsert)
+            directorList = service.getDirectors(htmlCode);
+            foreach (var item in directorList)
             {
                 lbDirectors.Items.Add(item);
             }
 
-            writerInsert = getWriters(htmlCode);
-            foreach (var item in writerInsert)
+            writerList = service.getWriters(htmlCode);
+            foreach (var item in writerList)
             {
                 lbWriters.Items.Add(item);
             }
 
-            starInsert = getStars(htmlCode);
-            foreach (var item in starInsert)
+            starList = service.getStars(htmlCode);
+            foreach (var item in starList)
             {
                 lbStars.Items.Add(item);
             }
@@ -64,94 +64,8 @@ namespace imdb
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {}
         private void lblMovieLable_Click(object sender, EventArgs e)
-        {
-
-        }            
-        public List<string> getDirectors(string htmlCode)
-        {
-            string html = htmlCode;
-            List<string> directors = new List<string>();
-            html = s.getBetween(html, "director", "creator");
-            foreach (Match m in Regex.Matches(html, "\"name\":\\s\"(.*)\""))
-            {
-                directors.Add(m.Groups[1].Value);
-            }
-            return directors;
-        }
-        public List<string> getWriters(string htmlCode)
-        {
-            string html= htmlCode;
-            List<string> writers = new List<string>();
-            html = s.getBetween(html, "Writers", "summary");
-            foreach (Match m in Regex.Matches(html, ">(.*)</a>"))
-            {
-                writers.Add(m.Groups[1].Value);
-            }
-            return writers;
-        }
-        public List<string> getStars(string htmlCode)
-        {
-            string html = htmlCode;
-            List<string> stars = new List<string>();
-            html = s.getBetween(html, "actor", "director");
-            foreach (Match m in Regex.Matches(html, "\"name\":\\s\"(.*)\""))
-            {
-                stars.Add(m.Groups[1].Value);
-            }
-            return stars;
-        }
-        public string getDescription(string htmlCode)
-        {
-            string html= htmlCode;
-            return html = s.getBetween(html, "<meta name=\"description\" content=\"", "\" />");
-        }
-        public string getRank(string htmlCode)
-        {
-            string html = htmlCode;
-            html = s.getBetween(html, "ratingValue\": \"", "\"");
-
-            return html;
-        }
-        public PictureBox getPoster(PictureBox pictureBox, string htmlCode)
-        {
-            string html = htmlCode;
-            html = client.DownloadString("https://www.imdb.com" + link);
-            html = s.getBetween(html, "<link rel='image_src' href=\"", "/>");   
-            client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
-            pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg");
-            return pictureBox;
-        }
-        public DateTime getYear(string htmlCode)
-        {
-            string date;
-            string html = htmlCode;
-            date = s.getBetween(html, "datePublished\": \"", "\"");
-            DateTime oDate = Convert.ToDateTime(date);
-            return oDate;
-        }
-        int getCount(string source1, string word)
-        {
-
-            string word1 = word;
-            string source = source1;
-
-            int wordSize = word1.Length;
-            int sourceSize = source.Length;
-
-            string sourceNewSize = source.Replace(word1, "");
-            int newSizeSource = sourceNewSize.Length;
-
-            return (sourceSize - newSizeSource) / wordSize;
-
-        }
-        string delete(string strSource, string deleteWord)
-        {
-            int start;
-
-            start = strSource.IndexOf(deleteWord) + deleteWord.Length;
-            return strSource = strSource.Substring(start);
-
-        }
+        {}         
+        
         private void lbDirectors_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -172,50 +86,24 @@ namespace imdb
             {
                 ctx.Movies.Add(movie);
                 ctx.SaveChanges();
-                foreach (var director in directorInsert)
+                foreach (var director in directorList)
                 {
-                    AddCast("Director", director, movie.Name);
+                    service.AddCast("Director", director, movie.Name);
                 }
 
-                foreach (var writer in writerInsert)
+                foreach (var writer in writerList)
                 {
-                    AddCast("Writer", writer, movie.Name);
+                    service.AddCast("Writer", writer, movie.Name);
                 }
 
-                foreach (var star in starInsert)
+                foreach (var star in starList)
                 {
-                    AddCast("Star", star, movie.Name);
+                    service.AddCast("Star", star, movie.Name);
                 }
                 MessageBox.Show("Movie added successfully");
             }
             this.Close();
         }
-        void AddCast(string role, string castName , string movieName) {
-            imdbContext ctx = new imdbContext();
-            CastRole castRole = new CastRole();
-            MovieCast map = new MovieCast();
-            Cast cast = new Cast();
 
-            castRole.Role = role;
-            if (!ctx.castRoles.Any(c => c.Role == castRole.Role))
-            {
-                ctx.castRoles.Add(castRole);
-                ctx.SaveChanges();
-            }
-
-            cast.Name = castName;
-
-            if (!ctx.Casts.Any(c => c.Name == cast.Name))
-            {
-                ctx.Casts.Add(cast);
-                ctx.SaveChanges();
-            }
-
-            map.CastId = ctx.Casts.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
-            map.CastRoleId = ctx.castRoles.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();
-            map.MovieId = ctx.Movies.Where(m => m.Name == movieName).Select(m => m.MovieId).FirstOrDefault();
-            ctx.MovieCasts.Add(map);
-            ctx.SaveChanges();
-        }
     }
 }

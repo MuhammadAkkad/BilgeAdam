@@ -17,7 +17,6 @@ namespace imdb
         {
             // TODO: This line of code loads data into the 'imdbContextDataSet.Movies' table. You can move, or remove it, as needed.
             this.moviesTableAdapter.Fill(this.imdbContextDataSet.Movies);
-
         }
 
         private void gvMovieDBList_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -27,12 +26,11 @@ namespace imdb
                 "\n Cancel Does nothing :)", "Action", MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Information);
 
-
+            // Show Details
             if (dr == DialogResult.Yes)
             {
                 if (gvMovieDBList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
-
                     string name = gvMovieDBList.Rows[e.RowIndex].Cells[0].Value.ToString();
                     string desc = gvMovieDBList.Rows[e.RowIndex].Cells[1].Value.ToString();
                     string year = gvMovieDBList.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -49,6 +47,7 @@ namespace imdb
                     mdf.Show();
                 }
             }
+            // Delete
             else if (dr == DialogResult.No)
             {
                 if (gvMovieDBList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)

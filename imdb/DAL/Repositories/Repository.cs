@@ -10,6 +10,12 @@ namespace DAL
     public class Repository<TEntity> : IRepository<TEntity> where TEntity:class
     {
         imdbContext db;
+
+        public Repository()
+        {
+            db = new imdbContext();
+        }
+
         public Repository(imdbContext db)
         {
             this.db = db;
