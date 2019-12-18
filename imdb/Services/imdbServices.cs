@@ -14,15 +14,16 @@ namespace Services
     public class imdbServices
     {
         public imdbContext db = new imdbContext();
-        public Movie movie = new Movie();
+       // public Movie movie = new Movie();
         public WebClient client = new WebClient();
         public List<Movie> movieList = new List<Movie>();
-        public Repository<Movie> repository;
+        public Repository<Movie> repositoryMovie;
         public Repository<Cast> repositoryCast = new Repository<Cast>();
         public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
+        public Repository<MovieCast> repositoryMovieCast = new Repository<MovieCast>();
         public imdbServices()
         {
-            repository = new Repository<Movie>();
+            repositoryMovie = new Repository<Movie>();
             Database.SetInitializer(
             new DropCreateDatabaseIfModelChanges<imdbContext>());
         }
@@ -170,37 +171,36 @@ namespace Services
             }
 
             cast.Name = castName;
+            
             if (!repositoryCast.EntityExists(x => x.Name == castName))
             {
                 repositoryCast.Add(cast);
             }
 
-
-            //map.CastId = ctx.Casts.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
-            //map.CastRoleId = ctx.castRoles.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();
-            //map.MovieId = ctx.Movies.Where(m => m.Name == movieName).Select(m => m.MovieId).FirstOrDefault();
-            //ctx.MovieCasts.Add(map);
-            //ctx.SaveChanges();
+            map.CastId = repositoryCast.GetIdByString(c => c.Name == cast.Name, c => c.CastId);
+            map.CastRoleId = repositoryCastRole.GetIdByString(c => c.Role == castRole.Role, c => c.CastRoleId);
+            map.MovieId = repositoryMovie.GetIdByString(c => c.Name == movieName, c => c.MovieId);
+            repositoryMovieCast.Add(map);
         }
         public Boolean EntityExist(string movieLink) {
-           return repository.EntityExists(x => x.Link == movieLink);
+           return repositoryMovie.EntityExists(x => x.Link == movieLink);
         }
         public string AddMovie(Movie movie) {
 
-            if (!repository.EntityExists(m => m.Link == movie.Link))
+            if (!repositoryMovie.EntityExists(m => m.Link == movie.Link))
             {
-                repository.Add(movie);
+                repositoryMovie.Add(movie);
                 return "Movie Added successfully";
             }
             return "Movie already exists";
         }
         public List<Movie> GetAllMovies()
         {
-            return repository.GetAll();
+            return repositoryMovie.GetAll();
         }
         public void Delete(Movie movie)
         {
-            repository.Delete(movie);
+            repositoryMovie.Delete(movie);
         }
     }
 }

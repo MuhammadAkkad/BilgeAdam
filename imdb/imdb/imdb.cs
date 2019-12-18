@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Net;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Services;
 
 namespace imdb
 {

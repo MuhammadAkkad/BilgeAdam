@@ -74,6 +74,15 @@ namespace DAL
             return db.Set<TEntity>().Any(expression);
         }
 
+        public int GetIdByString(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, int>> expression2) {
+            return db.Set<TEntity>().Where(expression).Select(expression2).FirstOrDefault();
+        }
+
+        public virtual TEntity GetById(TEntity id)
+        {
+            return db.Set<TEntity>().Find(id);
+        }
+
 
         #region IRepository<T> Members
 
