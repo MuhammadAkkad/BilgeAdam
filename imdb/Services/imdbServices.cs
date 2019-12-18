@@ -169,36 +169,22 @@ namespace Services
         }
         public void AddCast(string role, string castName, string movieName)
         {
-            //imdbContext ctx = new imdbContext();
+
             CastRole castRole = new CastRole();
             MovieCast map = new MovieCast();
             Cast cast = new Cast();
 
-            castRole.Role = role;
-
-            if (repositoryCastRole.GetByID(castRole.CastRoleId) != null)
+            if (!repositoryCastRole.EntityExists(x => x.Role == role))
             {
                 repositoryCastRole.Add(castRole);
             }
 
-            //if (!ctx.castRoles.Any(c => c.Role == castRole.Role))
-            //{
-            //    ctx.castRoles.Add(castRole);
-            //    ctx.SaveChanges();
-            //}
-
             cast.Name = castName;
-
-            if (repositoryCast.GetByID(cast.CastId) != null)
+            if (!repositoryCast.EntityExists(x => x.Name == castName))
             {
                 repositoryCast.Add(cast);
             }
 
-            //if (!ctx.Casts.Any(c => c.Name == cast.Name))
-            //{
-            //    ctx.Casts.Add(cast);
-            //    ctx.SaveChanges();
-            //}
 
             //map.CastId = ctx.Casts.Where(c => c.Name == cast.Name).Select(c => c.CastId).FirstOrDefault();
             //map.CastRoleId = ctx.castRoles.Where(c => c.Role == castRole.Role).Select(c => c.CastRoleId).FirstOrDefault();

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-
+using System.Linq.Expressions;
 
 namespace DAL
 {
@@ -43,6 +43,16 @@ namespace DAL
             return db.Set<TEntity>().Find(id);
         }
 
+        public Boolean MapExists(MovieCast movieCast)// needs TEST
+        {
+            if (db.MovieCasts.Any(mc => mc.MovieId == movieCast.MovieId))
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+
         public void Insert(TEntity entity)
         {
             db.Set<TEntity>().Add(entity);
@@ -57,6 +67,16 @@ namespace DAL
         {
             db.Set<TEntity>().Attach(entityToUpdate);
             db.Entry(entityToUpdate).State = EntityState.Modified;
+        }
+
+        public Boolean EntityExists(Expression<Func<TEntity,bool>> expression)
+        {
+            return db.Set<TEntity>().Any(expression);
+        }
+
+        public bool CastExists(TEntity entity)
+        {
+            throw new NotImplementedException();
         }
 
         #region IRepository<T> Members
