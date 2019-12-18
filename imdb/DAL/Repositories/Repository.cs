@@ -74,10 +74,6 @@ namespace DAL
             return db.Set<TEntity>().Any(expression);
         }
 
-        public bool CastExists(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
 
         #region IRepository<T> Members
 

@@ -1,11 +1,7 @@
 ﻿using Services;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace imdb
@@ -62,10 +58,10 @@ namespace imdb
             }
         }
         private void txtDescription_TextChanged(object sender, EventArgs e)
-        {}
+        { }
         private void lblMovieLable_Click(object sender, EventArgs e)
-        {}         
-        
+        { }
+
         private void lbDirectors_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -76,9 +72,9 @@ namespace imdb
         }
         private void btnSave2Db_Click(object sender, EventArgs e)
         {
-            imdbContext ctx = new imdbContext();
+            //imdbContext ctx = new imdbContext();
 
-            if (ctx.Movies.Any(m => m.Link == movie.Link))
+            if ((m => m.Link == movie.Link))
             {
                 MessageBox.Show("Movie already exists");
             }

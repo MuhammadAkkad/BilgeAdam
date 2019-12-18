@@ -1,16 +1,12 @@
-﻿using System;
+﻿using DAL;
+using imdb;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DAL;
-using imdb;
 
 
 namespace Services
@@ -30,12 +26,12 @@ namespace Services
             Database.SetInitializer(
             new DropCreateDatabaseIfModelChanges<imdbContext>());
         }
-        public imdbServices(Movie movie)
-        {
-            this.movie = movie;
-            Database.SetInitializer(
-            new DropCreateDatabaseIfModelChanges<imdbContext>());
-        }
+        //public imdbServices(Movie movie)
+        //{
+        //    this.movie = movie;
+        //    Database.SetInitializer(
+        //    new DropCreateDatabaseIfModelChanges<imdbContext>());
+        //}
         public List<Movie> Search(string search)
         {
 
@@ -99,11 +95,6 @@ namespace Services
             {
                 return "Not Found!!";
             }
-        }
-        string getHtmlCode(string link)
-        {
-            string result = client.DownloadString("https://www.imdb.com" + link);
-            return result;
         }
         public List<string> getDirectors(string htmlCode)
         {
@@ -169,7 +160,6 @@ namespace Services
         }
         public void AddCast(string role, string castName, string movieName)
         {
-
             CastRole castRole = new CastRole();
             MovieCast map = new MovieCast();
             Cast cast = new Cast();
@@ -191,6 +181,9 @@ namespace Services
             //map.MovieId = ctx.Movies.Where(m => m.Name == movieName).Select(m => m.MovieId).FirstOrDefault();
             //ctx.MovieCasts.Add(map);
             //ctx.SaveChanges();
+        }
+        public void AddMovie() { 
+        
         }
         public List<Movie> GetAllMovies()
         {
