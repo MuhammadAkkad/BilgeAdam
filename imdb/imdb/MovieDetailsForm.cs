@@ -61,7 +61,6 @@ namespace imdb
         { }
         private void lblMovieLable_Click(object sender, EventArgs e)
         { }
-
         private void lbDirectors_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -72,32 +71,20 @@ namespace imdb
         }
         private void btnSave2Db_Click(object sender, EventArgs e)
         {
-            //imdbContext ctx = new imdbContext();
-
-            if ((m => m.Link == movie.Link))
+            string result = service.AddMovie(movie);
+            foreach (var director in directorList)
             {
-                MessageBox.Show("Movie already exists");
+                service.AddCast("Director", director, movie.Name);
             }
-            else
+            foreach (var writer in writerList)
             {
-                ctx.Movies.Add(movie);
-                ctx.SaveChanges();
-                foreach (var director in directorList)
-                {
-                    service.AddCast("Director", director, movie.Name);
-                }
-
-                foreach (var writer in writerList)
-                {
-                    service.AddCast("Writer", writer, movie.Name);
-                }
-
-                foreach (var star in starList)
-                {
-                    service.AddCast("Star", star, movie.Name);
-                }
-                MessageBox.Show("Movie added successfully");
+                service.AddCast("Writer", writer, movie.Name);
             }
+            foreach (var star in starList)
+            {
+                service.AddCast("Star", star, movie.Name);
+            }
+            MessageBox.Show(result);
             this.Close();
         }
 

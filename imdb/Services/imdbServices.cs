@@ -182,8 +182,17 @@ namespace Services
             //ctx.MovieCasts.Add(map);
             //ctx.SaveChanges();
         }
-        public void AddMovie() { 
-        
+        public Boolean EntityExist(string movieLink) {
+           return repository.EntityExists(x => x.Link == movieLink);
+        }
+        public string AddMovie(Movie movie) {
+
+            if (!repository.EntityExists(m => m.Link == movie.Link))
+            {
+                repository.Add(movie);
+                return "Movie Added successfully";
+            }
+            return "Movie already exists";
         }
         public List<Movie> GetAllMovies()
         {
