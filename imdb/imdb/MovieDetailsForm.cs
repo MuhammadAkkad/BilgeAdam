@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,9 +10,11 @@ namespace imdb
     public partial class MovieDetailsForm : Form
     {
         string link;
-        Movie movie;
+        MovieDTO movieDTO = new MovieDTO();
         WebClient client = new WebClient();
         imdbServices service = new imdbServices();
+        MovieService movieService = new MovieService();
+        CastService castService = new CastService();
         List<string> directorList = new List<string>();
         List<string> writerList = new List<string>();
         List<string> starList = new List<string>();
@@ -19,25 +22,25 @@ namespace imdb
         {
             InitializeComponent();
         }
-        public MovieDetailsForm(Movie movie)
+        public MovieDetailsForm(MovieDTO movieDTO)
         {
             InitializeComponent();
-            this.movie = movie;
-            link = movie.Link;
+            this.movieDTO = movieDTO;
+            link = movieDTO.Link;
         }
         private void MovieDetailsForm_Load(object sender, EventArgs e)
         {
             string htmlCode = client.DownloadString("https://www.imdb.com" + link);
-            lblMovieLable.Text = movie.Name;
+            lblMovieLable.Text = movieDTO.Name;
             txtDescription.Text = service.getDescription(htmlCode);
             lblRank.Text = service.getRank(htmlCode);
-            service.getPoster(imgMovie, htmlCode, link);
+            service.getPoster(imgMovie, htmlCode, movieDTO);
 
-            movie.Description = txtDescription.Text;
-            movie.Name = lblMovieLable.Text;
-            movie.Photo = @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg";
-            movie.Rank = lblRank.Text;
-            movie.Year = service.getYear(htmlCode);
+            movieDTO.Description = txtDescription.Text;
+            movieDTO.Name = lblMovieLable.Text;
+            movieDTO.Photo = @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg";
+            movieDTO.Rank = lblRank.Text;
+            movieDTO.Year = service.getYear(htmlCode);
 
             directorList = service.getDirectors(htmlCode);
             foreach (var item in directorList)
@@ -71,18 +74,18 @@ namespace imdb
         }
         private void btnSave2Db_Click(object sender, EventArgs e)
         {
-            string result = service.AddMovie(movie);
+            string result = movieService.Add(movieDTO);
             foreach (var director in directorList)
             {
-                service.AddCast("Director", director, movie.Name);
+                castService.Add("Director", director, movieDTO.Name);
             }
             foreach (var writer in writerList)
             {
-                service.AddCast("Writer", writer, movie.Name);
+                castService.Add("Writer", writer, movieDTO.Name);
             }
             foreach (var star in starList)
             {
-                service.AddCast("Star", star, movie.Name);
+                castService.Add("Star", star, movieDTO.Name);
             }
             MessageBox.Show(result);
             this.Close();

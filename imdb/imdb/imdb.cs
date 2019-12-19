@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,9 +9,9 @@ namespace imdb
     public partial class Main : Form
     {
         imdbServices service = new imdbServices();
-        List<Movie> mList = new List<Movie>();
+        List<MovieDTO> mList = new List<MovieDTO>();
         List<string> sList = new List<string>();
-        Movie movie = new Movie();
+        MovieDTO movieDTO = new MovieDTO();
         public Main()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace imdb
         private void btnSearch_Click(object sender, EventArgs e)
         {
             lbListResult.Items.Clear();
+            mList.Clear();
             mList = service.Search(txtLink.Text);
             foreach (var item in mList)
             {
@@ -41,8 +43,8 @@ namespace imdb
         private void lbListResult_Click(object sender, EventArgs e)
         {
             int movieIndex = lbListResult.SelectedIndex;
-            movie = mList[movieIndex];
-            MovieDetailsForm mdf = new MovieDetailsForm(movie);
+            movieDTO = mList[movieIndex];
+            MovieDetailsForm mdf = new MovieDetailsForm(movieDTO);
             mdf.Show();
         }
         private void button1_Click(object sender, EventArgs e)

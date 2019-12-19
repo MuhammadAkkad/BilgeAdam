@@ -14,7 +14,6 @@ namespace imdb
         [Key, Column(Order = 0), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MovieCastId { get; set; }
 
-
         [Key, Column(Order = 1)]
         public int MovieId { get; set; }
 

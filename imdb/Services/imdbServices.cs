@@ -1,5 +1,6 @@
 ﻿using DAL;
 using imdb;
+using Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,27 +14,26 @@ namespace Services
 {
     public class imdbServices
     {
-        public imdbContext db = new imdbContext();
-       // public Movie movie = new Movie();
         public WebClient client = new WebClient();
-        public List<Movie> movieList = new List<Movie>();
-        public Repository<Movie> repositoryMovie;
-        public Repository<Cast> repositoryCast = new Repository<Cast>();
+        MovieDTO movieDTO = new MovieDTO();
+        public List<MovieDTO> movieList = new List<MovieDTO>();
+        public Repository<MovieDTO> repositoryMovie;
+        public Repository<CastDTO> repositoryCast = new Repository<CastDTO>();
         public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
-        public Repository<MovieCast> repositoryMovieCast = new Repository<MovieCast>();
+        public Repository<MovieCastDTO> repositoryMovieCast = new Repository<MovieCastDTO>();
         public imdbServices()
         {
-            repositoryMovie = new Repository<Movie>();
+            repositoryMovie = new Repository<MovieDTO>();
             Database.SetInitializer(
             new DropCreateDatabaseIfModelChanges<imdbContext>());
         }
-        //public imdbServices(Movie movie)
-        //{
-        //    this.movie = movie;
-        //    Database.SetInitializer(
-        //    new DropCreateDatabaseIfModelChanges<imdbContext>());
-        //}
-        public List<Movie> Search(string search)
+        public imdbServices(MovieDTO movieDTO)
+        {
+            this.movieDTO = movieDTO;
+            Database.SetInitializer(
+            new DropCreateDatabaseIfModelChanges<imdbContext>());
+        }
+        public List<MovieDTO> Search(string search)
         {
 
             string result = client.DownloadString("https://www.imdb.com/find?ref_=nv_sr_fn&q=" + search + "&s=all");
@@ -54,20 +54,20 @@ namespace Services
             }
             for (int i = 1; i <= count; i++)
             {
-                Movie movie = new Movie();
+                MovieDTO movieDTO = new MovieDTO();
                 int resultIndex = result.IndexOf("<td class=\"result_text\"> <a href=\"") + "<td class=\"result_text\"> <a href=\"".Length;
                 string newResult = result.Substring(resultIndex);
                 int hrefStart = newResult.IndexOf("\"");
                 string link = newResult.Substring(0, hrefStart);
-                movie.Link = link;
+                movieDTO.Link = link;
                 result = newResult.Remove(0, link.Length + 3);
                 int startIndex = result.IndexOf("</a>");
                 string title = result.Substring(0, startIndex);
-                movie.Name = title;
+                movieDTO.Name = title;
                 result = result.Remove(0, title.Length + 6);
                 int yearIndex = result.IndexOf(")");
                 string year = result.Substring(0, yearIndex);
-                movieList.Add(movie);
+                movieList.Add(movieDTO);
             }
             return movieList;
         }
@@ -141,14 +141,22 @@ namespace Services
             html = getBetween(html, "ratingValue\": \"", "\"");
             return html;
         }
-        public PictureBox getPoster(PictureBox pictureBox, string htmlCode, string mlink)
+        public PictureBox getPoster(PictureBox pictureBox, string htmlCode, MovieDTO movieDTO)
         {
             string html = htmlCode;
-            string link = mlink;
+            string link = movieDTO.Link;
             html = client.DownloadString("https://www.imdb.com" + link);
             html = getBetween(html, "<link rel='image_src' href=\"", "/>");
-            client.DownloadFile(html, @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + movie.Name + ".jpg");
-            pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + movie.Name + ".jpg");
+            try
+            {
+                client.DownloadFile(html, @"C:\Users\BA\Desktop\BilgeAdam\IMDB\imdb\Images\" + movieDTO.Name + ".jpg");
+            }
+            catch (Exception)
+            {
+               throw;
+            }
+           
+            pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\BilgeAdam\IMDB\imdb\Images\" + movieDTO.Name + ".jpg");
             return pictureBox;
         }
         public DateTime getYear(string htmlCode)
@@ -159,48 +167,19 @@ namespace Services
             DateTime oDate = Convert.ToDateTime(date);
             return oDate;
         }
-        public void AddCast(string role, string castName, string movieName)
+
+        public Boolean EntityExist(string movieLink)
         {
-            CastRole castRole = new CastRole();
-            MovieCast map = new MovieCast();
-            Cast cast = new Cast();
-
-            if (!repositoryCastRole.EntityExists(x => x.Role == role))
-            {
-                repositoryCastRole.Add(castRole);
-            }
-
-            cast.Name = castName;
-            
-            if (!repositoryCast.EntityExists(x => x.Name == castName))
-            {
-                repositoryCast.Add(cast);
-            }
-
-            map.CastId = repositoryCast.GetIdByString(c => c.Name == cast.Name, c => c.CastId);
-            map.CastRoleId = repositoryCastRole.GetIdByString(c => c.Role == castRole.Role, c => c.CastRoleId);
-            map.MovieId = repositoryMovie.GetIdByString(c => c.Name == movieName, c => c.MovieId);
-            repositoryMovieCast.Add(map);
+            return repositoryMovie.EntityExists(x => x.Link == movieLink);
         }
-        public Boolean EntityExist(string movieLink) {
-           return repositoryMovie.EntityExists(x => x.Link == movieLink);
-        }
-        public string AddMovie(Movie movie) {
 
-            if (!repositoryMovie.EntityExists(m => m.Link == movie.Link))
-            {
-                repositoryMovie.Add(movie);
-                return "Movie Added successfully";
-            }
-            return "Movie already exists";
-        }
-        public List<Movie> GetAllMovies()
+        public List<MovieDTO> GetAllMovies()
         {
             return repositoryMovie.GetAll();
         }
-        public void Delete(Movie movie)
+        public void Delete(MovieDTO movieDTO)
         {
-            repositoryMovie.Delete(movie);
+            repositoryMovie.Delete(movieDTO);
         }
     }
 }

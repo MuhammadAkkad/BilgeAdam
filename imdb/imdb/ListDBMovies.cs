@@ -2,12 +2,12 @@
 using System.Windows.Forms;
 using System.Linq;
 using System.Data.Entity;
+using Services.DTO;
 
 namespace imdb
 {
     public partial class ListDBMovies : Form
     {
-        imdbContext ctx = new imdbContext();
         public ListDBMovies()
         {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace imdb
 
         private void gvMovieDBList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Movie movie = new Movie();
+            MovieDTO movieDTO = new MovieDTO();
             DialogResult dr = MessageBox.Show("Please choose an option: \n Yes View \n No Delete \n" +
                 "\n Cancel Does nothing :)", "Action", MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Information);
@@ -38,12 +38,12 @@ namespace imdb
                     string link = gvMovieDBList.Rows[e.RowIndex].Cells[3].Value.ToString();
                     string rank = gvMovieDBList.Rows[e.RowIndex].Cells[4].Value.ToString();
 
-                    movie.Name = name;
-                    movie.Description = desc;
-                    movie.Year = Date;
-                    movie.Link = link;
-                    movie.Rank = rank;
-                    MovieDetailsForm mdf = new MovieDetailsForm(movie);
+                    movieDTO.Name = name;
+                    movieDTO.Description = desc;
+                    movieDTO.Year = Date;
+                    movieDTO.Link = link;
+                    movieDTO.Rank = rank;
+                    MovieDetailsForm mdf = new MovieDetailsForm(movieDTO);
                     mdf.Show();
                 }
             }
