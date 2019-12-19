@@ -167,12 +167,10 @@ namespace Services
             DateTime oDate = Convert.ToDateTime(date);
             return oDate;
         }
-
         public Boolean EntityExist(string movieLink)
         {
             return repositoryMovie.EntityExists(x => x.Link == movieLink);
         }
-
         public List<MovieDTO> GetAllMovies()
         {
             return repositoryMovie.GetAll();
