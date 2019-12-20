@@ -19,10 +19,6 @@ namespace Services
         public WebClient client = new WebClient();
         MovieDTO movieDTO = new MovieDTO();
         public List<MovieDTO> movieList = new List<MovieDTO>();
-        //public Repository<MovieDTO> repositoryMovie;
-        //public Repository<CastDTO> repositoryCast = new Repository<CastDTO>();
-        //public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
-        //public Repository<MovieCastDTO> repositoryMovieCast = new Repository<MovieCastDTO>();
         public imdbServices()
         {
             //repositoryMovie = new Repository<MovieDTO>();
@@ -155,9 +151,9 @@ namespace Services
             }
             catch (Exception)
             {
-               throw;
+                throw;
             }
-           
+
             pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\BilgeAdam\IMDB\imdb\Images\" + movieDTO.Name + ".jpg");
             return pictureBox;
         }

@@ -12,10 +12,6 @@ namespace Services
     public class CastService
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        //public Repository<Movie> repositoryMovie = new Repository<Movie>();
-        //public Repository<Cast> repositoryCast = new Repository<Cast>();
-        //public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
-        //public Repository<MovieCast> repositoryMovieCast = new Repository<MovieCast>();
         public void Add(string role, string castName, string movieName)
         {
             CastRole castRole = new CastRole();
