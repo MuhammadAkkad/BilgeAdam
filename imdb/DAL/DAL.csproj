@@ -61,6 +61,7 @@
     <Compile Include="Entities\MovieCast.cs" />
     <Compile Include="Context\MovieConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

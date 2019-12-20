@@ -8,6 +8,7 @@ namespace imdb
 {
     public partial class Main : Form
     {
+        MovieService movieService = new MovieService();
         imdbServices service = new imdbServices();
         List<MovieDTO> mList = new List<MovieDTO>();
         List<string> sList = new List<string>();
@@ -55,7 +56,7 @@ namespace imdb
         {
             mList.Clear();
             lbListResult.Items.Clear();
-            mList = service.GetAllMovies();
+            mList = movieService.GetAllMovies();
             foreach (var item in mList)
             {
                 lbListResult.Items.Add(item.Name);

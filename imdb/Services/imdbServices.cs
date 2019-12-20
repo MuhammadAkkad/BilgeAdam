@@ -14,18 +14,20 @@ namespace Services
 {
     public class imdbServices
     {
+        private UnitOfWork unitOfWork = new UnitOfWork();
+
         public WebClient client = new WebClient();
         MovieDTO movieDTO = new MovieDTO();
         public List<MovieDTO> movieList = new List<MovieDTO>();
-        public Repository<MovieDTO> repositoryMovie;
-        public Repository<CastDTO> repositoryCast = new Repository<CastDTO>();
-        public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
-        public Repository<MovieCastDTO> repositoryMovieCast = new Repository<MovieCastDTO>();
+        //public Repository<MovieDTO> repositoryMovie;
+        //public Repository<CastDTO> repositoryCast = new Repository<CastDTO>();
+        //public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
+        //public Repository<MovieCastDTO> repositoryMovieCast = new Repository<MovieCastDTO>();
         public imdbServices()
         {
-            repositoryMovie = new Repository<MovieDTO>();
-            Database.SetInitializer(
-            new DropCreateDatabaseIfModelChanges<imdbContext>());
+            //repositoryMovie = new Repository<MovieDTO>();
+            //Database.SetInitializer(
+            //new DropCreateDatabaseIfModelChanges<imdbContext>());
         }
         public imdbServices(MovieDTO movieDTO)
         {
@@ -169,15 +171,7 @@ namespace Services
         }
         public Boolean EntityExist(string movieLink)
         {
-            return repositoryMovie.EntityExists(x => x.Link == movieLink);
-        }
-        public List<MovieDTO> GetAllMovies()
-        {
-            return repositoryMovie.GetAll();
-        }
-        public void Delete(MovieDTO movieDTO)
-        {
-            repositoryMovie.Delete(movieDTO);
+            return unitOfWork.MovieRepository.EntityExists(x => x.Link == movieLink);
         }
     }
 }

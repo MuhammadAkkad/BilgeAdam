@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 namespace Services
 {
     public class CastService
-    {        
-        public Repository<Movie> repositoryMovie = new Repository<Movie>();
-        public Repository<Cast> repositoryCast = new Repository<Cast>();
-        public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
-        public Repository<MovieCast> repositoryMovieCast = new Repository<MovieCast>();
+    {
+        private UnitOfWork unitOfWork = new UnitOfWork();
+        //public Repository<Movie> repositoryMovie = new Repository<Movie>();
+        //public Repository<Cast> repositoryCast = new Repository<Cast>();
+        //public Repository<CastRole> repositoryCastRole = new Repository<CastRole>();
+        //public Repository<MovieCast> repositoryMovieCast = new Repository<MovieCast>();
         public void Add(string role, string castName, string movieName)
         {
             CastRole castRole = new CastRole();
@@ -22,20 +23,20 @@ namespace Services
             MovieCast movieCast = new MovieCast();
 
             castRole.Role = role;
-            if (!repositoryCastRole.EntityExists(x => x.Role == role))
+            if (!unitOfWork.CastRoleRepository.EntityExists(x => x.Role == role))
             {
-                repositoryCastRole.Add(castRole);
+                unitOfWork.CastRoleRepository.Add(castRole);
             }
             cast.Name = castName;
-            if (!repositoryCast.EntityExists(c => c.Name == castName))
+            if (!unitOfWork.CastRepository.EntityExists(c => c.Name == castName))
             {
-                repositoryCast.Add(cast);
+                unitOfWork.CastRepository.Add(cast);
             }
 
-            movieCast.CastId = repositoryCast.GetIdByString(c => c.Name == cast.Name, c => c.CastId);
-            movieCast.CastRoleId = repositoryCastRole.GetIdByString(c => c.Role == castRole.Role, c => c.CastRoleId);
-            movieCast.MovieId = repositoryMovie.GetIdByString(c => c.Name == movieName, c => c.MovieId);
-            repositoryMovieCast.Add(movieCast);
+            movieCast.CastId = unitOfWork.CastRepository.GetIdByString(c => c.Name == cast.Name, c => c.CastId);
+            movieCast.CastRoleId = unitOfWork.CastRoleRepository.GetIdByString(c => c.Role == castRole.Role, c => c.CastRoleId);
+            movieCast.MovieId = unitOfWork.MovieRepository.GetIdByString(c => c.Name == movieName, c => c.MovieId);
+            unitOfWork.MovieCastRoleRepository.Add(movieCast);
         }
     }
 }
