@@ -28,7 +28,7 @@ namespace DAL
         }
 
         public void Delete(TEntity entity)
-        { 
+        {
             db.Set<TEntity>().Remove(entity);
             db.SaveChanges();
         }

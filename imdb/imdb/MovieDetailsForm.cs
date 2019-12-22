@@ -3,6 +3,7 @@ using Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace imdb
@@ -74,7 +75,10 @@ namespace imdb
         }
         private void btnSave2Db_Click(object sender, EventArgs e)
         {
-            string result = movieService.Add(movieDTO);
+            
+            var MovieJson = new JavaScriptSerializer().Serialize(movieDTO);
+
+            string result = movieService.Add(MovieJson);
             foreach (var director in directorList)
             {
                 castService.Add("Director", director, movieDTO.Name);
@@ -91,5 +95,9 @@ namespace imdb
             this.Close();
         }
 
+        private void imgMovie_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

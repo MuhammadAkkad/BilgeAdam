@@ -50,6 +50,7 @@
             this.imgMovie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgMovie.TabIndex = 0;
             this.imgMovie.TabStop = false;
+            this.imgMovie.Click += new System.EventHandler(this.imgMovie_Click);
             // 
             // lblMovieLable
             // 
@@ -106,7 +107,7 @@
             this.Directors.AutoSize = true;
             this.Directors.Location = new System.Drawing.Point(19, 222);
             this.Directors.Name = "Directors";
-            this.Directors.Size = new System.Drawing.Size(49, 13);
+            this.Directors.Size = new System.Drawing.Size(50, 13);
             this.Directors.TabIndex = 6;
             this.Directors.Text = "Directors";
             // 
@@ -115,7 +116,7 @@
             this.Stars.AutoSize = true;
             this.Stars.Location = new System.Drawing.Point(301, 222);
             this.Stars.Name = "Stars";
-            this.Stars.Size = new System.Drawing.Size(31, 13);
+            this.Stars.Size = new System.Drawing.Size(32, 13);
             this.Stars.TabIndex = 7;
             this.Stars.Text = "Stars";
             // 
@@ -124,7 +125,7 @@
             this.Writers.AutoSize = true;
             this.Writers.Location = new System.Drawing.Point(567, 222);
             this.Writers.Name = "Writers";
-            this.Writers.Size = new System.Drawing.Size(40, 13);
+            this.Writers.Size = new System.Drawing.Size(42, 13);
             this.Writers.TabIndex = 8;
             this.Writers.Text = "Writers";
             // 

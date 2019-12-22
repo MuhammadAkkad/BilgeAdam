@@ -2,6 +2,7 @@
 using Services.DTO;
 using System;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace imdb
@@ -54,13 +55,17 @@ namespace imdb
         }
         private void btnSavedMovies_Click(object sender, EventArgs e)
         {
-            mList.Clear();
-            lbListResult.Items.Clear();
-            mList = movieService.GetAllMovies();
-            foreach (var item in mList)
-            {
-                lbListResult.Items.Add(item.Name);
-            }
+            //mList.Clear();
+            //lbListResult.Items.Clear();
+            ViewForm viewForm = new ViewForm();
+            viewForm.Show();
+
+            //var obj = movieService.GetAllMovies();
+            //mList = new JavaScriptSerializer().Deserialize<List<MovieDTO>>(obj);
+            //foreach (var item in mList)
+            //{
+            //    lbListResult.Items.Add(item.Name);
+            //}
         }
         private void btnList100_Click(object sender, EventArgs e)
         {

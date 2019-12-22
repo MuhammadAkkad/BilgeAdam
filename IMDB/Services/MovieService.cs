@@ -6,43 +6,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Services
 {
     public class MovieService
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        public string Add(MovieDTO movieDTO) {
+        public string Add(string movieDTOjson) {
             Movie movie = new Movie();
-            movie = DtoToEntityCinverter(movieDTO);
-
-            if (!unitOfWork.MovieRepository.EntityExists(m => m.Link == movieDTO.Link))
+            movie = new JavaScriptSerializer().Deserialize<Movie>(movieDTOjson);
+            if (!unitOfWork.MovieRepository.EntityExists(m => m.Link == movie.Link))
             {
                 unitOfWork.MovieRepository.Add(movie);
                 return "Movie Added successfully";
             }
             return "Movie already exists";
         }
-        public List<MovieDTO> GetAllMovies()
+        public string GetAllMovies()
         {
-            List<Movie> mlist = new List<Movie>();
-            List<MovieDTO> dlist = new List<MovieDTO>();
-
-            Movie movie = new Movie();
-            mlist = unitOfWork.MovieRepository.GetAll();
-            foreach (var movieEntity in mlist)
-            {
-                MovieDTO movieDTO = new MovieDTO();
-                movieDTO = EntityToDtoConverter(movieEntity);
-                dlist.Add(movieDTO);
-            }
-            return dlist;
-        }
-
-        public void Delete(MovieDTO movieDTO)
+            List<Movie> mlist = unitOfWork.MovieRepository.GetAll();
+            var json = new JavaScriptSerializer().Serialize(mlist);
+            return json;
+        }        
+        public void Delete(string movieDTOjson)
         {
             Movie movie = new Movie();
-            movie = DtoToEntityCinverter(movieDTO);
+            movie = new JavaScriptSerializer().Deserialize<Movie>(movieDTOjson);
             unitOfWork.MovieRepository.Delete(movie);
         }
 
