@@ -15,9 +15,10 @@ namespace imdb
 {
     public partial class ViewForm : Form
     {
-        List<MovieDTO> mList = new List<MovieDTO>();
-        List<CastDTO> cList = new List<CastDTO>();
-        MovieService services = new MovieService();
+        List<MovieDTO> movies = new List<MovieDTO>();
+        List<string> casts = new List<string>();
+        MovieService MovieServices = new MovieService();
+        CastService castServices = new CastService();
         MovieDTO movieDTO = new MovieDTO();
 
         public ViewForm()
@@ -28,27 +29,44 @@ namespace imdb
         private void lbMovieList_SelectedIndexChanged(object sender, EventArgs e)
         {
             int movieIndex = lbMovieList.SelectedIndex;
-            movieDTO = mList[movieIndex];
+            movieDTO = movies[movieIndex];
             txtTitle.Text = movieDTO.Name;
             txtRank.Text = movieDTO.Rank;
             txtYear.Text = movieDTO.Year.ToString();
             rtDesc.Text = movieDTO.Description;
             pbPoster.ImageLocation = movieDTO.Photo;
 
-            //services.
-            //lbDirectors.Items.Add();
+            string json = castServices.GetCasts(movieDTO, 18);
+            casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
+            foreach (var item in casts)
+            {
+                lbDirectors.Items.Add(item);
+            }
 
+            json = castServices.GetCasts(movieDTO, 19);
+            casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
+            foreach (var item in casts)
+            {
+                lbWriters.Items.Add(item);
+            }
 
+            json = castServices.GetCasts(movieDTO, 20);
+            casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
+            foreach (var item in casts)
+            {
+                lbStars.Items.Add(item);
+            }
         }
 
         private void ViewForm_Load(object sender, EventArgs e)
         {
-            var obj = services.GetAllMovies();
-            mList = new JavaScriptSerializer().Deserialize<List<MovieDTO>>(obj);
-            foreach (var item in mList)
+            var obj = MovieServices.GetAllMovies();
+            movies = new JavaScriptSerializer().Deserialize<List<MovieDTO>>(obj);
+            foreach (var item in movies)
             {
                 lbMovieList.Items.Add(item.Name);
             }
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -64,7 +82,7 @@ namespace imdb
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var json = new JavaScriptSerializer().Serialize(movieDTO);
-            services.Delete(json);
+            MovieServices.Delete(json);
         }
     }
 }

@@ -35,9 +35,6 @@ namespace Services
             movie = new JavaScriptSerializer().Deserialize<Movie>(movieDTOjson);
             unitOfWork.MovieRepository.Delete(movie);
         }
-
-
-
         //MovieDTO EntityToDtoConverter(Movie entity) {
         //    MovieDTO dto = new MovieDTO();
         //    dto.Name = entity.Name;

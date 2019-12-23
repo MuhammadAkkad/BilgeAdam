@@ -10,5 +10,7 @@ namespace Services.DTO
     {
         public int CastId { get; set; }
         public string Name { get; set; }
+
+        public int RoleId { get; set; }
     }
 }

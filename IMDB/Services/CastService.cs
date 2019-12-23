@@ -1,5 +1,8 @@
 ﻿using DAL;
 using imdb;
+using Services.DTO;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace Services
 {
@@ -33,6 +36,30 @@ namespace Services
             {
                 unitOfWork.MovieCastRepository.Add(movieCast);
             }
+        }
+
+        public string GetCasts(MovieDTO movieDTO, int role)
+        {
+            List<string> casts = new List<string>();
+
+            foreach (var item in unitOfWork.MovieCastRepository.GetAll())
+            {
+                if (item.MovieId == movieDTO.MovieId)
+                {
+
+                    var cast = unitOfWork.CastRepository.GetByID(item.CastId);
+
+                    if (item.CastRoleId == role)
+                    {
+
+                        casts.Add(cast.Name);
+
+                    }
+
+                }
+            }
+            string json = new JavaScriptSerializer().Serialize(casts);
+            return json;
         }
     }
 }
