@@ -33,7 +33,7 @@ namespace imdb
             txtRank.Text = movieDTO.Rank;
             txtYear.Text = movieDTO.Year.ToString();
             rtDesc.Text = movieDTO.Description;
-            pbPoster.Image = Image.FromFile(movieDTO.Photo);
+            pbPoster.ImageLocation = movieDTO.Photo;
 
             //services.
             //lbDirectors.Items.Add();

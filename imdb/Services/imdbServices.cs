@@ -139,23 +139,13 @@ namespace Services
             html = getBetween(html, "ratingValue\": \"", "\"");
             return html;
         }
-        public PictureBox getPoster(PictureBox pictureBox, string htmlCode, MovieDTO movieDTO)
+        public string getPoster(string htmlCode, MovieDTO movieDTO)
         {
             string html = htmlCode;
             string link = movieDTO.Link;
             html = client.DownloadString("https://www.imdb.com" + link);
             html = getBetween(html, "<link rel='image_src' href=\"", "/>");
-            try
-            {
-                client.DownloadFile(html, @"C:\Users\BA\Desktop\BilgeAdam\IMDB\imdb\Images\" + movieDTO.Name + ".jpg");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            pictureBox.Image = Image.FromFile(@"C:\Users\BA\Desktop\BilgeAdam\IMDB\imdb\Images\" + movieDTO.Name + ".jpg");
-            return pictureBox;
+            return html;
         }
         public DateTime getYear(string htmlCode)
         {

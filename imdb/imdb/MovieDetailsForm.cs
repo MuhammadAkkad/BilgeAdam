@@ -35,11 +35,12 @@ namespace imdb
             lblMovieLable.Text = movieDTO.Name;
             txtDescription.Text = service.getDescription(htmlCode);
             lblRank.Text = service.getRank(htmlCode);
-            service.getPoster(imgMovie, htmlCode, movieDTO);
+            string photoPath = service.getPoster(htmlCode, movieDTO);
+            imgMovie.ImageLocation = photoPath;
 
             movieDTO.Description = txtDescription.Text;
             movieDTO.Name = lblMovieLable.Text;
-            movieDTO.Photo = @"C:\Users\BA\Desktop\GitHub\BilgeAdam\imdb\imdb\Images\" + lblMovieLable.Text + ".jpg";
+            movieDTO.Photo = photoPath; // + lblMovieLable.Text + ".jpg"
             movieDTO.Rank = lblRank.Text;
             movieDTO.Year = service.getYear(htmlCode);
 
