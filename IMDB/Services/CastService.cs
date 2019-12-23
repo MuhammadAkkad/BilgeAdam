@@ -26,7 +26,13 @@ namespace Services
             movieCast.CastId = unitOfWork.CastRepository.GetIdByString(c => c.Name == cast.Name, c => c.CastId);
             movieCast.CastRoleId = unitOfWork.CastRoleRepository.GetIdByString(c => c.Role == castRole.Role, c => c.CastRoleId);
             movieCast.MovieId = unitOfWork.MovieRepository.GetIdByString(c => c.Name == movieName, c => c.MovieId);
-            unitOfWork.MovieCastRoleRepository.Add(movieCast);
+
+            if (!unitOfWork.MovieCastRepository.EntityExists(c => c.CastId == movieCast.CastId &&
+                                                             c.MovieId == movieCast.MovieId &&
+                                                             c.CastRoleId == movieCast.CastRoleId))
+            {
+                unitOfWork.MovieCastRepository.Add(movieCast);
+            }
         }
     }
 }

@@ -36,27 +36,29 @@ namespace Services
             unitOfWork.MovieRepository.Delete(movie);
         }
 
-        MovieDTO EntityToDtoConverter(Movie entity) {
-            MovieDTO dto = new MovieDTO();
-            dto.Name = entity.Name;
-            dto.Year = entity.Year;
-            dto.Description = entity.Description;
-            dto.Link = entity.Link;
-            dto.Photo = entity.Photo;
-            dto.Rank = entity.Rank;
-            return dto;
-        }
-        Movie DtoToEntityCinverter(MovieDTO dto)
-        {
-            Movie entity = new Movie();
-            entity.Name = dto.Name;
-            entity.Year = dto.Year;
-            entity.Description = dto.Description;
-            entity.Link = dto.Link;
-            entity.Photo = dto.Photo;
-            entity.Rank = dto.Rank;
-            return entity;
-        }
+
+
+        //MovieDTO EntityToDtoConverter(Movie entity) {
+        //    MovieDTO dto = new MovieDTO();
+        //    dto.Name = entity.Name;
+        //    dto.Year = entity.Year;
+        //    dto.Description = entity.Description;
+        //    dto.Link = entity.Link;
+        //    dto.Photo = entity.Photo;
+        //    dto.Rank = entity.Rank;
+        //    return dto;
+        //}
+        //Movie DtoToEntityCinverter(MovieDTO dto)
+        //{
+        //    Movie entity = new Movie();
+        //    entity.Name = dto.Name;
+        //    entity.Year = dto.Year;
+        //    entity.Description = dto.Description;
+        //    entity.Link = dto.Link;
+        //    entity.Photo = dto.Photo;
+        //    entity.Rank = dto.Rank;
+        //    return entity;
+        //}
 
     }
 }

@@ -55,7 +55,7 @@ namespace DAL
             }
         }
 
-        public Repository<MovieCast> MovieCastRoleRepository
+        public Repository<MovieCast> MovieCastRepository
         {
             get
             {

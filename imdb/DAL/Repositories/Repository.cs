@@ -29,8 +29,10 @@ namespace DAL
 
         public void Delete(TEntity entity)
         {
+            db.Entry(entity).State = EntityState.Deleted;
             db.Set<TEntity>().Remove(entity);
             db.SaveChanges();
+
         }
 
         public List<TEntity> GetAll()
@@ -41,16 +43,6 @@ namespace DAL
         public TEntity GetByID(object id)
         {
             return db.Set<TEntity>().Find(id);
-        }
-
-        public Boolean MapExists(MovieCast movieCast)// needs TEST
-        {
-            if (db.MovieCasts.Any(mc => mc.MovieId == movieCast.MovieId))
-                return true;
-            else
-            {
-                return false;
-            }
         }
 
         public void Insert(TEntity entity)
@@ -77,6 +69,7 @@ namespace DAL
         public int GetIdByString(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, int>> expression2) {
             return db.Set<TEntity>().Where(expression).Select(expression2).FirstOrDefault();
         }
+
 
         public virtual TEntity GetById(TEntity id)
         {
