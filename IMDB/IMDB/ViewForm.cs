@@ -20,6 +20,9 @@ namespace imdb
         MovieService MovieServices = new MovieService();
         CastService castServices = new CastService();
         MovieDTO movieDTO = new MovieDTO();
+        int Director = 18;
+        int Writer = 18;
+        int Star = 18;
 
         public ViewForm()
         {
@@ -36,21 +39,21 @@ namespace imdb
             rtDesc.Text = movieDTO.Description;
             pbPoster.ImageLocation = movieDTO.Photo;
 
-            string json = castServices.GetCasts(movieDTO, 18);
+            string json = castServices.GetCasts(movieDTO, Director);
             casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
             foreach (var item in casts)
             {
                 lbDirectors.Items.Add(item);
             }
 
-            json = castServices.GetCasts(movieDTO, 19);
+            json = castServices.GetCasts(movieDTO, Writer);
             casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
             foreach (var item in casts)
             {
                 lbWriters.Items.Add(item);
             }
 
-            json = castServices.GetCasts(movieDTO, 20);
+            json = castServices.GetCasts(movieDTO, Star);
             casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
             foreach (var item in casts)
             {

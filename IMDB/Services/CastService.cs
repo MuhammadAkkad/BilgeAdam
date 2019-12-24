@@ -55,7 +55,6 @@ namespace Services
                         casts.Add(cast.Name);
 
                     }
-
                 }
             }
             string json = new JavaScriptSerializer().Serialize(casts);
