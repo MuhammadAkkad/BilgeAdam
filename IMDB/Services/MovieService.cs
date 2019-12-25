@@ -13,7 +13,8 @@ namespace Services
     public class MovieService
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        public string Add(string movieDTOjson) {
+        public string Add(string movieDTOjson)
+        {
             Movie movie = new Movie();
             movie = new JavaScriptSerializer().Deserialize<Movie>(movieDTOjson);
             if (!unitOfWork.MovieRepository.EntityExists(m => m.Link == movie.Link))
@@ -28,7 +29,7 @@ namespace Services
             List<Movie> mlist = unitOfWork.MovieRepository.GetAll();
             var json = new JavaScriptSerializer().Serialize(mlist);
             return json;
-        }        
+        }
         public void Delete(string movieDTOjson)
         {
             Movie movie = new Movie();
