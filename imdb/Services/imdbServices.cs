@@ -79,7 +79,6 @@ namespace Services
                 list.Add(m.Groups[1].Value);
             }
             return list;
-
         }
         public string getBetween(string strSource, string strStart, string strEnd)
         {

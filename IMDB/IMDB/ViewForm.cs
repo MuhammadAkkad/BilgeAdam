@@ -1,15 +1,8 @@
-﻿using Newtonsoft.Json;
-using Services;
+﻿using Services;
 using Services.DTO;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -17,7 +10,7 @@ namespace imdb
 {
     public partial class ViewForm : Form
     {
-        List<MovieDTO> movies = new List<MovieDTO>();
+        static List<MovieDTO> movies;
         List<string> casts = new List<string>();
         MovieService MovieServices = new MovieService();
         CastService castServices = new CastService();
@@ -44,12 +37,9 @@ namespace imdb
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-
                     var readTask = result.Content.ReadAsStringAsync();
                     readTask.Wait();
-
                     var movies = readTask.Result;
-
                     movieDTOs = new JavaScriptSerializer().Deserialize<List<MovieDTO>>(movies);
                 }
             }
@@ -67,6 +57,7 @@ namespace imdb
             pbPoster.ImageLocation = movieDTO.Photo;
 
             string json = castServices.GetCasts(movieDTO, Director);
+            lbDirectors.Items.Clear();
             casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
             foreach (var item in casts)
             {
@@ -74,6 +65,7 @@ namespace imdb
             }
 
             json = castServices.GetCasts(movieDTO, Writer);
+            lbWriters.Items.Clear();
             casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
             foreach (var item in casts)
             {
@@ -81,6 +73,7 @@ namespace imdb
             }
 
             json = castServices.GetCasts(movieDTO, Star);
+            lbStars.Items.Clear();
             casts = new JavaScriptSerializer().Deserialize<List<string>>(json);
             foreach (var item in casts)
             {
@@ -90,16 +83,11 @@ namespace imdb
 
         private void ViewForm_Load(object sender, EventArgs e)
         {
-
-
-            var obj = GetAllMovies();
-            //movies = new JavaScriptSerializer().Deserialize<List<MovieDTO>>(obj);
-            foreach (var item in obj)
+            movies = GetAllMovies();
+            foreach (var item in movies)
             {
                 lbMovieList.Items.Add(item.Name);
             }
-
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -116,6 +104,8 @@ namespace imdb
         {
             var json = new JavaScriptSerializer().Serialize(movieDTO);
             MovieServices.Delete(json);
+            ViewForm viewForm = new ViewForm();
+            viewForm.Close();
         }
     }
 }
