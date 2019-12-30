@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Facebook</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="tab_text_4">Tab 4</string>
-    <string name="tab_text_5">Tab 5</string>
+    <string name="tab_text_1">Feed</string>
+    <string name="tab_text_2">Messages</string>
+    <string name="tab_text_3">Friends</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="the_content_of_the_last_message">the content of the last message</string>
+    <string name="sender_name">name</string>
+    <string name="arrived_time">20:12</string>
+    <string name="sender_img">sender_img</string>
 </resources>

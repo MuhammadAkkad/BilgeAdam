@@ -1,7 +1,5 @@
 package com.example.facebook;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +12,14 @@ import androidx.fragment.app.Fragment;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Frag2.OnFragmentInteractionListener} interface
+ * {@link FriendsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Frag2#newInstance} factory method to
+ * Use the {@link FriendsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag2 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class FriendsFragment extends Fragment {
+//    // TODO: Rename parameter arguments, choose names that match
+//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
 //    private static final String ARG_PARAM2 = "param2";
 //
@@ -31,7 +29,7 @@ public class Frag2 extends Fragment {
 //
 //    private OnFragmentInteractionListener mListener;
 //
-//    public Frag2() {
+//    public FriendsFragment() {
 //        // Required empty public constructor
 //    }
 //
@@ -41,11 +39,11 @@ public class Frag2 extends Fragment {
 //     *
 //     * @param param1 Parameter 1.
 //     * @param param2 Parameter 2.
-//     * @return A new instance of fragment Frag1.
+//     * @return A new instance of fragment NewsFeedFragment.
 //     */
 //    // TODO: Rename and change types and number of parameters
-//    public static Frag2 newInstance(String param1, String param2) {
-//        Frag2 fragment = new Frag2();
+//    public static FriendsFragment newInstance(String param1, String param2) {
+//        FriendsFragment fragment = new FriendsFragment();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -66,9 +64,9 @@ public class Frag2 extends Fragment {
     public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag2_layout, container, false);
+        return inflater.inflate(R.layout.friends_layout, container, false);
     }
-
+//
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {

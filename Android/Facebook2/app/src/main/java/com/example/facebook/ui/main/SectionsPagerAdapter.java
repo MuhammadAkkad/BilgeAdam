@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.facebook.Frag1;
-import com.example.facebook.Frag2;
-import com.example.facebook.Frag3;
+import com.example.facebook.NewsFeedFragment;
+import com.example.facebook.MessagesFragment;
+import com.example.facebook.FriendsFragment;
 import com.example.facebook.R;
 
 /**
@@ -40,13 +40,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (position)
         {
             case 0:
-                fragment = new Frag1();
+                fragment = new NewsFeedFragment();
                 break;
             case 1:
-                fragment = new Frag2();
+                fragment = new MessagesFragment();
                 break;
             case 2:
-                fragment = new Frag3();
+                fragment = new FriendsFragment();
                 break;
         }
         return fragment;
