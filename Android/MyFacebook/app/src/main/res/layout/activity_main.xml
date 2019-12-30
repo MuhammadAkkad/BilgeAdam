@@ -31,7 +31,7 @@
                     android:layout_marginBottom="16dp"
                     android:background="#00FFFFFF"
                     android:backgroundTint="#00FFFFFF"
-                    android:contentDescription="ic_search"
+                    android:contentDescription="@string/ic_search"
                     android:foregroundTint="#00FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +45,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="16dp"
-                    android:text="News Feed"
-                    android:textSize="22dp"
+                    android:text="@string/topbar_tab_name_text"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -83,7 +83,8 @@
                 android:id="@+id/messeges_tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_messeges" />
+                android:icon="@drawable/ic_messeges"
+                android:visibility="visible" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/explor_tab"
@@ -101,16 +102,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MainActivity" />
-    </androidx.core.widget.NestedScrollView>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

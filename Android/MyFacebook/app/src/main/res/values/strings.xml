@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyFacebook</string>
+    <string name="ic_search">ic_search</string>
+    <string name="topbar_tab_name_text">News Feed</string>
 </resources>
