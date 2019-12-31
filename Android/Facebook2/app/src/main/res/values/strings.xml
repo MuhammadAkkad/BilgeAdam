@@ -11,4 +11,15 @@
     <string name="sender_name">name</string>
     <string name="arrived_time">20:12</string>
     <string name="sender_img">sender_img</string>
+    <string name="shares">shares</string>
+    <string name="comments">comments</string>
+    <string name="likes">likes</string>
+    <string name="date_posted">10 Aug 2020</string>
+    <string name="author_name">Name</string>
+    <string name="status_picture">status picture</string>
+    <string name="profile_picture">profile picture</string>
+    <string name="status_text_content">TextView</string>
+    <string name="share">Share</string>
+    <string name="comment">Comment</string>
+    <string name="like">Like</string>
 </resources>
