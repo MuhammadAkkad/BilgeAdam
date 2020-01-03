@@ -1,29 +1,31 @@
-package com.example.facebook;
+package com.example.twitter20.ui.Messages;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.facebook.ui.main.PageViewModel;
+import com.example.twitter20.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class MessagesFragment extends Fragment {
+
     List<MessageClass> messageClasseList;
     ListView listView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root= inflater.inflate(R.layout.messages_layout,container,false);
+        View root= inflater.inflate(R.layout.fragment_messages,container,false);
         return root;
     }
 
@@ -52,13 +54,11 @@ public class MessagesFragment extends Fragment {
         messageClasseList.add (new MessageClass("Hoca" , "isletim sistem yapin."));
 
 
-        listView = (ListView) view.findViewById(R.id.ListViewM);
-       // PageViewModel pgvm = ViewModelProviders.of(requireActivity()).get(PageViewModel.class);
-        MessageAdapter messageAdapter = new MessageAdapter(requireActivity(), R.layout.message_layout_design,messageClasseList);
+        listView = (ListView) view.findViewById(R.id.listViewMesseges);
+        // PageViewModel pgvm = ViewModelProviders.of(requireActivity()).get(PageViewModel.class);
+        MessageAdapter messageAdapter = new MessageAdapter(requireActivity(), R.layout.fragment_message_design,messageClasseList);
 
         listView.setAdapter(messageAdapter);
     }
-
-
 
 }
