@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Twitter2.0</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="btn_Like">Like</string>
+    <string name="btn_comment">comment</string>
+    <string name="btn_share">share</string>
+    <string name="tweet_text_content">tweet_text_content</string>
+    <string name="tweet_profile_img">tweet_profile_img</string>
+    <string name="tweetter_name">tweetter_name</string>
+    <string name="tweet_date">tweet_date</string>
+    <string name="tweet_likes_count">likes</string>
+    <string name="tweet_comments_count">comments</string>
+    <string name="tweet_shares_count">shares</string>
+    <string name="tweet_shared_image">tweet shared image</string>
+
+</resources>

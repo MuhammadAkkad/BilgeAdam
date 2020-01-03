@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">adapterTest</string>
+    <string name="the_content_of_the_last_message">content of last msg</string>
+    <string name="sender_name">sender name</string>
+    <string name="arrived_time">arrived time</string>
+    <string name="sender_img">sender img</string>
+</resources>
