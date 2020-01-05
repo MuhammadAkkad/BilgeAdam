@@ -5,17 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#25FFFFFF"
-    tools:ignore="LabelFor"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="LabelFor">
 
 
     <FrameLayout
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,50 +21,130 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout3"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="47dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ConstraintLayout">
+                app:layout_constraintTop_toBottomOf="@+id/tweet_shared_image">
 
                 <Button
-                    android:id="@+id/btn_Like"
+                    android:id="@+id/btn_retweet"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_weight="1"
-                    android:text="@string/btn_Like" />
+                    android:background="@drawable/ic_thumb_up_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/likes_count_number"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/likes_count_number"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="none"
+                    android:text="34"
+                    app:layout_constraintStart_toEndOf="@+id/btn_Like"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/retweets_count_number"
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="129"
+                    app:layout_constraintStart_toEndOf="@+id/btn_retweet"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_comment"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/btn_comment" />
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/ic_comment_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/comments_count_number"
+                    android:layout_width="30sp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="21"
+                    app:layout_constraintStart_toEndOf="@+id/btn_comment"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_share"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_weight="1"
-                    android:text="@string/btn_share" />
-            </LinearLayout>
+                    android:background="@drawable/ic_menu_share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/retweets_count_number"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <Button
+                    android:id="@+id/btn_Like"
+                    style="?android:attr/buttonBarStyle"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/ic_refresh_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/comments_count_number"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/shares_count_number"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:text="5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_share"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tweet_text_content"
-                android:layout_width="319dp"
+                android:layout_width="316dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/tweet_text_content"
                 android:textColor="#030303"
@@ -91,7 +168,7 @@
 
             <ImageView
                 android:id="@+id/tweet_shared_image"
-                android:layout_width="321dp"
+                android:layout_width="316dp"
                 android:layout_height="224dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="8dp"
@@ -102,128 +179,47 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tweet_text_content" />
 
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="316dp"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
                 <TextView
                     android:id="@+id/tweetter_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tweetter_name"
-                    android:textColor="#131212" />
+                    android:textColor="#131212"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tweet_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="31dp"
-                    android:text="@string/tweet_date"
-                    android:textSize="12sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="17h" />
+
+                <TextView
+                    android:id="@+id/tweetter_account_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="Muha" />
+
+
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tweet_shared_image">
 
 
-                <EditText
-                    android:id="@+id/likes_count_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:ems="10"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_likes_count"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_likes_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="351dp"
-                    android:layout_marginBottom="3dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/tweet_likes_count"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/likes_count_number"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_comments_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="101dp"
-                    android:layout_weight="1"
-                    android:text="@string/tweet_comments_count"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_shares_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/tweet_shares_count"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/comments_count_number"
-                    android:layout_width="10sp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_comments_count"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/shares_count_number"
-                    android:layout_width="10sp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="numberPassword"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_shares_count"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/divider5"
-                android:layout_width="406dp"
-                android:layout_height="0.5dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ConstraintLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

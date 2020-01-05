@@ -24,5 +24,6 @@
     <string name="tweet_comments_count">comments</string>
     <string name="tweet_shares_count">shares</string>
     <string name="tweet_shared_image">tweet shared image</string>
+    <string name="btn_retweet">retweet</string>
 
 </resources>

@@ -6,16 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_gravity="bottom"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FCFBFB">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button2"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_home_black_24dp"
+                android:backgroundTint="#F3A7A7A7"
+                android:textColor="#C2C2C2"
+                android:textColorHint="#C20F0F"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_search"
+                android:backgroundTint="#F3A7A7A7"
+                android:textColor="#C2C2C2"
+                android:textColorHint="#C20F0F"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/button2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button4"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_notifications_black_24dp"
+                android:backgroundTint="#F3A7A7A7"
+                android:textColor="#C2C2C2"
+                android:textColorHint="#C20F0F"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button3"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/ic_move_to_inbox_black_24dp"
+                android:backgroundTint="#F3A7A7A7"
+                android:textColor="#C2C2C2"
+                android:textColorHint="#C20F0F"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button4"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:visibility="visible">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            android:visibility="visible"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -23,7 +104,8 @@
     <include
         layout="@layout/content_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -31,6 +113,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:background="#00acee "
+        android:visibility="visible"
+        app:backgroundTint="#00ACEE"
+        app:borderWidth="0.5dp"
+        app:hoveredFocusedTranslationZ="6dp"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
