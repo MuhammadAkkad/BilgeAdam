@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="47dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,8 +36,8 @@
                 <Button
                     android:id="@+id/btn_retweet"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
@@ -75,15 +75,14 @@
                 <Button
                     android:id="@+id/btn_comment"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/ic_comment"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/comments_count_number"
@@ -100,8 +99,8 @@
                 <Button
                     android:id="@+id/btn_share"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
@@ -109,14 +108,13 @@
                     android:background="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/retweets_count_number"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_Like"
                     style="?android:attr/buttonBarStyle"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
