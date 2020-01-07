@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -32,6 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnHome;
@@ -45,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     Context context = this;
     private AppBarConfiguration mAppBarConfiguration;
+//    MessagesFragment messageFragment = new MessagesFragment();
+//    HomeFragment homeFragment = new HomeFragment();
+//    FragmentManager fragmentManager = getSupportFragmentManager();
+//    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,36 +67,37 @@ public class MainActivity extends AppCompatActivity {
         btnMessage = findViewById(R.id.btn_messages);
 
 
-        HomeFragment homeFragment = new HomeFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.drawer_layout,homeFragment,"home");
-        fragmentTransaction.commit();
-
-
-
-
         btnHome.setOnClickListener(new View.OnClickListener() {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            HomeFragment homeFragment = new HomeFragment();
             @Override
             public void onClick(View view) {
-                HomeFragment homeFragment = new HomeFragment();
-                FragmentManager fragmentManager2 = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager2.beginTransaction();
-                fragmentTransaction.replace(R.id.drawer_layout,homeFragment,"home");
+                for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                    if (fragment != null) {
+                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                    }
+                }
+                fragmentTransaction.replace(R.id.appBarLayout, homeFragment);
                 fragmentTransaction.commit();
 
             }
         });
 
 
-
         btnMessage.setOnClickListener(new View.OnClickListener() {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            MessagesFragment messageFragment = new MessagesFragment();
             @Override
             public void onClick(View view) {
-                MessagesFragment messageFragment = new MessagesFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.drawer_layout,messageFragment,"message");
+
+                for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                    if (fragment != null) {
+                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                    }
+                }
+                fragmentTransaction.replace(R.id.appBarLayout, messageFragment);
                 fragmentTransaction.commit();
             }
         });
