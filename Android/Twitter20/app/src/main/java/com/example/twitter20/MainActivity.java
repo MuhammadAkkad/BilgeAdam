@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnHome.setOnClickListener(new View.OnClickListener() {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             HomeFragment homeFragment = new HomeFragment();
             @Override
             public void onClick(View view) {
@@ -56,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
-            //FragmentManager fragmentManager = getSupportFragmentManager();
-            //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             MessagesFragment messageFragment = new MessagesFragment();
             @Override
             public void onClick(View view) {
@@ -70,6 +66,40 @@ public class MainActivity extends AppCompatActivity {
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
                 fragmentTransaction.replace(R.id.appBarLayout, messageFragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            SeachFragment mSearchFragment = new SeachFragment();
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "SEARCH PRESSED", Toast.LENGTH_SHORT).show();
+
+                for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                    if (fragment != null) {
+                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                    }
+                }
+                FragmentTransaction fragmentTransaction = GetNewTrans();
+                fragmentTransaction.replace(R.id.appBarLayout, mSearchFragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnNotification.setOnClickListener(new View.OnClickListener() {
+            NotificationFragment mNotificationFragment = new NotificationFragment();
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "NOTI PRESSED", Toast.LENGTH_SHORT).show();
+
+                for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                    if (fragment != null) {
+                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                    }
+                }
+                FragmentTransaction fragmentTransaction = GetNewTrans();
+                fragmentTransaction.replace(R.id.appBarLayout, mNotificationFragment);
                 fragmentTransaction.commit();
             }
         });
