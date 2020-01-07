@@ -23,6 +23,7 @@ class Tweet {
         //TweetImage = tweetImage;
     }
 
+
     //region Getters
 
     public String getTweeterName() {
