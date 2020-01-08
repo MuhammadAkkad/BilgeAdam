@@ -1,5 +1,6 @@
 package com.example.twitter20;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.example.twitter20.ui.Messages.MessagesFragment;
 import com.example.twitter20.ui.Notification.NotificationFragment;
 import com.example.twitter20.ui.Search.SeachFragment;
 import com.example.twitter20.ui.home.HomeFragment;
+import com.example.twitter20.ui.home.NewTweetActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -110,5 +112,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         return fragmentTransaction;
+    }
+
+    public void NewTweet(View view) {
+        Intent i = new Intent(getApplicationContext() , NewTweetActivity.class);
+        startActivity(i);
     }
 }
