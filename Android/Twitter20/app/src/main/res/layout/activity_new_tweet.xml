@@ -24,7 +24,6 @@
         android:layout_marginTop="45dp"
         android:contentDescription="@string/tweet_profile_img"
         android:src="@drawable/img_profile"
-        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
