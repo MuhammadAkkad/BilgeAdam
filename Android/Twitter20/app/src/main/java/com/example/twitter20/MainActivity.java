@@ -74,16 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
-
-        Button btn = (Button) findViewById(R.id.nav_home);
-        btn.setOnClickListener(new View.OnClickListener() {
-            //MessagesFragment messageFragment = new MessagesFragment();
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "NAV HOME PRESSED", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//
+//        Button clickButton = (Button) findViewById(R.id.nav_home);
+//        clickButton.setOnClickListener( new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//            }
+//        });
 
 
 

@@ -94,25 +94,28 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:theme="@style/AppTheme.AppBarOverlay"
-        android:visibility="visible">
+        android:visibility="visible" >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:visibility="visible"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+        <Button
+            android:id="@+id/btn_drawer_open"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_hamburger"
+            android:onClick="OpenDrawer" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
         layout="@layout/content_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:layout_height="679dp"
+        android:layout_gravity="bottom"
+        android:foregroundGravity="bottom"
+        android:visibility="visible"
+        app:layout_anchorGravity="bottom" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
