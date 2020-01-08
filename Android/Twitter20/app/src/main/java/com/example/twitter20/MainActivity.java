@@ -2,11 +2,15 @@ package com.example.twitter20;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +20,7 @@ import com.example.twitter20.ui.Notification.NotificationFragment;
 import com.example.twitter20.ui.Search.SeachFragment;
 import com.example.twitter20.ui.home.HomeFragment;
 import com.example.twitter20.ui.home.NewTweetActivity;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         btnMessage.setOnClickListener(new View.OnClickListener() {
             MessagesFragment messageFragment = new MessagesFragment();
             @Override
@@ -70,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
+
+        Button btn = (Button) findViewById(R.id.nav_home);
+        btn.setOnClickListener(new View.OnClickListener() {
+            //MessagesFragment messageFragment = new MessagesFragment();
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "NAV HOME PRESSED", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             SeachFragment mSearchFragment = new SeachFragment();
@@ -117,5 +134,42 @@ public class MainActivity extends AppCompatActivity {
     public void NewTweet(View view) {
         Intent i = new Intent(getApplicationContext() , NewTweetActivity.class);
         startActivity(i);
+    }
+
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                if (fragment != null) {
+                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                }
+            }
+            FragmentTransaction fragmentTransaction = GetNewTrans();
+            HomeFragment homeFragment = new HomeFragment();
+            fragmentTransaction.add(R.id.appBarLayout, homeFragment);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_gallery) {
+            // handle action
+        } else if (id == R.id.nav_slideshow) {
+            // handle action
+        } else if (id == R.id.nav_share) {
+            // handle action
+        } else if (id == R.id.nav_send) {
+            // handle action
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.END);
+        return true;
+    }
+
+
+
+    public void OpenDrawer(View view) {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 }

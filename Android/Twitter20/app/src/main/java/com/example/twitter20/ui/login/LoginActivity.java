@@ -2,6 +2,8 @@ package com.example.twitter20.ui.login;
 
 import android.app.Activity;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -95,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+                loadingProgressBar.setVisibility(View.VISIBLE);
             }
         };
         usernameEditText.addTextChangedListener(afterTextChangedListener);
@@ -114,9 +118,10 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                //loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                 passwordEditText.getText().toString());
+
                 if(usernameEditText.getText().toString().equals("Muhammad") && passwordEditText.getText().toString().equals("123456789")){
                     Intent i = new Intent(getApplicationContext() , MainActivity.class);
                     startActivity(i);
@@ -132,6 +137,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
     }
+
+
+
 }
