@@ -34,13 +34,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         btnHome = findViewById(R.id.btn_home);
         btnSearch = findViewById(R.id.btn_search);
         btnNotification = findViewById(R.id.btn_notification);
         btnMessage = findViewById(R.id.btn_messages);
 
-
+        // change fragments buttons action
         btnHome.setOnClickListener(new View.OnClickListener() {
             HomeFragment homeFragment = new HomeFragment();
             @Override
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
-
         btnMessage.setOnClickListener(new View.OnClickListener() {
             MessagesFragment messageFragment = new MessagesFragment();
             @Override
@@ -74,20 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
-//
-//        Button clickButton = (Button) findViewById(R.id.nav_home);
-//        clickButton.setOnClickListener( new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-
-
-
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             SeachFragment mSearchFragment = new SeachFragment();
             @Override
@@ -104,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
-
         btnNotification.setOnClickListener(new View.OnClickListener() {
             NotificationFragment mNotificationFragment = new NotificationFragment();
             @Override
@@ -124,50 +107,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    // renews transaction instance to avoid crash!
     FragmentTransaction GetNewTrans(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         return fragmentTransaction;
     }
-
-    public void NewTweet(View view) {
+    // new tweet button onClick action
+    public void NewTweetButton(View view) {
         Intent i = new Intent(getApplicationContext() , NewTweetActivity.class);
         startActivity(i);
     }
 
-
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
-            }
-            FragmentTransaction fragmentTransaction = GetNewTrans();
-            HomeFragment homeFragment = new HomeFragment();
-            fragmentTransaction.add(R.id.appBarLayout, homeFragment);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_gallery) {
-            // handle action
-        } else if (id == R.id.nav_slideshow) {
-            // handle action
-        } else if (id == R.id.nav_share) {
-            // handle action
-        } else if (id == R.id.nav_send) {
-            // handle action
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.END);
-        return true;
-    }
-
-
-
+    // Opens navigation drawer
     public void OpenDrawer(View view) {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.openDrawer(GravityCompat.START);

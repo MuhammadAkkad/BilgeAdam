@@ -124,7 +124,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="64dp"
-        android:onClick="NewTweet"
+        android:onClick="NewTweetButton"
         android:visibility="visible"
         app:backgroundTint="#00ACEE"
         app:borderWidth="0.5dp"
