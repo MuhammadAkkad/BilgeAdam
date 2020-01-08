@@ -1,20 +1,19 @@
 package com.example.twitter20;
 
 import android.os.Bundle;
-
-import com.example.twitter20.ui.Messages.MessagesFragment;
-import com.example.twitter20.ui.home.HomeFragment;
-
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.widget.Button;
-import android.widget.Toast;
+import com.example.twitter20.ui.Messages.MessagesFragment;
+import com.example.twitter20.ui.Notification.NotificationFragment;
+import com.example.twitter20.ui.Search.SeachFragment;
+import com.example.twitter20.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                     if (fragment != null) {
-                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.replace(R.id.appBarLayout, homeFragment);
+                fragmentTransaction.add(R.id.appBarLayout, homeFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -61,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                     if (fragment != null) {
-                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.replace(R.id.appBarLayout, messageFragment);
+                fragmentTransaction.add(R.id.appBarLayout, messageFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -78,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                     if (fragment != null) {
-                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.replace(R.id.appBarLayout, mSearchFragment);
+                fragmentTransaction.add(R.id.appBarLayout, mSearchFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -95,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
                 for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                     if (fragment != null) {
-                        getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+                        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.replace(R.id.appBarLayout, mNotificationFragment);
+                fragmentTransaction.add(R.id.appBarLayout, mNotificationFragment);
                 fragmentTransaction.commit();
             }
         });

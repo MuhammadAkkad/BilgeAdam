@@ -1,4 +1,4 @@
-package com.example.twitter20;
+package com.example.twitter20.ui.Search;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.twitter20.R;
+
 
 public class SeachFragment extends Fragment {
 

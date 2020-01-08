@@ -1,4 +1,5 @@
-package com.example.twitter20;
+package com.example.twitter20.ui.Search;
+
 
 import androidx.lifecycle.ViewModel;
 

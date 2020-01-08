@@ -1,4 +1,4 @@
-package com.example.twitter20;
+package com.example.twitter20.ui.Notification;
 
 import androidx.lifecycle.ViewModel;
 
