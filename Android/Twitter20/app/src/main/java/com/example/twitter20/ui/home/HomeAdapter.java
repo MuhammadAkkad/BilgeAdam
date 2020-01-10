@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import com.example.twitter20.R;
 
 import java.util.List;
+import java.util.Random;
 
 public class HomeAdapter extends ArrayAdapter<Tweet> {
 
@@ -25,7 +26,6 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
     public HomeAdapter(Context mCtx, int resource, List<Tweet> tweetList) {
         super(mCtx, resource, tweetList);
-
         this.mCtx = mCtx;
         this.resource = resource;
         this.tweetList = tweetList;
@@ -38,25 +38,36 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home_design, parent, false);
 
-        TextView tweeterName = convertView.findViewById(R.id.tweetter_name);
-        TextView tweeterNickName = convertView.findViewById(R.id.tweetter_name); //TODO add nickName
-        TextView tweetTxt = convertView.findViewById(R.id.tweet_text_content);
+        TextView Name = convertView.findViewById(R.id.tweetter_name);
+        TextView NickName = convertView.findViewById(R.id.tweeter_nickname);
+        TextView tweet = convertView.findViewById(R.id.tweet_text_content);
+        TextView account = convertView.findViewById(R.id.tweetter_account_name);
+
         //ImageView imageView = convertView.findViewById(R.id.tweet_shared_image); // TODO fix image
 
         TextView likesCount = convertView.findViewById(R.id.likes_count_number);
+        TextView retweetCount = convertView.findViewById(R.id.retweets_count_number);
         TextView commentsCount = convertView.findViewById(R.id.comments_count_number);
         TextView shareCount = convertView.findViewById(R.id.shares_count_number);
 
-        Tweet msg = tweetList.get(position);
-        tweeterName.setText(msg.getTweeterName());
-        tweeterNickName.setText(msg.getTweeterName());
-        tweetTxt.setText(msg.getTweetText());
-        //imageView.setImageURI(msg.getTweetImage()); // TODO
+        Tweet t = tweetList.get(position);
+        Name.setText(t.getName());
+        NickName.setText(t.getName());
+        tweet.setText(t.getTweetText());
+        account.setText(t.getAccount());
 
-//        likesCount.setText(msg.getTweetLikeCount());
-//        commentsCount.setText(msg.getTweetCommentCount());
-//        shareCount.setText(msg.getTweetShareCount());
+
+        likesCount.setText(getRandom());
+        commentsCount.setText(getRandom());
+        shareCount.setText(getRandom());
+        retweetCount.setText(getRandom());
 
         return convertView;
+    }
+
+    // Random number generator
+    static String getRandom() {
+        Random r = new Random();
+        return String.valueOf(r.nextInt(50));
     }
 }

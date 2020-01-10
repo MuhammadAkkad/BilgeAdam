@@ -6,8 +6,9 @@ import java.util.Date;
 
 class Tweet {
 
-    String TweeterName;
-    String TweeterNickName;
+    String Name;
+    String NickName;
+    String Account;
     Date TweetDate;
     String TweetText;
     //Image TweetImage;
@@ -15,23 +16,36 @@ class Tweet {
     int TweetCommentCount;
     int TweetShareCount;
 
-    public Tweet(String tweeterName, String tweeterNickName, Date tweetDate, String tweetText) {
-        TweeterName = tweeterName;
-        TweeterNickName = tweeterNickName;
+    public Tweet(String Name, String NickName, String Account, Date tweetDate, String tweetText) {
+        this.Name = Name;
+        this.NickName = NickName;
+        this.Account = Account;
         TweetDate = tweetDate;
         TweetText = tweetText;
         //TweetImage = tweetImage;
     }
 
+    public String getAccount() {
+        return Account;
+    }
+
+    public void setAccount(String account) {
+        Account = account;
+    }
+
+    public Tweet() {
+
+    }
+
 
     //region Getters
 
-    public String getTweeterName() {
-        return TweeterName;
+    public String getName() {
+        return Name;
     }
 
-    public String getTweeterNickName() {
-        return TweeterNickName;
+    public String getNickName() {
+        return NickName;
     }
 
     public Date getTweetDate() {
@@ -62,12 +76,12 @@ class Tweet {
 
     //region Setters
 
-    public void setTweeterName(String tweeterName) {
-        TweeterName = tweeterName;
+    public void setName(String Name) {
+        Name = Name;
     }
 
-    public void setTweeterNickName(String tweeterNickName) {
-        TweeterNickName = tweeterNickName;
+    public void setNickName(String NickName) {
+        NickName = NickName;
     }
 
     public void setTweetDate(Date tweetDate) {

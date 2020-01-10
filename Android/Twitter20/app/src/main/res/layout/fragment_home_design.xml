@@ -177,14 +177,14 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -198,18 +198,25 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tweet_date"
+                    android:id="@+id/tweeter_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="17h" />
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:text="nickName" />
 
                 <TextView
                     android:id="@+id/tweetter_account_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:text="Muha" />
+                    android:text="@muhammad" />
+
+                <TextView
+                    android:id="@+id/tweet_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="17h" />
 
 
             </LinearLayout>

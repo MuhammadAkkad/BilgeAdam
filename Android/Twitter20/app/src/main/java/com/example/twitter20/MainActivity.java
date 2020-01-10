@@ -1,6 +1,7 @@
 package com.example.twitter20;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.twitter20.ui.Messages.MessagesFragment;
 import com.example.twitter20.ui.Notification.NotificationFragment;
 import com.example.twitter20.ui.Search.SeachFragment;
+import com.example.twitter20.ui.home.FeedReaderDbHelper;
 import com.example.twitter20.ui.home.HomeFragment;
 import com.example.twitter20.ui.home.NewTweetActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btn_search);
         btnNotification = findViewById(R.id.btn_notification);
         btnMessage = findViewById(R.id.btn_messages);
+
+//        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this);
+//        // Gets the data repository in write mode
+//        SQLiteDatabase dbR = dbHelper.getWritableDatabase();
 
         // change fragments buttons action
         btnHome.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext() , NewTweetActivity.class);
         startActivity(i);
     }
-
     // Opens navigation drawer
     public void OpenDrawer(View view) {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
