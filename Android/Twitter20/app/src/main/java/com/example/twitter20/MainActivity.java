@@ -41,11 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnNotification = findViewById(R.id.btn_notification);
         btnMessage = findViewById(R.id.btn_messages);
 
-//        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this);
-//        // Gets the data repository in write mode
-//        SQLiteDatabase dbR = dbHelper.getWritableDatabase();
 
-        // change fragments buttons action
         btnHome.setOnClickListener(new View.OnClickListener() {
             HomeFragment homeFragment = new HomeFragment();
             @Override
@@ -111,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
     // renews transaction instance to avoid crash!
     FragmentTransaction GetNewTrans(){
@@ -121,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // new tweet button onClick action
     public void NewTweetButton(View view) {
-        Intent i = new Intent(getApplicationContext() , NewTweetActivity.class);
+        Intent i = new Intent(getBaseContext(), NewTweetActivity.class);
         startActivity(i);
     }
     // Opens navigation drawer

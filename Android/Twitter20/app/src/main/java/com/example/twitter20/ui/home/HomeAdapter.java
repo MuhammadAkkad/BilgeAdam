@@ -19,7 +19,6 @@ import java.util.Random;
 
 public class HomeAdapter extends ArrayAdapter<Tweet> {
 
-
     Context mCtx;
     int resource;
     List<Tweet> tweetList;
@@ -38,12 +37,9 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home_design, parent, false);
 
-        TextView Name = convertView.findViewById(R.id.tweetter_name);
-        TextView NickName = convertView.findViewById(R.id.tweeter_nickname);
-        TextView tweet = convertView.findViewById(R.id.tweet_text_content);
-        TextView account = convertView.findViewById(R.id.tweetter_account_name);
 
-        //ImageView imageView = convertView.findViewById(R.id.tweet_shared_image); // TODO fix image
+        TextView tweet = convertView.findViewById(R.id.tweet_text_content);
+        TextView image = convertView.findViewById(R.id.tweet_shared_image);
 
         TextView likesCount = convertView.findViewById(R.id.likes_count_number);
         TextView retweetCount = convertView.findViewById(R.id.retweets_count_number);
@@ -51,11 +47,8 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
         TextView shareCount = convertView.findViewById(R.id.shares_count_number);
 
         Tweet t = tweetList.get(position);
-        Name.setText(t.getName());
-        NickName.setText(t.getName());
         tweet.setText(t.getTweetText());
-        account.setText(t.getAccount());
-
+        image.setText(t.getTweetImage());
 
         likesCount.setText(getRandom());
         commentsCount.setText(getRandom());

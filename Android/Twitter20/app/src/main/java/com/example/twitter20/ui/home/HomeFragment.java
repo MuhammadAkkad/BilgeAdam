@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -16,17 +18,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twitter20.R;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
-    List<Tweet> tweetList = new ArrayList<>();
-    ListView listView;
-
     private HomeViewModel homeViewModel;
+
 
 
     @Nullable
@@ -52,61 +52,34 @@ public class HomeFragment extends Fragment {
        //tweetList.add(new Tweet("Baris", "Baris", new Date(1900, 1, 1), "this ierws my very powerful tweet becausaqeretyi i caytn and why not to tweet everydayi about shit?"));
        //tweetList.add(new Tweet("Muhammad", "", new Date(1900, 1, 1), "this is my vetry powerful tweet because i can and why not to tweet awerteveryday about shit?"));
 
-
-
-        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(getContext());
-        // Gets the data repository in write mode
-        SQLiteDatabase dbR = dbHelper.getWritableDatabase();
-
-        // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME, "Muhammad");
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NICKNAME, "Akkado");
-        values.put(FeedReaderContract.FeedEntry.COLUMN_ACCOUNT, "@muhammad");
-        values.put(FeedReaderContract.FeedEntry.COLUMN_TWEET, "this is my powerfull life changing tweet of today please avoid getting killed today and thanks.");
-
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = dbR.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
-
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
+        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this.getContext());
+         SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
+        SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
+            List<Tweet> tweetList = new ArrayList<>();
+            ListView listView;
         String[] projection = {
-                FeedReaderContract.FeedEntry.COLUMN_NAME,
-                FeedReaderContract.FeedEntry.COLUMN_NICKNAME,
-                FeedReaderContract.FeedEntry.COLUMN_ACCOUNT,
-                FeedReaderContract.FeedEntry.COLUMN_TWEET
+                FeedReaderContract.TweetEntry.COLUMN_PHOTO,
+                FeedReaderContract.TweetEntry.COLUMN_TWEET
         };
 
-        // Filter results WHERE "title" = 'My Title'
-        //String selection = FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " = ?";
-        //String[] selectionArgs = {"Muhammad"};
-
-        // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                FeedReaderContract.FeedEntry.COLUMN_NAME + " DESC";
+                FeedReaderContract.TweetEntry.COLUMN_TWEET + " DESC";
 
-        Cursor cursor = db.query(
-                FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                sortOrder               // The sort order
+        Cursor cursor = dbRead.query(
+                FeedReaderContract.TweetEntry.TABLE_NAME,   // The table to query
+                projection,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
         );
         while (cursor.moveToNext()) {
             Tweet t = new Tweet();
-            t.Name = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME));
-            t.NickName = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NICKNAME));
-            t.Account = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_ACCOUNT));
             t.TweetText = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_TWEET));
-            tweetList.add(t);
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.TweetEntry.COLUMN_TWEET));
+            t.TweetImage = cursor.getString(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.TweetEntry.COLUMN_PHOTO));
         }
         cursor.close();
 
@@ -116,10 +89,11 @@ public class HomeFragment extends Fragment {
                 new HomeAdapter(this.getContext(), R.layout.fragment_home_design, tweetList);
 
         listView.setAdapter(HomeAdapter);
+
+
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             final ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
