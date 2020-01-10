@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment {
        //tweetList.add(new Tweet("Muhammad", "", new Date(1900, 1, 1), "this is my vetry powerful tweet because i can and why not to tweet awerteveryday about shit?"));
 
         FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this.getContext());
-         SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
             List<Tweet> tweetList = new ArrayList<>();
             ListView listView;
@@ -72,7 +71,7 @@ public class HomeFragment extends Fragment {
                 null,
                 null,
                 null,
-                sortOrder
+                null
         );
         while (cursor.moveToNext()) {
             Tweet t = new Tweet();
@@ -80,6 +79,8 @@ public class HomeFragment extends Fragment {
                     cursor.getColumnIndexOrThrow(FeedReaderContract.TweetEntry.COLUMN_TWEET));
             t.TweetImage = cursor.getString(
                     cursor.getColumnIndexOrThrow(FeedReaderContract.TweetEntry.COLUMN_PHOTO));
+
+            tweetList.add(t);
         }
         cursor.close();
 

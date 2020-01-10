@@ -39,6 +39,8 @@ public class NewTweetActivity extends AppCompatActivity {
         dbWrite = dbHelper.getWritableDatabase();
 
     }
+
+
     public void AddTweet(View view){
         TextView tweet = findViewById(R.id.txt_new_tweet_content);
         String tweetText = tweet.getText().toString();

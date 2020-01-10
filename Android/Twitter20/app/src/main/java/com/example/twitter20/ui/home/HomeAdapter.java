@@ -39,7 +39,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
 
         TextView tweet = convertView.findViewById(R.id.tweet_text_content);
-        TextView image = convertView.findViewById(R.id.tweet_shared_image);
+        //TextView image = convertView.findViewById(R.id.tweet_shared_image);
 
         TextView likesCount = convertView.findViewById(R.id.likes_count_number);
         TextView retweetCount = convertView.findViewById(R.id.retweets_count_number);
@@ -48,7 +48,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
         Tweet t = tweetList.get(position);
         tweet.setText(t.getTweetText());
-        image.setText(t.getTweetImage());
+        //image.setText(t.getTweetImage());
 
         likesCount.setText(getRandom());
         commentsCount.setText(getRandom());
