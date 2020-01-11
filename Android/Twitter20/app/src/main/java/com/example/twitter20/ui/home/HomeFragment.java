@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.twitter20.FeedReaderContract;
+import com.example.twitter20.FeedReaderDbHelper;
 import com.example.twitter20.R;
 
 import java.io.File;

@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.twitter20.ui.Messages.MessagesFragment;
 import com.example.twitter20.ui.Notification.NotificationFragment;
 import com.example.twitter20.ui.Search.SeachFragment;
-import com.example.twitter20.ui.home.FeedReaderDbHelper;
 import com.example.twitter20.ui.home.HomeFragment;
 import com.example.twitter20.ui.home.NewTweetActivity;
 import com.google.android.material.navigation.NavigationView;

@@ -1,13 +1,14 @@
-package com.example.twitter20.ui.home;
+package com.example.twitter20;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.example.twitter20.ui.home.FeedReaderContract.TweetEntry.SQL_CREATE_TWEET_TABLE;
-import static com.example.twitter20.ui.home.FeedReaderContract.TweetEntry.SQL_DELETE_TWEET_TABLE;
-import static com.example.twitter20.ui.home.FeedReaderContract.UserEntry.SQL_CREATE_USER_TABLE;
-import static com.example.twitter20.ui.home.FeedReaderContract.UserEntry.SQL_DELETE_USER_TABLE;
+import static com.example.twitter20.FeedReaderContract.TweetEntry.SQL_CREATE_TWEET_TABLE;
+import static com.example.twitter20.FeedReaderContract.TweetEntry.SQL_DELETE_TWEET_TABLE;
+import static com.example.twitter20.FeedReaderContract.UserEntry.SQL_CREATE_USER_TABLE;
+import static com.example.twitter20.FeedReaderContract.UserEntry.SQL_DELETE_USER_TABLE;
+
 
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.

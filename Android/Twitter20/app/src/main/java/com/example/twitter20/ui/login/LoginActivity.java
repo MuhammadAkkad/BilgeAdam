@@ -28,12 +28,14 @@ import android.widget.Toast;
 
 import com.example.twitter20.MainActivity;
 import com.example.twitter20.R;
+import com.example.twitter20.ui.Register.RegisterFragment;
 import com.example.twitter20.ui.login.LoginViewModel;
 import com.example.twitter20.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    Button signUp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,14 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        signUp = findViewById(R.id.btn_sign_up);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegisterFragment.class);
+                startActivity(i);
+            }
+        });
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override

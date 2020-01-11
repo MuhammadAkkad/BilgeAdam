@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.twitter20.FeedReaderContract;
+import com.example.twitter20.FeedReaderDbHelper;
 import com.example.twitter20.MainActivity;
 import com.example.twitter20.R;
 
@@ -50,6 +52,7 @@ public class NewTweetActivity extends AppCompatActivity {
         // Insert the new row, returning the primary key value of the new row
         long newRowId = dbWrite.insert(FeedReaderContract.TweetEntry.TABLE_NAME, null, values);
         Toast.makeText(this, "Tweet Added", Toast.LENGTH_SHORT).show();
+
         if(newRowId > 0){
         this.finish();
         }
