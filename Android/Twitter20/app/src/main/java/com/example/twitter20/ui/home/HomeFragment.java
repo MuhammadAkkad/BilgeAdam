@@ -25,7 +25,6 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
 
 
-
     @Nullable
     @Override
     public View getView() {
@@ -36,30 +35,14 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-       //tweetList = new ArrayList<>(); // TODO add fake tweets below
-       //tweetList.add(new Tweet("Muhammad", "Akkad", new Date(1900, 1, 1), "this is my very powsdferful twedfthet because i sfgdfhdfcauion and why not to tweet everyday about shit?"));
-       //tweetList.add(new Tweet("Atilat", "Ati", new Date(1900, 1, 1), "this is mygfhj very powerfsdgul tweet bechoerdfhdfghause i can and why unot to tweet everyday awetwrybout shit?"));
-       //tweetList.add(new Tweet("Orkun", "Cacik", new Date(1900, 1, 1), "thiswwertert is my very powerful twhgheet becauiouse i can anyuud why not to wytweet everyday about shit?"));
-       //tweetList.add(new Tweet("Simge", "SGS", new Date(1900, 1, 1), "this is my vgdrery powerfulsdg twedfghdfghet because i can and why not to tweet eiyveryday aribout shit?"));
-       //tweetList.add(new Tweet("Beyza", "amin", new Date(1900, 1, 1), "this ius my very powerfulj tweet because ihdfhtuio can and gfwhyu not tkodfgh tweet everyday about shit?"));
-       //tweetList.add(new Tweet("Guney", "Konya", new Date(1900, 1, 1), "this ityus my very powerful tweet because i can and why not to tweetklhjkjkl everyday about shit?"));
-       //tweetList.add(new Tweet("Emre", "Kutahya", new Date(1900, 1, 1), "this iwetrs asdfmy very posdfgwerful tgdfweet because i cyutyan and wfghhy not to tweioet everyday about shit?"));
-       //tweetList.add(new Tweet("Dilara", "Selfi", new Date(1900, 1, 1), "this is my very powerful tweettyer becahuse idfg catrun and why not to tweet everyday about shit?"));
-       //tweetList.add(new Tweet("Serhat", "Adam", new Date(1900, 1, 1), "thisqer is my very poweraful tweet because i can and why not to twdfghgeet everyday abyuioyuout shit?"));
-       //tweetList.add(new Tweet("Baris", "Baris", new Date(1900, 1, 1), "this ierws my very powerful tweet becausaqeretyi i caytn and why not to tweet everydayi about shit?"));
-       //tweetList.add(new Tweet("Muhammad", "", new Date(1900, 1, 1), "this is my vetry powerful tweet because i can and why not to tweet awerteveryday about shit?"));
-
         DbHelper dbHelper = new DbHelper(this.getContext());
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
-            List<Tweet> tweetList = new ArrayList<>();
-            ListView listView;
+        List<Tweet> tweetList = new ArrayList<>();
+        ListView listView;
         String[] projection = {
                 DbContract.TweetEntry.COLUMN_PHOTO,
                 DbContract.TweetEntry.COLUMN_TWEET
         };
-
-        String sortOrder =
-                DbContract.TweetEntry.COLUMN_TWEET + " DESC";
 
         Cursor cursor = dbRead.query(
                 DbContract.TweetEntry.TABLE_NAME,   // The table to query
@@ -87,8 +70,6 @@ public class HomeFragment extends Fragment {
                 new HomeAdapter(this.getContext(), R.layout.fragment_home_design, tweetList);
 
         listView.setAdapter(HomeAdapter);
-
-
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
