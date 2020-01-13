@@ -1,4 +1,4 @@
-package com.example.twitter20.ui.home;
+package com.example.twitter20.ui.Tweet;
 
 import androidx.appcompat.app.AppCompatActivity;
 

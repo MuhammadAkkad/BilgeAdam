@@ -1,8 +1,4 @@
-package com.example.twitter20.ui.home;
-
-import android.media.Image;
-
-import java.util.Date;
+package com.example.twitter20.ui.Tweet;
 
 class Tweet {
 

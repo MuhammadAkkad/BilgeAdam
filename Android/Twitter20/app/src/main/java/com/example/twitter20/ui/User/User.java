@@ -1,12 +1,5 @@
 package com.example.twitter20.ui.User;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.widget.Button;
-
-import com.example.twitter20.DbHelper;
-
-
 public class User {
 
     String Name;
@@ -54,7 +47,4 @@ public class User {
         Password = password;
     }
     //endregion
-
-
-
 }

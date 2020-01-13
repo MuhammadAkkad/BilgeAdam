@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.Register.RegisterFragment"></activity>
         <activity
-            android:name=".ui.home.NewTweetActivity"
+            android:name=".ui.Tweet.NewTweetActivity"
             android:label="Tweet"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="ExtraText"></activity>
