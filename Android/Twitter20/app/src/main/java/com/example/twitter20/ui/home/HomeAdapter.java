@@ -37,7 +37,6 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home_design, parent, false);
 
-
         TextView tweet = convertView.findViewById(R.id.tweet_text_content);
         //TextView image = convertView.findViewById(R.id.tweet_shared_image);
 

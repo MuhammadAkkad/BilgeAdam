@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.twitter20.MainActivity;
 import com.example.twitter20.R;
+import com.example.twitter20.data.LoginDataSource;
 import com.example.twitter20.ui.Register.RegisterFragment;
 import com.example.twitter20.ui.login.LoginViewModel;
 import com.example.twitter20.ui.login.LoginViewModelFactory;
@@ -35,6 +36,7 @@ import com.example.twitter20.ui.login.LoginViewModelFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    LoginDataSource dataSource;
     Button signUp;
 
     @Override
@@ -118,8 +120,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                    //loginViewModel.login(usernameEditText.getText().toString(),
+                            passwordEditText.getText().toString();
                 }
                 return false;
             }
@@ -128,12 +130,17 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                passwordEditText.getText().toString());
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                //loginViewModel.login(usernameEditText.getText().toString(),
+                passwordEditText.getText().toString();
+                dataSource = new LoginDataSource();
+                boolean IsAuthorized = dataSource.login(getApplicationContext(),usernameEditText.getText().toString(),passwordEditText.getText().toString());
 
-                if(usernameEditText.getText().toString().equals("Muhammad") && passwordEditText.getText().toString().equals("123456789")){
+                if(IsAuthorized){
                     Intent i = new Intent(getApplicationContext() , MainActivity.class);
+                    startActivity(i);
+                }else {
+                    Intent i = new Intent(getApplicationContext() , LoginActivity.class);
                     startActivity(i);
                 }
             }

@@ -65,7 +65,6 @@ public class RegisterFragment extends AppCompatActivity {
             values.put(DbContract.UserEntry.COLUMN_ACCOUNT, mAccount);
             values.put(DbContract.UserEntry.COLUMN_PASSWORD, mPassword);
 
-
             boolean isExist = isUserExists(DbContract.UserEntry.TABLE_NAME, DbContract.UserEntry.COLUMN_ACCOUNT, mAccount);
 
             if (!isExist) {
