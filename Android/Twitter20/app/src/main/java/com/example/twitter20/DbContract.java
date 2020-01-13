@@ -1,12 +1,10 @@
 package com.example.twitter20;
-
 import android.provider.BaseColumns;
 
-public final class FeedReaderContract {
 
-    private FeedReaderContract() {
+public final class DbContract {
 
-    }
+    private DbContract() {}
 
     // Tweet Table
     public static class TweetEntry implements BaseColumns {
@@ -26,7 +24,6 @@ public final class FeedReaderContract {
         public static final String SQL_DELETE_TWEET_TABLE =
                 "DROP TABLE IF EXISTS " + TweetEntry.TABLE_NAME;
     }
-
     // User table
     public static class UserEntry implements BaseColumns {
 
@@ -50,7 +47,7 @@ public final class FeedReaderContract {
 
         public static final String SQL_DELETE_USER_TABLE =
                 "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
-
     }
+
 }
 

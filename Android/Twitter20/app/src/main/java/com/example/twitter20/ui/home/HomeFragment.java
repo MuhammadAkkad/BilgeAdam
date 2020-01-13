@@ -1,27 +1,22 @@
 package com.example.twitter20.ui.home;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.twitter20.FeedReaderContract;
-import com.example.twitter20.FeedReaderDbHelper;
+import com.example.twitter20.DbContract;
+import com.example.twitter20.DbHelper;
 import com.example.twitter20.R;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,20 +49,20 @@ public class HomeFragment extends Fragment {
        //tweetList.add(new Tweet("Baris", "Baris", new Date(1900, 1, 1), "this ierws my very powerful tweet becausaqeretyi i caytn and why not to tweet everydayi about shit?"));
        //tweetList.add(new Tweet("Muhammad", "", new Date(1900, 1, 1), "this is my vetry powerful tweet because i can and why not to tweet awerteveryday about shit?"));
 
-        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(this.getContext());
+        DbHelper dbHelper = new DbHelper(this.getContext());
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
             List<Tweet> tweetList = new ArrayList<>();
             ListView listView;
         String[] projection = {
-                FeedReaderContract.TweetEntry.COLUMN_PHOTO,
-                FeedReaderContract.TweetEntry.COLUMN_TWEET
+                DbContract.TweetEntry.COLUMN_PHOTO,
+                DbContract.TweetEntry.COLUMN_TWEET
         };
 
         String sortOrder =
-                FeedReaderContract.TweetEntry.COLUMN_TWEET + " DESC";
+                DbContract.TweetEntry.COLUMN_TWEET + " DESC";
 
         Cursor cursor = dbRead.query(
-                FeedReaderContract.TweetEntry.TABLE_NAME,   // The table to query
+                DbContract.TweetEntry.TABLE_NAME,   // The table to query
                 projection,
                 null,
                 null,
@@ -78,9 +73,9 @@ public class HomeFragment extends Fragment {
         while (cursor.moveToNext()) {
             Tweet t = new Tweet();
             t.TweetText = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.TweetEntry.COLUMN_TWEET));
+                    cursor.getColumnIndexOrThrow(DbContract.TweetEntry.COLUMN_TWEET));
             t.TweetImage = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.TweetEntry.COLUMN_PHOTO));
+                    cursor.getColumnIndexOrThrow(DbContract.TweetEntry.COLUMN_PHOTO));
 
             tweetList.add(t);
         }
