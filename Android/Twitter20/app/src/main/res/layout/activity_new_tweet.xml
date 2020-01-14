@@ -10,9 +10,11 @@
     <Button
         android:id="@+id/btn_submit_tweet"
         android:layout_width="wrap_content"
+        android:shadowRadius="@android:integer/config_longAnimTime"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Tweet"
+        android:text="@string/tweet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,11 +36,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif"
+        android:hint="@string/whats_happening"
         android:inputType="textMultiLine"
-        android:text="Whats happening!"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tweet_profile_img2"
-        app:layout_constraintTop_toTopOf="@+id/tweet_profile_img2" />
+        app:layout_constraintTop_toTopOf="@+id/tweet_profile_img2"
+        android:importantForAutofill="no" />
 </androidx.constraintlayout.widget.ConstraintLayout>

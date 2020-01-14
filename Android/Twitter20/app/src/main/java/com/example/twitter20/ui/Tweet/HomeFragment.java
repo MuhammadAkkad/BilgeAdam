@@ -1,5 +1,7 @@
 package com.example.twitter20.ui.Tweet;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -7,9 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -22,8 +25,14 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    TextView Name;
+    TextView Account;
+    TextView NickName;
+    TextView Date;
+    DbHelper dbHelper;
+    SQLiteDatabase dbRead;
+    int UID;
     private HomeViewModel homeViewModel;
-
 
     @Nullable
     @Override
@@ -35,20 +44,31 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DbHelper dbHelper = new DbHelper(this.getContext());
-        SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
+        Name = view.findViewById(R.id.tweetter_name);
+        Account = view.findViewById(R.id.tweetter_account_name);
+        NickName = view.findViewById(R.id.nickname);
+
         List<Tweet> tweetList = new ArrayList<>();
         ListView listView;
         String[] projection = {
+                DbContract.TweetEntry._ID,
+                DbContract.TweetEntry.COLUMN_USER_ID,
                 DbContract.TweetEntry.COLUMN_PHOTO,
                 DbContract.TweetEntry.COLUMN_TWEET
         };
+        final SharedPreferences pref = this.getActivity().getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
 
+        UID = pref.getInt("ID", 0);
+        String where = DbContract.TweetEntry.COLUMN_USER_ID;
+        String[] whereArgs = new String[] {String.valueOf(UID)};
+
+        dbHelper = new DbHelper(this.getContext());
+        dbRead = dbHelper.getReadableDatabase();
         Cursor cursor = dbRead.query(
                 DbContract.TweetEntry.TABLE_NAME,   // The table to query
                 projection,
-                null,
-                null,
+                where + "=?",
+                whereArgs,
                 null,
                 null,
                 null
@@ -64,7 +84,7 @@ public class HomeFragment extends Fragment {
         }
         cursor.close();
 
-        listView = (ListView) view.findViewById(R.id.TweetsList); // TODO fix view
+        listView = view.findViewById(R.id.TweetsList); // TODO fix view
 
         HomeAdapter HomeAdapter =
                 new HomeAdapter(this.getContext(), R.layout.fragment_home_design, tweetList);

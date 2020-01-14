@@ -33,6 +33,7 @@
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/ic_inbox"
                 android:backgroundTint="#F3A7A7A7"
+                android:shadowColor="#2196F3"
                 android:textColor="#C2C2C2"
                 android:textColorHint="#C20F0F"
                 android:textSize="12sp"

@@ -1,55 +1,39 @@
 package com.example.twitter20.ui.login;
 
-import android.app.Activity;
-
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.twitter20.DbContract;
+import com.example.twitter20.DbHelper;
 import com.example.twitter20.MainActivity;
 import com.example.twitter20.R;
-import com.example.twitter20.data.LoginDataSource;
 import com.example.twitter20.ui.Register.RegisterFragment;
-import com.example.twitter20.ui.login.LoginViewModel;
-import com.example.twitter20.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
-    LoginDataSource dataSource;
+
     Button signUp;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        //final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         signUp = findViewById(R.id.btn_sign_up);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,104 +43,53 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
-
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
-
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-                loadingProgressBar.setVisibility(View.VISIBLE);
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    //loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString();
-                }
-                return false;
-            }
-        });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                //loginViewModel.login(usernameEditText.getText().toString(),
-                passwordEditText.getText().toString();
-                dataSource = new LoginDataSource();
-                boolean IsAuthorized = dataSource.login(getApplicationContext(),usernameEditText.getText().toString(),passwordEditText.getText().toString());
+                //loadingProgressBar.setVisibility(View.VISIBLE);
+                boolean IsAuthorized = login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
 
-                if(IsAuthorized){
-                    Intent i = new Intent(getApplicationContext() , MainActivity.class);
+                if (IsAuthorized) {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
-                }else {
-                    Intent i = new Intent(getApplicationContext() , LoginActivity.class);
+                } else {
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                 }
             }
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    public boolean login(String username, String password) {
+        //try {
+        DbHelper dbHelper = new DbHelper(this);
+        SQLiteDatabase dbWrite;
+        SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
+
+        // TODO: handle loggedInUser authentication
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM user WHERE  account = " + "\'" + username + "\'" + " AND password = " + "\'" + password + "\'",
+                null);
+
+        final SharedPreferences pref = getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
+        int ID;
+        String Name;
+        String NickName;
+
+        try {
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    ID = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                    Name = cursor.getString(cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NAME));
+                    NickName = cursor.getString(cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NICKNAME));
+                    pref.edit().putInt("ID", ID).apply();
+                    pref.edit().putString("Name", Name).apply();
+                    pref.edit().putString("NickName", NickName).apply();
+                }
+                cursor.close();
+                return true;
+            } else return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
-
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
-    }
-
-
-
 }

@@ -3,6 +3,8 @@ package com.example.twitter20.ui.Tweet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +17,9 @@ import com.example.twitter20.DbHelper;
 import com.example.twitter20.R;
 
 public class NewTweetActivity extends AppCompatActivity {
+    int loggendInUserID;
     DbHelper dbHelper;
+    SQLiteDatabase dbRead;
     SQLiteDatabase dbWrite;
     Button btn;
 
@@ -32,7 +36,10 @@ public class NewTweetActivity extends AppCompatActivity {
         });
 
         dbHelper = new DbHelper(this);
+        dbRead = dbHelper.getReadableDatabase();
         dbWrite = dbHelper.getWritableDatabase();
+        SharedPreferences pref = this.getApplicationContext().getSharedPreferences("com.example.twitter20", 0);
+        loggendInUserID = pref.getInt("ID", 0);
 
     }
 
@@ -43,6 +50,7 @@ public class NewTweetActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(DbContract.TweetEntry.COLUMN_PHOTO, "TEMP\\path\\to\\solve");
         values.put(DbContract.TweetEntry.COLUMN_TWEET,tweetText);
+        values.put(DbContract.TweetEntry.COLUMN_USER_ID,loggendInUserID);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = dbWrite.insert(DbContract.TweetEntry.TABLE_NAME, null, values);
         Toast.makeText(this, "Tweet Added", Toast.LENGTH_SHORT).show();

@@ -12,15 +12,20 @@ public final class DbContract {
     public static class TweetEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "tweet";
+
         public static final String COLUMN_TWEET = "tweet";
         public static final String COLUMN_PHOTO = "photo";
+        public static final String COLUMN_USER_ID = "user_id";
 
 
         public static final String SQL_CREATE_TWEET_TABLE =
                 "CREATE TABLE " + TweetEntry.TABLE_NAME + " (" +
                         TweetEntry._ID + " INTEGER PRIMARY KEY," +
                         TweetEntry.COLUMN_TWEET + " TEXT," +
-                        TweetEntry.COLUMN_PHOTO + " TEXT)";
+                        TweetEntry.COLUMN_PHOTO + " TEXT," +
+                        TweetEntry.COLUMN_USER_ID + " INTEGER," +
+                        " FOREIGN KEY(user_id) REFERENCES user(_ID)"+
+                        ")";
 
 
         public static final String SQL_DELETE_TWEET_TABLE =
