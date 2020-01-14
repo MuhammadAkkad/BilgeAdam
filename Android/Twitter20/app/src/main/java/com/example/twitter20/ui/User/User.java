@@ -2,16 +2,20 @@ package com.example.twitter20.ui.User;
 
 public class User {
 
-    String Name;
-    String NickName;
-    String Account;
-    String Password;
+    public String Name;
+    public String NickName;
+    public String Account;
+    public String Password;
 
     public User(String name, String nickName, String account, String password) {
         Name = name;
         NickName = nickName;
         Account = account;
         Password = password;
+    }
+
+    public User() {
+
     }
 
     //region Getters/Setters

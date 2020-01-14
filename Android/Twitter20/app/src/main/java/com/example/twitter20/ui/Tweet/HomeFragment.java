@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.twitter20.DbContract;
 import com.example.twitter20.DbHelper;
 import com.example.twitter20.R;
+import com.example.twitter20.ui.User.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +44,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Name = view.findViewById(R.id.tweetter_name);
-        Account = view.findViewById(R.id.tweetter_account_name);
-        NickName = view.findViewById(R.id.nickname);
+        final SharedPreferences pref = this.getActivity().getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
+        UID = pref.getInt("ID", 0);
+        dbHelper = new DbHelper(this.getContext());
+        dbRead = dbHelper.getReadableDatabase();
 
         List<Tweet> tweetList = new ArrayList<>();
         ListView listView;
@@ -56,14 +57,11 @@ public class HomeFragment extends Fragment {
                 DbContract.TweetEntry.COLUMN_PHOTO,
                 DbContract.TweetEntry.COLUMN_TWEET
         };
-        final SharedPreferences pref = this.getActivity().getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
 
-        UID = pref.getInt("ID", 0);
         String where = DbContract.TweetEntry.COLUMN_USER_ID;
-        String[] whereArgs = new String[] {String.valueOf(UID)};
+        String[] whereArgs = new String[]{String.valueOf(UID)};
 
-        dbHelper = new DbHelper(this.getContext());
-        dbRead = dbHelper.getReadableDatabase();
+
         Cursor cursor = dbRead.query(
                 DbContract.TweetEntry.TABLE_NAME,   // The table to query
                 projection,
