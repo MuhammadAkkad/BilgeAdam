@@ -156,7 +156,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:contentDescription="@string/tweet_profile_img"
                 android:src="@drawable/img_profile"
                 app:layout_constraintStart_toStartOf="parent"
@@ -199,6 +199,13 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@id/ignore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/ignore" />
+
+                <TextView
                     android:id="@+id/tweeter_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,16 +214,21 @@
                     android:text="nickName" />
 
                 <TextView
-                    android:id="@+id/tweetter_account_name"
+                    android:id="@+id/point_divider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@muhammad" />
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:text="."
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:translationY="-3dp" />
 
                 <TextView
                     android:id="@+id/tweet_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:text="17h" />
 
 

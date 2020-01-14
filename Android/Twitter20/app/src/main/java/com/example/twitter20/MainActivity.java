@@ -18,6 +18,7 @@ import com.example.twitter20.ui.Notification.NotificationFragment;
 import com.example.twitter20.ui.Search.SeachFragment;
 import com.example.twitter20.ui.Tweet.HomeFragment;
 import com.example.twitter20.ui.Tweet.NewTweetActivity;
+import com.example.twitter20.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,5 +119,10 @@ public class MainActivity extends AppCompatActivity {
     public void OpenDrawer(View view) {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    public void SignOut(View view) {
+        finishAffinity();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
     }
 }

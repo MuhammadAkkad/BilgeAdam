@@ -28,7 +28,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
     List<Tweet> tweetList;
 
     TextView Name;
-    TextView Account;
+    //TextView Account;
     TextView NickName;
     TextView Date;
     DbHelper dbHelper;
@@ -61,7 +61,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
         dbRead = dbHelper.getReadableDatabase();
 
         Name = convertView.findViewById(R.id.tweetter_name);
-        Account = convertView.findViewById(R.id.tweetter_account_name);
+        //Account = convertView.findViewById(R.id.tweetter_account_name);
         NickName = convertView.findViewById(R.id.tweeter_nickname);
 
 
@@ -83,12 +83,12 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
                         cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NAME));
                 u.NickName = cursor.getString(
                         cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NICKNAME));
-                u.Account = cursor.getString(
-                        cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_ACCOUNT));
+//                u.Account = cursor.getString(
+//                        cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_ACCOUNT));
 
                 Name.setText(u.Name);
                 NickName.setText(u.NickName);
-                Account.setText(u.Account);
+                //Account.setText(u.Account);
             }
         }
         cursor.close();

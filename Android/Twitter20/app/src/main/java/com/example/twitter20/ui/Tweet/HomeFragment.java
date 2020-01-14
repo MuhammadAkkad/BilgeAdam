@@ -26,10 +26,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    TextView Name;
-    TextView Account;
-    TextView NickName;
-    TextView Date;
+
     DbHelper dbHelper;
     SQLiteDatabase dbRead;
     int UID;
