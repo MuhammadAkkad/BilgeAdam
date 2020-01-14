@@ -44,5 +44,6 @@
     <string name="whats_happening">Whats happening!</string>
     <string name="log_out">Log Out</string>
     <string name="ignore">"@"</string>
+    <string name="profile">Profile</string>
 
 </resources>
