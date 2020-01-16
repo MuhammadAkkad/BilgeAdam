@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +18,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.twitter20.DbContract;
 import com.example.twitter20.DbHelper;
 import com.example.twitter20.R;
-import com.example.twitter20.ui.User.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-
+    List<Tweet> tweetList;
+    String ID;
     DbHelper dbHelper;
     SQLiteDatabase dbRead;
     int UID;
@@ -46,7 +45,7 @@ public class HomeFragment extends Fragment {
         dbHelper = new DbHelper(this.getContext());
         dbRead = dbHelper.getReadableDatabase();
 
-        List<Tweet> tweetList = new ArrayList<>();
+        tweetList = new ArrayList<>();
         ListView listView;
         String[] projection = {
                 DbContract.TweetEntry._ID,
@@ -70,6 +69,8 @@ public class HomeFragment extends Fragment {
         );
         while (cursor.moveToNext()) {
             Tweet t = new Tweet();
+            ID = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DbContract.TweetEntry._ID));
             t.TweetText = cursor.getString(
                     cursor.getColumnIndexOrThrow(DbContract.TweetEntry.COLUMN_TWEET));
             t.TweetImage = cursor.getString(
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
         listView = view.findViewById(R.id.TweetsList); // TODO fix view
 
         HomeAdapter HomeAdapter =
-                new HomeAdapter(this.getContext(), R.layout.fragment_home_design, tweetList);
+                new HomeAdapter(this.getContext(), R.layout.fragment_tweet_list_design, tweetList);
 
         listView.setAdapter(HomeAdapter);
     }

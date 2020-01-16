@@ -1,23 +1,30 @@
 package com.example.twitter20.ui.Tweet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Parcelable;
+import android.text.AutoText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.example.twitter20.DbContract;
 import com.example.twitter20.DbHelper;
 import com.example.twitter20.R;
 import com.example.twitter20.ui.User.User;
 
+import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -25,15 +32,14 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
     Context mCtx;
     int resource;
-    List<Tweet> tweetList;
+    static List<Tweet> tweetList;
 
     TextView Name;
-    //TextView Account;
     TextView NickName;
-    TextView Date;
     DbHelper dbHelper;
     SQLiteDatabase dbRead;
     int UID;
+    User u;
 
     public HomeAdapter(Context mCtx, int resource, List<Tweet> tweetList) {
         super(mCtx, resource, tweetList);
@@ -50,18 +56,19 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home_design, parent, false);
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_tweet_list_design, parent, false);
 
 
         final SharedPreferences pref = getContext().getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
         UID = pref.getInt("ID", 0);
+
+
         dbHelper = new DbHelper(this.getContext());
         dbRead = dbHelper.getReadableDatabase();
 
         Name = convertView.findViewById(R.id.tweetter_name);
-        //Account = convertView.findViewById(R.id.tweetter_account_name);
         NickName = convertView.findViewById(R.id.tweeter_nickname);
 
 
@@ -78,17 +85,13 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
 
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                User u = new User();
+                u = new User();
                 u.Name = cursor.getString(
                         cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NAME));
                 u.NickName = cursor.getString(
                         cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NICKNAME));
-//                u.Account = cursor.getString(
-//                        cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_ACCOUNT));
-
                 Name.setText(u.Name);
                 NickName.setText(u.NickName);
-                //Account.setText(u.Account);
             }
         }
         cursor.close();
@@ -97,6 +100,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
         TextView tweet = convertView.findViewById(R.id.tweet_text_content);
         //TextView image = convertView.findViewById(R.id.tweet_shared_image);
 
+        FrameLayout cardView = convertView.findViewById(R.id.cardView);
         TextView likesCount = convertView.findViewById(R.id.likes_count_number);
         TextView retweetCount = convertView.findViewById(R.id.retweets_count_number);
         TextView commentsCount = convertView.findViewById(R.id.comments_count_number);
@@ -105,6 +109,18 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
         Tweet t = tweetList.get(position);
         tweet.setText(t.getTweetText());
         //image.setText(t.getTweetImage());
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tweet t = tweetList.get(position);
+                Intent i = new Intent(getContext(), ViewTweet.class);
+                i.putExtra("TweetText",  t.TweetText);
+                i.putExtra("user_name", u.Name);
+                i.putExtra("user_nick", u.NickName);
+                getContext().startActivity(i);
+            }
+        });
 
         likesCount.setText(getRandom());
         commentsCount.setText(getRandom());
