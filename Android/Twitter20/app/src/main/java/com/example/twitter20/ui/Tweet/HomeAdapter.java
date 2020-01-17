@@ -116,6 +116,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
                 Tweet t = tweetList.get(position);
                 Intent i = new Intent(getContext(), ViewTweet.class);
                 i.putExtra("TweetText",  t.TweetText);
+                i.putExtra("TweetID", t.ID);
                 i.putExtra("user_name", u.Name);
                 i.putExtra("user_nick", u.NickName);
                 getContext().startActivity(i);

@@ -252,7 +252,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:backgroundTint="#0A0000"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
+        app:layout_constraintBottom_toTopOf="@+id/comment_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -260,7 +260,7 @@
     </ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView2"
+        android:id="@+id/comment_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#FFFFFF"
@@ -272,12 +272,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
             android:orientation="horizontal"
             android:visibility="visible">
 
             <EditText
                 android:id="@+id/txt_add_comment"
-                android:layout_width="310dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autofillHints=""
@@ -288,11 +289,13 @@
 
             <Button
                 android:id="@+id/btn_add_comment"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:text="@string/btn_comment" />
+                android:text="@string/btn_comment"
+                android:textColor="#2196F3" />
         </LinearLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

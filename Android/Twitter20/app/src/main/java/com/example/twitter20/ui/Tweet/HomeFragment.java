@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
         );
         while (cursor.moveToNext()) {
             Tweet t = new Tweet();
-            ID = cursor.getString(
+            t.ID = cursor.getInt(
                     cursor.getColumnIndexOrThrow(DbContract.TweetEntry._ID));
             t.TweetText = cursor.getString(
                     cursor.getColumnIndexOrThrow(DbContract.TweetEntry.COLUMN_TWEET));

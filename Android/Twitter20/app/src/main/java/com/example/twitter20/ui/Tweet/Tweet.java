@@ -2,6 +2,7 @@ package com.example.twitter20.ui.Tweet;
 
 class Tweet {
 
+    int ID;
     String TweetText;
     String TweetImage;
 
@@ -13,6 +14,10 @@ class Tweet {
 
         TweetText = tweetText;
         TweetImage = tweetImage;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public Tweet() {

@@ -1,6 +1,9 @@
 package com.example.twitter20.ui.Tweet;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -9,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.twitter20.DbContract;
+import com.example.twitter20.DbHelper;
 import com.example.twitter20.R;
 import com.example.twitter20.ui.Comment.Comment;
 import com.example.twitter20.ui.User.User;
@@ -22,8 +27,14 @@ public class ViewTweet  extends AppCompatActivity {
 
     ListView listView;
     TextView Name;
+    int TweetID;
     //TextView Account;
     TextView NickName;
+    List<Comment> comments;
+    DbHelper dbHelper;
+    SQLiteDatabase dbRead;
+    int UID;
+
 
 
     @Override
@@ -45,6 +56,7 @@ public class ViewTweet  extends AppCompatActivity {
         Intent i = getIntent();
         Tweet t = new Tweet();
         User u = new User();
+        TweetID = i.getIntExtra("TweetID",-1);
         t.TweetText = i.getStringExtra("TweetText");
         u.Name = i.getStringExtra("user_name");
         u.NickName = i.getStringExtra("user_nick");
@@ -53,19 +65,36 @@ public class ViewTweet  extends AppCompatActivity {
         Name.setText(u.Name);
         NickName.setText(u.NickName);
 
-        List<Comment> comments = new ArrayList<>();
-        comments.add(new Comment("Wow this is awesome man!"));
-        comments.add(new Comment("i disagree dude i dont think is is right"));
-        comments.add(new Comment("thats might be a good point"));
-        comments.add(new Comment("hell yeah"));
-        comments.add(new Comment("Wow this is awesome man!"));
-        comments.add(new Comment("i disagree dude i dont think is is right"));
-        comments.add(new Comment("thats might be a good point"));
-        comments.add(new Comment("hell yeah"));
-        comments.add(new Comment("Wow this is awesome man!"));
-        comments.add(new Comment("i disagree dude i dont think is is right"));
-        comments.add(new Comment("thats might be a good point"));
-        comments.add(new Comment("hell yeah"));
+        comments = new ArrayList<>();
+
+        final SharedPreferences pref = this.getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
+        UID = pref.getInt("ID", 0);
+        dbHelper = new DbHelper(this);
+        dbRead = dbHelper.getReadableDatabase();
+        comments = new ArrayList<>();
+
+
+        String[] projection = {
+                DbContract.CommentEntry._ID,
+                DbContract.CommentEntry.COLUMN_COMMENT
+        };
+
+        String where = DbContract.CommentEntry._ID;
+        String[] whereArgs = new String[]{String.valueOf(UID)};
+
+
+//        comments.add(new Comment("Wow this is awesome man!"));
+//        comments.add(new Comment("i disagree dude i dont think is is right"));
+//        comments.add(new Comment("thats might be a good point"));
+//        comments.add(new Comment("hell yeah"));
+//        comments.add(new Comment("Wow this is awesome man!"));
+//        comments.add(new Comment("i disagree dude i dont think is is right"));
+//        comments.add(new Comment("thats might be a good point"));
+//        comments.add(new Comment("hell yeah"));
+//        comments.add(new Comment("Wow this is awesome man!"));
+//        comments.add(new Comment("i disagree dude i dont think is is right"));
+//        comments.add(new Comment("thats might be a good point"));
+//        comments.add(new Comment("hell yeah"));
 
         listView = findViewById(R.id.listComments);
         ArrayAdapter<Comment> itemsAdapter =
