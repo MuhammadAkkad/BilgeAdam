@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -92,29 +91,6 @@ public class ViewTweet extends AppCompatActivity {
         dbWrite = dbHelper.getWritableDatabase();
         comments = new ArrayList<>();
 
-//
-//        String[] projection = {
-//                DbContract.CommentEntry._ID,
-//                DbContract.CommentEntry.COLUMN_COMMENT
-//        };
-//        String where = DbContract.MappingEntry.COLUMN_TID;
-//        String[] whereArgs = new String[]{String.valueOf(TweetID)};
-//
-//        Cursor cursor = dbRead.query(
-//                DbContract.CommentEntry.TABLE_NAME,   // The table to query
-//                projection,
-//                where + "=?",
-//                whereArgs,
-//                null,
-//                null,
-//                null
-//        );
-
-//        String rawQuery = "SELECT comment.comment FROM " + DbContract.CommentEntry.TABLE_NAME + " INNER JOIN " + DbContract.MappingEntry.TABLE_NAME
-//                + " ON " + DbContract.CommentEntry._ID + " = " + DbContract.MappingEntry.COLUMN_CID +
-//                "inner join " + DbContract.TweetEntry.TABLE_NAME + " ON " + DbContract.MappingEntry.COLUMN_TID + " = " + DbContract.TweetEntry._ID +
-//                " WHERE " + DbContract.TweetEntry._ID + " = " + TweetID;
-
 
         String rawQuery = "SELECT comment.comment, comment._id FROM comment INNER JOIN mapping  on comment._id = mapping.CID " +
                 "inner join tweet on mapping.TID = tweet._id " +
@@ -124,9 +100,6 @@ public class ViewTweet extends AppCompatActivity {
                 null
         );
 
-//        SELECT comment.comment FROM comment INNER JOIN mapping on comment._id = mapping.CID
-//        inner join tweet on /mapping.TID = tweet._id
-//        where tweet._id = 1
         while (cursor.moveToNext()) {
             Comment c = new Comment();
             c.CID = cursor.getInt(
@@ -154,6 +127,14 @@ public class ViewTweet extends AppCompatActivity {
 
         if (newRowId > 0) {
             Toast.makeText(this, "Comment Added", Toast.LENGTH_SHORT).show();
+            ContentValues val = new ContentValues();
+            val.put(DbContract.MappingEntry.COLUMN_CID, newRowId);
+            val.put(DbContract.MappingEntry.COLUMN_UID, UID);
+            val.put(DbContract.MappingEntry.COLUMN_TID, TweetID);
+            val.put(DbContract.MappingEntry.COLUMN_IID, 2);
+            long map = dbWrite.insert(DbContract.MappingEntry.TABLE_NAME, null, val);
+            if (map > 0)
+                Toast.makeText(this, "Mapping Added", Toast.LENGTH_SHORT).show();
             this.finish();
         }
 
