@@ -66,7 +66,7 @@ public class CommentFragment extends Fragment {
 
 
 
-        return inflater.inflate(R.layout.fragment_comment, container, false);
+        return inflater.inflate(R.layout.fragment_comment_list_design, container, false);
     }
 
 

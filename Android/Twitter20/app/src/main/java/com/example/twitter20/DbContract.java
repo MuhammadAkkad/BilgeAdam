@@ -17,7 +17,7 @@ public final class DbContract {
         public static final String COLUMN_PHOTO = "photo";
         public static final String COLUMN_USER_ID = "user_id";
 
-        public static final String COLUMN_COMMENT_ID = "comment_id";
+        //public static final String COLUMN_COMMENT_ID = "comment_id";
         public static final String COLUMN_COMMENT_COUNT = "comment_count";
         public static final String COLUMN_LIKE_COUNT = "like_count";
         public static final String COLUMN_RT_COUNT = "rt_count";
@@ -28,13 +28,12 @@ public final class DbContract {
                         TweetEntry._ID + " INTEGER PRIMARY KEY," +
                         TweetEntry.COLUMN_TWEET + " TEXT," +
                         TweetEntry.COLUMN_PHOTO + " TEXT," +
-                        TweetEntry.COLUMN_COMMENT_ID + " INTEGER," +
+                        //TweetEntry.COLUMN_COMMENT_ID + " INTEGER," +
                         TweetEntry.COLUMN_COMMENT_COUNT + " INTEGER," +
                         TweetEntry.COLUMN_LIKE_COUNT + " INTEGER," +
                         TweetEntry.COLUMN_RT_COUNT + " INTEGER," +
                         TweetEntry.COLUMN_USER_ID + " INTEGER," +
                         " FOREIGN KEY(user_id) REFERENCES user(_ID)" +
-                        "FOREIGN KEY(comment_id) REFERENCES comment(_ID)" +
                         ")";
 
 
@@ -93,7 +92,9 @@ public final class DbContract {
         public static final String SQL_CREATE_INTERACTION_TABLE =
                 "CREATE TABLE " + InteractionEntry.TABLE_NAME + " (" +
                         InteractionEntry._ID + " INTEGER PRIMARY KEY," +
-                        InteractionEntry.COLUMN_INTERACT + " TEXT)";
+                        InteractionEntry.COLUMN_INTERACT + " TEXT)" ;
+
+
 
         public static final String SQL_DELETE_INTERACTION_TABLE =
                 "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
@@ -104,18 +105,26 @@ public final class DbContract {
 
         public static final String TABLE_NAME = "mapping";
 
+        public static final String COLUMN_UID = "UID";
+        public static final String COLUMN_TID = "TID";
+        public static final String COLUMN_IID = "IID";
+        public static final String COLUMN_CID = "CID";
+
 
         public static final String SQL_CREATE_MAPPING_TABLE =
-                "CREATE TABLE " + MappingEntry.TABLE_NAME + " (UID INTEGER, TID INTEGER, RTID INTEGER," +
-                        " CID INTEGER, FOREIGN KEY(UID) REFERENCES user(_ID)," +
+                "CREATE TABLE " + MappingEntry.TABLE_NAME + " ( " +
+                        MappingEntry.COLUMN_UID + " INTEGER," +
+                        MappingEntry.COLUMN_TID + " INTEGER," +
+                        MappingEntry.COLUMN_IID + " INTEGER," +
+                        MappingEntry.COLUMN_CID + " INTEGER," +
+                        " FOREIGN KEY(UID) REFERENCES user(_ID)," +
                         " FOREIGN KEY(TID) REFERENCES tweet(_ID)," +
-                        " FOREIGN KEY(CID) REFERENCES comment(_ID)," +
-                        " FOREIGN KEY(RTID) REFERENCES interaction(_ID))";
+                        " FOREIGN KEY(IID) REFERENCES interaction(_ID)," +
+                        " FOREIGN KEY(CID) REFERENCES comment(_ID))";
 
         public static final String SQL_DELETE_MAPPING_TABLE =
                 "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
     }
-
 
 }
 

@@ -45,5 +45,7 @@
     <string name="log_out">Log Out</string>
     <string name="ignore">"@"</string>
     <string name="profile">Profile</string>
+    <string name="replyer_name">replyer_name</string>
+    <string name="reply_text">Reply_text</string>
 
 </resources>

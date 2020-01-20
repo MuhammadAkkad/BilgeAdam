@@ -1,16 +1,15 @@
 package com.example.twitter20.ui.Tweet;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.twitter20.DbContract;
 import com.example.twitter20.DbHelper;
@@ -44,19 +43,20 @@ public class NewTweetActivity extends AppCompatActivity {
     }
 
 
-    public void AddTweet(View view){
+    public void AddTweet(View view) {
         TextView tweet = findViewById(R.id.txt_new_tweet_content);
         String tweetText = tweet.getText().toString();
         ContentValues values = new ContentValues();
         values.put(DbContract.TweetEntry.COLUMN_PHOTO, "TEMP\\path\\to\\solve");
-        values.put(DbContract.TweetEntry.COLUMN_TWEET,tweetText);
-        values.put(DbContract.TweetEntry.COLUMN_USER_ID,loggendInUserID);
+        values.put(DbContract.TweetEntry.COLUMN_TWEET, tweetText);
+        values.put(DbContract.TweetEntry.COLUMN_USER_ID, loggendInUserID);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = dbWrite.insert(DbContract.TweetEntry.TABLE_NAME, null, values);
-        Toast.makeText(this, "Tweet Added", Toast.LENGTH_SHORT).show();
 
-        if(newRowId > 0){
-        this.finish();
+
+        if (newRowId > 0) {
+            Toast.makeText(this, "Tweet Added", Toast.LENGTH_SHORT).show();
+            this.finish();
         }
     }
 }

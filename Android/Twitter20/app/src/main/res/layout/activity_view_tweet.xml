@@ -251,6 +251,7 @@
         android:id="@+id/listComments"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#0A0000"
         app:layout_constraintBottom_toTopOf="@+id/comment_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -298,5 +299,14 @@
                 android:textColor="#2196F3" />
         </LinearLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/listComments"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:layout_editor_absoluteX="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
