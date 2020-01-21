@@ -10,15 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.Register.RegisterFragment"></activity>
-        <activity android:name=".app.Tweet.ViewTweet"></activity>
+        <activity android:name=".Register.RegisterFragment"></activity>
+        <activity android:name=".Tweet.ViewTweet"></activity>
         <activity
-            android:name=".app.Tweet.NewTweetActivity"
+            android:name=".Tweet.NewTweetActivity"
             android:label="Tweet"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="ExtraText"></activity>
         <activity
-            android:name=".app.login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/title_activity_login">
 
             <intent-filter>
