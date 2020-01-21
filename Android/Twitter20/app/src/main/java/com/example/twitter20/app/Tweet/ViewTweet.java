@@ -35,6 +35,7 @@ public class ViewTweet extends AppCompatActivity {
     //TextView Account;
     TextView NickName;
     List<Comment> comments;
+    List<User> users;
     DbHelper dbHelper;
     SQLiteDatabase dbRead;
     SQLiteDatabase dbWrite;
@@ -91,6 +92,7 @@ public class ViewTweet extends AppCompatActivity {
         dbRead = dbHelper.getReadableDatabase();
         dbWrite = dbHelper.getWritableDatabase();
         comments = new ArrayList<>();
+        users = new ArrayList<>();
 
 
         String rawQuery = "SELECT user._id,user.name,user.nickname,comment.comment, comment._id FROM comment " +
@@ -104,24 +106,28 @@ public class ViewTweet extends AppCompatActivity {
                 rawQuery,
                 null
         );
+        //Comment c = new Comment();
+         while (cursor.moveToNext()) {
 
-        while (cursor.moveToNext()) {
-            Comment c = new Comment();
             User user = new User();
 
-            c.CID = cursor.getInt(
+             user.CID = cursor.getInt(
                     cursor.getColumnIndexOrThrow(DbContract.CommentEntry._ID));
-            c.Comment = cursor.getString(
+             user.Comment = cursor.getString(
                     cursor.getColumnIndexOrThrow(DbContract.CommentEntry.COLUMN_COMMENT));
+            // get comment's user info
             user.Name = cursor.getString(
                     cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NAME));
-            comments.add(c);
+            user.NickName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DbContract.UserEntry.COLUMN_NICKNAME));
+            users.add(user);
+
         }
         cursor.close();
 
         listView = findViewById(R.id.listComments);
         CommentAdapter itemsAdapter =
-                new CommentAdapter(this, R.layout.fragment_comment_list_design, comments);
+                new CommentAdapter(this, R.layout.fragment_comment_list_design, users);
         listView.setAdapter(itemsAdapter);
 
     }

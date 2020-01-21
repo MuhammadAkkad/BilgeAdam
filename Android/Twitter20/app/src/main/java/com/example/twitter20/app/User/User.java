@@ -7,6 +7,34 @@ public class User {
     public String Account;
     public String Password;
 
+    public int CID;
+    public String Comment;
+
+    public int getCID() {
+        return CID;
+    }
+
+    public void setCID(int CID) {
+        this.CID = CID;
+    }
+
+    public String getComment() {
+        return Comment;
+    }
+
+    public void setComment(String comment) {
+        Comment = comment;
+    }
+
+    public User(String name, String nickName, String account, String password, int CID, String comment) {
+        Name = name;
+        NickName = nickName;
+        Account = account;
+        Password = password;
+        this.CID = CID;
+        Comment = comment;
+    }
+
     public User(String name, String nickName, String account, String password) {
         Name = name;
         NickName = nickName;

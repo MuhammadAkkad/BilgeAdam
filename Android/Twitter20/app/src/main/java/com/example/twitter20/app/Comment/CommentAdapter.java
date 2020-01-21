@@ -12,22 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.twitter20.R;
+import com.example.twitter20.app.User.User;
 
 import java.util.List;
 
-public class CommentAdapter extends ArrayAdapter<Comment> {
+public class CommentAdapter extends ArrayAdapter<User> {
 
     TextView replyer_name;
     TextView nickname;
     TextView replying_to;
     TextView comment;
 
-    static List<Comment> comments;
+    static List<User> comments;
     int UID;
     Context mCtx;
     int resource;
 
-    public CommentAdapter(Context mCtx, int resource, List<Comment> comments) {
+    public CommentAdapter(Context mCtx, int resource, List<User> comments) {
         super(mCtx, resource, comments);
         this.mCtx = mCtx;
         this.resource = resource;
@@ -46,8 +47,11 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
         replying_to = convertView.findViewById(R.id.replying_to);
         comment = convertView.findViewById(R.id.reply_text_content);
 
-        Comment c = comments.get(position);
-        comment.setText(c.Comment);
+        User u = comments.get(position);
+        comment.setText(u.Comment);
+
+        replyer_name.setText(u.Name);
+        nickname.setText(u.NickName);
 
 
 
