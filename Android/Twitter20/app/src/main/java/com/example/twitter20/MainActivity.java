@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.twitter20.app.Messages.MessagesFragment;
-import com.example.twitter20.app.Notification.NotificationFragment;
-import com.example.twitter20.app.Search.SeachFragment;
-import com.example.twitter20.app.Tweet.HomeFragment;
-import com.example.twitter20.app.Tweet.NewTweetActivity;
-import com.example.twitter20.app.login.LoginActivity;
+import com.example.twitter20.Messages.MessagesFragment;
+import com.example.twitter20.Notification.NotificationFragment;
+import com.example.twitter20.Search.SeachFragment;
+import com.example.twitter20.Tweet.HomeFragment;
+import com.example.twitter20.Tweet.NewTweetActivity;
+import com.example.twitter20.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
