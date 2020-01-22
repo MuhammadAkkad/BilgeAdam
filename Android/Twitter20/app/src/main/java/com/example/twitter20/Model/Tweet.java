@@ -1,10 +1,10 @@
-package com.example.twitter20.navigation.Tweet;
+package com.example.twitter20.Model;
 
-class Tweet {
+public class Tweet {
 
-    int ID;
-    String TweetText;
-    String TweetImage;
+    public int ID;
+    public String TweetText;
+    public String TweetImage;
 
     int TweetLikeCount;
     int TweetCommentCount;

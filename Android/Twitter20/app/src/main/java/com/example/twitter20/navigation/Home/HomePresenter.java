@@ -1,4 +1,4 @@
-package com.example.twitter20.navigation.Tweet;
+package com.example.twitter20.navigation.Home;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.example.twitter20.DB.DbContract;
 import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
+import com.example.twitter20.Model.Tweet;
 
 import java.util.ArrayList;
 import java.util.List;

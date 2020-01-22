@@ -1,4 +1,4 @@
-package com.example.twitter20.Comment;
+package com.example.twitter20.Model;
 
 public class Comment {
     public String Comment;

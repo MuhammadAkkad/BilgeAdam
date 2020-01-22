@@ -1,4 +1,4 @@
-package com.example.twitter20.navigation.Tweet;
+package com.example.twitter20.navigation.Home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,9 @@ import androidx.annotation.Nullable;
 import com.example.twitter20.DB.DbContract;
 import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
-import com.example.twitter20.User.User;
+import com.example.twitter20.Model.Tweet;
+import com.example.twitter20.Model.User;
+import com.example.twitter20.ViewTweet.ViewTweet;
 
 import java.util.List;
 import java.util.Random;

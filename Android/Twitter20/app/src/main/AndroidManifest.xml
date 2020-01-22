@@ -11,14 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Register.RegisterFragment"></activity>
-        <activity android:name=".navigation.Tweet.ViewTweet"></activity>
+        <activity android:name=".ViewTweet.ViewTweet"></activity>
         <activity
-            android:name=".navigation.Tweet.NewTweetActivity"
+            android:name=".NewTweet.NewTweetActivity"
             android:label="Tweet"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="ExtraText"></activity>
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".Login.LoginActivity"
             android:label="@string/title_activity_login">
 
             <intent-filter>

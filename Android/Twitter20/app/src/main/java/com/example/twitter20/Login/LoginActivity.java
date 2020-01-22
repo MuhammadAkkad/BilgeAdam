@@ -1,4 +1,4 @@
-package com.example.twitter20.login;
+package com.example.twitter20.Login;
 
 import android.content.Context;
 import android.content.Intent;

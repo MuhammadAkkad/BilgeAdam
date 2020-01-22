@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.twitter20.R;
-import com.example.twitter20.User.User;
+import com.example.twitter20.Model.User;
 
 import java.util.List;
 

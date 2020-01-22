@@ -1,4 +1,4 @@
-package com.example.twitter20.navigation.Tweet;
+package com.example.twitter20.navigation.Home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.twitter20.DB.DbContract;
 import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
-import com.example.twitter20.login.LoginActivity;
+import com.example.twitter20.Login.LoginActivity;
 
 
 public class RegisterFragment extends AppCompatActivity {

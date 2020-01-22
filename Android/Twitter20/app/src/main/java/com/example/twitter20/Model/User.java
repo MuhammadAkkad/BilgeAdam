@@ -1,4 +1,4 @@
-package com.example.twitter20.User;
+package com.example.twitter20.Model;
 
 public class User {
 

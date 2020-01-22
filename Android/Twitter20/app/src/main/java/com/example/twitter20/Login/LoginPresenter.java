@@ -1,4 +1,4 @@
-package com.example.twitter20.login;
+package com.example.twitter20.Login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.twitter20.DB.DbContract;
 import com.example.twitter20.DB.DbHelper;
-import com.example.twitter20.User.User;
+import com.example.twitter20.Model.User;
 
 public class LoginPresenter {
 

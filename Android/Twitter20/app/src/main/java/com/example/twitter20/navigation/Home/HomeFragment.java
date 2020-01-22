@@ -1,4 +1,4 @@
-package com.example.twitter20.navigation.Tweet;
+package com.example.twitter20.navigation.Home;
 
 import android.content.Context;
 import android.content.SharedPreferences;

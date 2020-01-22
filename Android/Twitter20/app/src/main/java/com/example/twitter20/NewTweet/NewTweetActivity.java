@@ -1,4 +1,4 @@
-package com.example.twitter20.navigation.Tweet;
+package com.example.twitter20.NewTweet;
 
 import android.content.ContentValues;
 import android.content.SharedPreferences;

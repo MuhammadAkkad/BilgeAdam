@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.twitter20.Login.LoginActivity;
 import com.example.twitter20.navigation.Messages.MessagesFragment;
 import com.example.twitter20.navigation.Notification.NotificationFragment;
 import com.example.twitter20.navigation.Search.SeachFragment;
-import com.example.twitter20.navigation.Tweet.HomeFragment;
-import com.example.twitter20.navigation.Tweet.NewTweetActivity;
-import com.example.twitter20.login.LoginActivity;
+import com.example.twitter20.navigation.Home.HomeFragment;
+import com.example.twitter20.NewTweet.NewTweetActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             HomeFragment homeFragment = new HomeFragment();
+
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "HOME PRESSED", Toast.LENGTH_SHORT).show();
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
         btnMessage.setOnClickListener(new View.OnClickListener() {
             MessagesFragment messageFragment = new MessagesFragment();
+
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "MESSAGE PRESSED", Toast.LENGTH_SHORT).show();
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
         btnSearch.setOnClickListener(new View.OnClickListener() {
             SeachFragment mSearchFragment = new SeachFragment();
+
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "SEARCH PRESSED", Toast.LENGTH_SHORT).show();
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         });
         btnNotification.setOnClickListener(new View.OnClickListener() {
             NotificationFragment mNotificationFragment = new NotificationFragment();
+
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "NOTI PRESSED", Toast.LENGTH_SHORT).show();
@@ -104,23 +108,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     // renews transaction instance to avoid crash!
-    FragmentTransaction GetNewTrans(){
+    FragmentTransaction GetNewTrans() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         return fragmentTransaction;
     }
+
     // new tweet button onClick action
     public void NewTweetButton(View view) {
         Intent i = new Intent(getBaseContext(), NewTweetActivity.class);
         startActivity(i);
     }
+
     // Opens navigation drawer
     public void OpenDrawer(View view) {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
+    // Sign out
     public void SignOut(View view) {
         finishAffinity();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
