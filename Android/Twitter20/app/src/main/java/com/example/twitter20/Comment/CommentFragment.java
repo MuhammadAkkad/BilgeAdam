@@ -1,33 +1,19 @@
 package com.example.twitter20.Comment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.example.twitter20.DB.DbContract;
-import com.example.twitter20.DB.DbHelper;
+import androidx.fragment.app.Fragment;
+
 import com.example.twitter20.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class CommentFragment extends Fragment {
-    String ID;
-    DbHelper dbHelper;
-    SQLiteDatabase dbRead;
-    List<Comment> comments;
-    ListView listView;
-    int UID;
+
 
     // TODO: Rename and change types of parameters
 
@@ -48,27 +34,8 @@ public class CommentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final SharedPreferences pref = this.getActivity().getSharedPreferences("com.example.twitter20", Context.MODE_PRIVATE);
-        UID = pref.getInt("ID", 0);
-        dbHelper = new DbHelper(this.getContext());
-        dbRead = dbHelper.getReadableDatabase();
-        comments = new ArrayList<>();
-
-
-        String[] projection = {
-                DbContract.CommentEntry._ID,
-                DbContract.CommentEntry.COLUMN_COMMENT
-        };
-
-        String where = DbContract.CommentEntry._ID;
-        String[] whereArgs = new String[]{String.valueOf(UID)};
-
-
-
         return inflater.inflate(R.layout.fragment_comment_list_design, container, false);
     }
-
 
 
     @Override
