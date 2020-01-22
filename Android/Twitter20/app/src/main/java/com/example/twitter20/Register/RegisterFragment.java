@@ -1,16 +1,14 @@
 package com.example.twitter20.Register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.twitter20.DB.DbContract;
 import com.example.twitter20.DB.DbHelper;
@@ -23,6 +21,7 @@ public class RegisterFragment extends AppCompatActivity {
     SQLiteDatabase dbWrite;
     SQLiteDatabase dbRead;
     Button btnAddUser;
+    RegisterPresenter mRegisterPresenter = new RegisterPresenter(this);
 
 
     @Override
@@ -59,17 +58,10 @@ public class RegisterFragment extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), RegisterFragment.class);
             startActivity(i);
         } else {
-            ContentValues values = new ContentValues();
-            values.put(DbContract.UserEntry.COLUMN_NAME, mName);
-            values.put(DbContract.UserEntry.COLUMN_NICKNAME, mNickName);
-            values.put(DbContract.UserEntry.COLUMN_ACCOUNT, mAccount);
-            values.put(DbContract.UserEntry.COLUMN_PASSWORD, mPassword);
 
-            boolean isExist = isUserExists(DbContract.UserEntry.TABLE_NAME, DbContract.UserEntry.COLUMN_ACCOUNT, mAccount);
-
-            if (!isExist) {
+            if (mRegisterPresenter.isUserExists(DbContract.UserEntry.TABLE_NAME, DbContract.UserEntry.COLUMN_ACCOUNT, mAccount)) {
+                mRegisterPresenter.InsertValues(mName, mNickName, mAccount, mPassword);
                 Toast.makeText(this, "User added", Toast.LENGTH_SHORT).show();
-                long newRowId = dbWrite.insert(DbContract.UserEntry.TABLE_NAME, null, values);
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
             } else
@@ -77,16 +69,4 @@ public class RegisterFragment extends AppCompatActivity {
         }
     }
 
-    public boolean isUserExists(String TableName,
-                                String dbfield, String fieldValue) {
-
-        Cursor cursor = dbRead.rawQuery("select * from " + TableName + " where " + dbfield + " = ?",
-                new String[]{fieldValue});
-        if (cursor.getCount() <= 0) {
-            cursor.close();
-            return false;
-        }
-        cursor.close();
-        return true;
-    }
 }

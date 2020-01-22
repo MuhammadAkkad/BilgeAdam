@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.add(R.id.appBarLayout, homeFragment);
+                fragmentTransaction.add(R.id.nav_home, homeFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.add(R.id.appBarLayout, messageFragment);
+                fragmentTransaction.add(R.id.nav_home, messageFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.add(R.id.appBarLayout, mSearchFragment);
+                fragmentTransaction.add(R.id.nav_home, mSearchFragment);
                 fragmentTransaction.commit();
             }
         });
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 FragmentTransaction fragmentTransaction = GetNewTrans();
-                fragmentTransaction.add(R.id.appBarLayout, mNotificationFragment);
+                fragmentTransaction.add(R.id.nav_home, mNotificationFragment);
                 fragmentTransaction.commit();
             }
         });
