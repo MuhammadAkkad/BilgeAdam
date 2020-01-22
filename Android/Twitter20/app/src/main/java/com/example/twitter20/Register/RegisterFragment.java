@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.twitter20.DbContract;
-import com.example.twitter20.DbHelper;
+import com.example.twitter20.DB.DbContract;
+import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
 import com.example.twitter20.login.LoginActivity;
 

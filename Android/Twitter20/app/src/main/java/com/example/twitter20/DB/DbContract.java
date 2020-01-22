@@ -1,4 +1,4 @@
-package com.example.twitter20;
+package com.example.twitter20.DB;
 
 import android.provider.BaseColumns;
 

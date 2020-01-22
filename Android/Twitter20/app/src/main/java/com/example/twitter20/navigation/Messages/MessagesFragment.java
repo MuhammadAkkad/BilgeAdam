@@ -1,4 +1,4 @@
-package com.example.twitter20.Messages;
+package com.example.twitter20.navigation.Messages;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,7 +51,7 @@ public class MessagesFragment extends Fragment {
         messageClasseList.add (new MessageClass("Hoca" , "isletim sistem yapin."));
 
 
-        listView = (ListView) view.findViewById(R.id.listViewMesseges);
+        listView = view.findViewById(R.id.listViewMesseges);
         // PageViewModel pgvm = ViewModelProviders.of(requireActivity()).get(PageViewModel.class);
         MessageAdapter messageAdapter = new MessageAdapter(requireActivity(), R.layout.fragment_message_design,messageClasseList);
 

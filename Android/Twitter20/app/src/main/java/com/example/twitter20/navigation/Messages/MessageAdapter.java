@@ -1,4 +1,4 @@
-package com.example.twitter20.Messages;
+package com.example.twitter20.navigation.Messages;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.twitter20.Tweet;
+package com.example.twitter20.navigation.Tweet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.twitter20.DbContract;
-import com.example.twitter20.DbHelper;
+import com.example.twitter20.DB.DbContract;
+import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
 import com.example.twitter20.User.User;
 
@@ -40,7 +40,7 @@ public class HomeAdapter extends ArrayAdapter<Tweet> {
         super(mCtx, resource, tweetList);
         this.mCtx = mCtx;
         this.resource = resource;
-        this.tweetList = tweetList;
+        HomeAdapter.tweetList = tweetList;
     }
 
     // Random number generator

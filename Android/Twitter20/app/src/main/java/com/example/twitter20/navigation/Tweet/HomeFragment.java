@@ -1,4 +1,4 @@
-package com.example.twitter20.Tweet;
+package com.example.twitter20.navigation.Tweet;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.twitter20.DbContract;
-import com.example.twitter20.DbHelper;
+import com.example.twitter20.DB.DbContract;
+import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
 
 import java.util.ArrayList;

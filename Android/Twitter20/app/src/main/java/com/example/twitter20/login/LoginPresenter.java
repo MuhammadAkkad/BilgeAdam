@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.twitter20.DbContract;
-import com.example.twitter20.DbHelper;
+import com.example.twitter20.DB.DbContract;
+import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.User.User;
 
 public class LoginPresenter {

@@ -1,4 +1,4 @@
-package com.example.twitter20.Tweet;
+package com.example.twitter20.navigation.Tweet;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.twitter20.DbContract;
-import com.example.twitter20.DbHelper;
+import com.example.twitter20.DB.DbContract;
+import com.example.twitter20.DB.DbHelper;
 import com.example.twitter20.R;
 import com.example.twitter20.Comment.Comment;
 import com.example.twitter20.Comment.CommentAdapter;

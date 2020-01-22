@@ -1,4 +1,4 @@
-package com.example.twitter20.Tweet;
+package com.example.twitter20.navigation.Tweet;
 
 class Tweet {
 

@@ -1,4 +1,4 @@
-package com.example.twitter20.Search;
+package com.example.twitter20.navigation.Search;
 
 
 import androidx.lifecycle.ViewModel;

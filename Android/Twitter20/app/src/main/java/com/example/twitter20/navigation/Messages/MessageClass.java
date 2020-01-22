@@ -1,4 +1,4 @@
-package com.example.twitter20.Messages;
+package com.example.twitter20.navigation.Messages;
 
 public class MessageClass {
     String name;

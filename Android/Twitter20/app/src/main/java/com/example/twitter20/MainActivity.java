@@ -13,11 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.twitter20.Messages.MessagesFragment;
-import com.example.twitter20.Notification.NotificationFragment;
-import com.example.twitter20.Search.SeachFragment;
-import com.example.twitter20.Tweet.HomeFragment;
-import com.example.twitter20.Tweet.NewTweetActivity;
+import com.example.twitter20.navigation.Messages.MessagesFragment;
+import com.example.twitter20.navigation.Notification.NotificationFragment;
+import com.example.twitter20.navigation.Search.SeachFragment;
+import com.example.twitter20.navigation.Tweet.HomeFragment;
+import com.example.twitter20.navigation.Tweet.NewTweetActivity;
 import com.example.twitter20.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // Opens navigation drawer
     public void OpenDrawer(View view) {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.openDrawer(GravityCompat.START);
     }
 

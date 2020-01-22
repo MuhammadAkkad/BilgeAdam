@@ -32,7 +32,7 @@ public class CommentAdapter extends ArrayAdapter<User> {
         super(mCtx, resource, comments);
         this.mCtx = mCtx;
         this.resource = resource;
-        this.comments = comments;
+        CommentAdapter.comments = comments;
     }
 
     @NonNull

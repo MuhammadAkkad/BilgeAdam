@@ -1,19 +1,19 @@
-package com.example.twitter20;
+package com.example.twitter20.DB;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.example.twitter20.DbContract.CommentEntry.SQL_CREATE_COMMENT_TABLE;
-import static com.example.twitter20.DbContract.CommentEntry.SQL_DELETE_COMMENT_TABLE;
-import static com.example.twitter20.DbContract.InteractionEntry.SQL_CREATE_INTERACTION_TABLE;
-import static com.example.twitter20.DbContract.InteractionEntry.SQL_DELETE_INTERACTION_TABLE;
-import static com.example.twitter20.DbContract.MappingEntry.SQL_CREATE_MAPPING_TABLE;
-import static com.example.twitter20.DbContract.MappingEntry.SQL_DELETE_MAPPING_TABLE;
-import static com.example.twitter20.DbContract.TweetEntry.SQL_CREATE_TWEET_TABLE;
-import static com.example.twitter20.DbContract.TweetEntry.SQL_DELETE_TWEET_TABLE;
-import static com.example.twitter20.DbContract.UserEntry.SQL_CREATE_USER_TABLE;
-import static com.example.twitter20.DbContract.UserEntry.SQL_DELETE_USER_TABLE;
+import static com.example.twitter20.DB.DbContract.CommentEntry.SQL_CREATE_COMMENT_TABLE;
+import static com.example.twitter20.DB.DbContract.CommentEntry.SQL_DELETE_COMMENT_TABLE;
+import static com.example.twitter20.DB.DbContract.InteractionEntry.SQL_CREATE_INTERACTION_TABLE;
+import static com.example.twitter20.DB.DbContract.InteractionEntry.SQL_DELETE_INTERACTION_TABLE;
+import static com.example.twitter20.DB.DbContract.MappingEntry.SQL_CREATE_MAPPING_TABLE;
+import static com.example.twitter20.DB.DbContract.MappingEntry.SQL_DELETE_MAPPING_TABLE;
+import static com.example.twitter20.DB.DbContract.TweetEntry.SQL_CREATE_TWEET_TABLE;
+import static com.example.twitter20.DB.DbContract.TweetEntry.SQL_DELETE_TWEET_TABLE;
+import static com.example.twitter20.DB.DbContract.UserEntry.SQL_CREATE_USER_TABLE;
+import static com.example.twitter20.DB.DbContract.UserEntry.SQL_DELETE_USER_TABLE;
 
 
 public class DbHelper extends SQLiteOpenHelper {
